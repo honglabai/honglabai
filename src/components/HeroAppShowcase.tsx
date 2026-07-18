@@ -57,7 +57,7 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
           <span className="ml-auto font-mono text-[10px] tracking-widest text-slate-500 uppercase">Featured product</span>
         </div>
 
-        <div className="relative h-[260px] overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 via-slate-900 to-secondary/25 sm:h-[360px] lg:h-[430px]" aria-live="polite">
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 via-slate-900 to-secondary/25" aria-live="polite">
           {app.hero_image_url ? (
             <Image
               src={app.hero_image_url}
@@ -66,7 +66,7 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
               priority
               unoptimized
               sizes="(min-width: 1024px) 44vw, 92vw"
-              className="object-cover transition duration-500 group-hover:scale-[1.02]"
+              className={`${app.hero_image_url === app.icon_url ? "object-contain p-8 sm:p-12" : "object-cover"} transition duration-500 group-hover:scale-[1.02]`}
             />
           ) : (
             <div className="flex h-full items-center justify-center px-8 text-center">

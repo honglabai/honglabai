@@ -62,7 +62,7 @@ export default function Hero({ featuredApps }: HeroProps) {
           </ul>
         </div>
 
-        <div className="relative order-2 mx-auto w-full max-w-2xl lg:mx-0 lg:justify-self-end">
+        <div className="relative order-2 mx-auto w-full max-w-md lg:mx-0 lg:justify-self-end">
           <HeroAppShowcase apps={featuredApps} />
         </div>
       </div>

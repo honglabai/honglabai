@@ -6,9 +6,16 @@ export default function AppCard({ app }: { app: AppRecord }) {
   return (
     <article className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-primary/40">
       <Link href={`/apps/${app.slug}`} className="block">
-        <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-tr from-primary/20 to-secondary/20">
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-gradient-to-tr from-primary/20 to-secondary/20">
           {app.hero_image_url ? (
-            <Image src={app.hero_image_url} alt={app.image_alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition duration-500 group-hover:scale-105" unoptimized />
+            <Image
+              src={app.hero_image_url}
+              alt={app.image_alt}
+              fill
+              sizes="(max-width: 639px) 100vw, 352px"
+              className={`${app.hero_image_url === app.icon_url ? "object-contain p-8" : "object-cover"} transition duration-500 group-hover:scale-105`}
+              unoptimized
+            />
           ) : (
             <div className="flex h-full items-center justify-center font-robot text-5xl font-bold text-white/30">{app.name.slice(0, 1)}</div>
           )}
