@@ -24,6 +24,13 @@ export default function Footer() {
             >
               GitHub
             </a>
+            <Link
+              href="/admin/login"
+              aria-label="관리자 로그인"
+              className="border-l border-white/10 pl-6 text-xs text-slate-600 transition-colors hover:text-slate-300"
+            >
+              관리자
+            </Link>
           </div>
         </div>
       </div>
