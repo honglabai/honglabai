@@ -26,6 +26,16 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
     return () => window.clearInterval(timer);
   }, [apps.length, isPaused]);
 
+  useEffect(() => {
+    if (apps.length < 2) return;
+
+    const nextImageUrl = apps[(safeIndex + 1) % apps.length]?.hero_image_url;
+    if (!nextImageUrl) return;
+
+    const preloadImage = new window.Image();
+    preloadImage.src = nextImageUrl;
+  }, [apps, safeIndex]);
+
   if (!app) return <HeroBrandFallback />;
 
   return (
@@ -54,6 +64,7 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
               alt={app.image_alt || `${app.name} 앱 화면`}
               fill
               priority
+              unoptimized
               sizes="(min-width: 1024px) 44vw, 92vw"
               className="object-cover transition duration-500 group-hover:scale-[1.02]"
             />
