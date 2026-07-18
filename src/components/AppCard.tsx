@@ -4,7 +4,7 @@ import { productLabels, type AppRecord } from "@/domain/apps/types";
 
 export default function AppCard({ app }: { app: AppRecord }) {
   return (
-    <article className="group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-primary/40">
+    <article className="group w-full max-w-[22rem] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-primary/40">
       <Link href={`/apps/${app.slug}`} className="block">
         <div className="relative aspect-[3/4] w-full overflow-hidden bg-gradient-to-tr from-primary/20 to-secondary/20">
           {app.hero_image_url ? (
