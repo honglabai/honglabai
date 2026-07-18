@@ -9,14 +9,14 @@ import { getPublishedApps } from "@/server/apps";
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const featuredApps = await getPublishedApps({ featured: true, limit: 3 });
+  const portfolioApps = await getPublishedApps({ limit: 6 });
 
   return (
     <div className="min-h-screen bg-dark text-white">
       <Navbar />
       <main>
-        <Hero featuredApp={featuredApps[0] ?? null} />
-        <FeaturedApps apps={featuredApps} />
+        <Hero featuredApps={portfolioApps} />
+        <FeaturedApps apps={portfolioApps} />
         <Features />
         <Contact />
       </main>

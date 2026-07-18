@@ -4,10 +4,10 @@ import type { AppRecord } from "@/domain/apps/types";
 import { SectionId } from "@/types";
 
 type HeroProps = {
-  featuredApp: AppRecord | null;
+  featuredApps: AppRecord[];
 };
 
-export default function Hero({ featuredApp }: HeroProps) {
+export default function Hero({ featuredApps }: HeroProps) {
   return (
     <section
       id={SectionId.HERO}
@@ -63,7 +63,7 @@ export default function Hero({ featuredApp }: HeroProps) {
         </div>
 
         <div className="relative order-2 mx-auto w-full max-w-2xl lg:mx-0 lg:justify-self-end">
-          <HeroAppShowcase app={featuredApp} />
+          <HeroAppShowcase apps={featuredApps} />
         </div>
       </div>
     </section>
