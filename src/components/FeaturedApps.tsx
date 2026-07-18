@@ -1,9 +1,12 @@
 import Link from "next/link";
 import AppCard from "@/components/AppCard";
-import { getPublishedApps } from "@/server/apps";
+import type { AppRecord } from "@/domain/apps/types";
 
-export default async function FeaturedApps() {
-  const apps = await getPublishedApps({ featured: true, limit: 3 });
+type FeaturedAppsProps = {
+  apps: AppRecord[];
+};
+
+export default function FeaturedApps({ apps }: FeaturedAppsProps) {
   if (apps.length === 0) return null;
 
   return (
