@@ -13,21 +13,10 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">
-            <Link href="/apps" className="text-gray-500 transition-colors hover:text-white">
-              Portfolio
-            </Link>
-            <a
-              href="https://github.com/zeromorow-hub/honglabai"
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-500 transition-colors hover:text-white"
-            >
-              GitHub
-            </a>
             <Link
               href="/admin/login"
               aria-label="관리자 로그인"
-              className="border-l border-white/10 pl-6 text-xs text-slate-600 transition-colors hover:text-slate-300"
+              className="text-xs text-slate-600 transition-colors hover:text-slate-300"
             >
               관리자
             </Link>
