@@ -44,7 +44,7 @@ export default async function AppDetailPage({ params }: AppDetailPageProps) {
             ← 포트폴리오로 돌아가기
           </Link>
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
-            {app.hero_image_url ? <div className="relative aspect-[16/8] w-full"><Image src={app.hero_image_url} alt={app.image_alt} fill priority sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" unoptimized /></div> : null}
+            {app.hero_image_url ? <div className="relative aspect-[16/8] w-full"><Image src={app.hero_image_url} alt={app.image_alt} fill priority sizes="(max-width: 1024px) 100vw, 896px" className={`object-cover ${app.slug === "alrimee" ? "object-top" : ""}`} unoptimized /></div> : null}
             <div className="p-8 md:p-12">
             <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center">
               {app.icon_url ? <div className="relative h-24 w-24 overflow-hidden rounded-3xl"><Image src={app.icon_url} alt={`${app.name} 아이콘`} fill sizes="96px" className="object-cover" unoptimized /></div> : <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-primary to-secondary font-robot text-4xl font-bold">{app.name.slice(0, 1)}</div>}
