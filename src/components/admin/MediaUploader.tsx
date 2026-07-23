@@ -40,7 +40,7 @@ export default function MediaUploader({ label, fieldName, initialUrl, previewSha
       <div className="rounded-xl border border-white/10 bg-black/20 p-4">
         {url ? (
           <div className={`relative mb-4 overflow-hidden rounded-lg bg-black/40 ${previewShape === "square" ? "h-28 w-28" : "aspect-[16/7] w-full"}`}>
-            <Image src={url} alt={`${label} 미리보기`} fill sizes={previewShape === "square" ? "112px" : "(max-width: 768px) 100vw, 500px"} className="object-cover" unoptimized />
+            <Image src={url} alt={`${label} 미리보기`} fill sizes={previewShape === "square" ? "112px" : "(max-width: 768px) 100vw, 500px"} className={`object-cover ${previewShape === "wide" ? "object-top" : ""}`} unoptimized />
           </div>
         ) : null}
         <div className="flex flex-wrap items-center gap-3">

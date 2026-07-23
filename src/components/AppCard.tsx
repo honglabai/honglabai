@@ -13,7 +13,7 @@ export default function AppCard({ app }: { app: AppRecord }) {
               alt={app.image_alt}
               fill
               sizes="(max-width: 639px) 100vw, 352px"
-              className={`${app.slug === "alrimee" ? "object-cover object-top" : app.hero_image_url === app.icon_url ? "object-contain p-8" : "object-cover"} transition duration-500 group-hover:scale-105`}
+              className="object-cover object-top transition duration-500 group-hover:scale-105"
               unoptimized
             />
           ) : (

@@ -66,7 +66,7 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
               priority
               unoptimized
               sizes="(min-width: 1024px) 44vw, 92vw"
-              className={`${app.slug === "alrimee" ? "object-cover object-top" : app.hero_image_url === app.icon_url ? "object-contain p-8 sm:p-12" : "object-cover"} transition duration-500 group-hover:scale-[1.02]`}
+              className="object-cover object-top transition duration-500 group-hover:scale-[1.02]"
             />
           ) : (
             <div className="flex h-full items-center justify-center px-8 text-center">
