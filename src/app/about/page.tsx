@@ -17,7 +17,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-dark text-white">
       <Navbar />
-      <main className="px-6 pt-36 pb-24">
+      <main id="main-content" className="px-6 pt-36 pb-24">
         <div className="container mx-auto max-w-5xl">
           <p className="mb-3 text-sm font-bold tracking-[0.24em] text-secondary uppercase">About HongLabAI</p>
           <h1 className="mb-8 max-w-3xl text-4xl leading-tight font-black md:text-6xl">아이디어가 실제로 작동하는 제품이 될 때까지</h1>

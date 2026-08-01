@@ -12,7 +12,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-dark text-white">
       <Navbar />
-      <main className="pt-16">
+      <main id="main-content" className="pt-16">
         <Contact />
       </main>
       <Footer />

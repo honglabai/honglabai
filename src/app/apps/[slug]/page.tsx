@@ -38,16 +38,16 @@ export default async function AppDetailPage({ params }: AppDetailPageProps) {
   return (
     <div className="min-h-screen bg-dark text-white">
       <Navbar />
-      <main className="px-6 pt-36 pb-24">
+      <main id="main-content" className="px-6 pt-36 pb-24">
         <article className="container mx-auto max-w-4xl">
           <Link href="/apps" className="mb-8 inline-flex text-sm text-primary-light transition-colors hover:text-white">
             ← 포트폴리오로 돌아가기
           </Link>
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
-            {app.hero_image_url ? <div className="relative aspect-[16/8] w-full"><Image src={app.hero_image_url} alt={app.image_alt} fill priority sizes="(max-width: 1024px) 100vw, 896px" className="object-cover object-top" unoptimized /></div> : null}
+            {app.hero_image_url ? <div className="relative aspect-[16/8] w-full"><Image src={app.hero_image_url} alt={app.image_alt} fill priority sizes="(max-width: 1024px) 100vw, 896px" className="object-cover object-top" /></div> : null}
             <div className="p-8 md:p-12">
             <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center">
-              {app.icon_url ? <div className="relative h-24 w-24 overflow-hidden rounded-3xl"><Image src={app.icon_url} alt={`${app.name} 아이콘`} fill sizes="96px" className="object-cover" unoptimized /></div> : <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-primary to-secondary font-robot text-4xl font-bold">{app.name.slice(0, 1)}</div>}
+              {app.icon_url ? <div className="relative h-24 w-24 overflow-hidden rounded-3xl"><Image src={app.icon_url} alt={`${app.name} 아이콘`} fill sizes="96px" className="object-cover" /></div> : <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-primary to-secondary font-robot text-4xl font-bold">{app.name.slice(0, 1)}</div>}
               <div>
                 <p className="mb-2 text-sm font-bold tracking-widest text-secondary uppercase">{productLabels[app.product_status]} · {app.platforms.join(" · ")}</p>
                 <h1 className="text-3xl font-black md:text-5xl">{app.name}</h1>

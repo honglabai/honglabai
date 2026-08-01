@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navigation = [
   { href: "/apps", label: "앱 포트폴리오" },
@@ -13,6 +13,8 @@ const navigation = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -20,6 +22,21 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    firstMobileLinkRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileMenuOpen]);
 
   return (
     <nav
@@ -33,7 +50,7 @@ export default function Navbar() {
       <div className="container mx-auto flex items-center justify-between px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-2xl font-black tracking-tighter"
+          className="flex min-h-11 items-center gap-2 text-2xl font-black tracking-tighter"
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-primary to-secondary shadow-lg shadow-primary/30">
@@ -56,7 +73,7 @@ export default function Navbar() {
           ))}
           <Link
             href="/contact"
-            className="rounded-full bg-gradient-to-r from-primary to-primary-dark px-5 py-2 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+            className="inline-flex min-h-11 items-center rounded-full bg-gradient-to-r from-primary to-primary-dark px-5 py-2 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
           >
             프로젝트 시작
           </Link>
@@ -64,7 +81,8 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="text-white md:hidden"
+          ref={menuButtonRef}
+          className="flex h-11 w-11 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 md:hidden"
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
           aria-label={isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
@@ -86,11 +104,12 @@ export default function Navbar() {
           className="animate-fade-in-down absolute top-full left-0 w-full border-b border-gray-800 bg-dark/95 backdrop-blur-lg md:hidden"
         >
           <div className="flex flex-col space-y-2 p-6">
-            {navigation.map((item) => (
+            {navigation.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-lg px-3 py-2 text-gray-300 transition-colors hover:bg-white/5 hover:text-white"
+                ref={index === 0 ? firstMobileLinkRef : undefined}
+                className="flex min-h-11 items-center rounded-lg px-3 py-2 text-gray-300 transition-colors hover:bg-white/5 hover:text-white"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}

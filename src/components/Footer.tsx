@@ -9,14 +9,14 @@ export default function Footer() {
             <div className="mb-2 text-xl font-bold tracking-tighter text-white">
               HongLab<span className="text-primary-light">AI</span>
             </div>
-            <p className="text-sm text-gray-500">© {new Date().getFullYear()} HongLabAI. All rights reserved.</p>
+            <p className="text-sm text-gray-400">© {new Date().getFullYear()} HongLabAI. All rights reserved.</p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-6">
             <Link
               href="/admin/login"
               aria-label="관리자 로그인"
-              className="text-xs text-slate-600 transition-colors hover:text-slate-300"
+              className="inline-flex min-h-11 items-center px-3 text-xs text-slate-400 transition-colors hover:text-slate-200"
             >
               관리자
             </Link>

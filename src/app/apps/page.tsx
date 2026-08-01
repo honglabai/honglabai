@@ -17,7 +17,7 @@ export default async function AppsPage() {
   return (
     <div className="min-h-screen bg-dark text-white">
       <Navbar />
-      <main className="relative overflow-hidden px-6 pt-36 pb-24">
+      <main id="main-content" className="relative overflow-hidden px-6 pt-36 pb-24">
         <div className="pointer-events-none absolute top-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" />
         <div className="container relative mx-auto">
           <div className="mx-auto mb-14 max-w-3xl text-center">

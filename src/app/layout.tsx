@@ -29,7 +29,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body className="overflow-x-hidden antialiased">{children}</body>
+      <body className="overflow-x-hidden antialiased">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:font-bold focus:text-dark">
+          본문으로 건너뛰기
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

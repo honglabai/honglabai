@@ -13,8 +13,7 @@ export default function AppCard({ app }: { app: AppRecord }) {
               alt={app.image_alt}
               fill
               sizes="(max-width: 639px) 100vw, 352px"
-              className="object-cover object-top transition duration-500 group-hover:scale-105"
-              unoptimized
+              className="object-cover object-top transition duration-300 group-hover:scale-105"
             />
           ) : (
             <div className="flex h-full items-center justify-center font-robot text-5xl font-bold text-white/30">{app.name.slice(0, 1)}</div>
@@ -23,7 +22,7 @@ export default function AppCard({ app }: { app: AppRecord }) {
         <div className="p-6">
           <div className="mb-4 flex items-center justify-between gap-4">
             <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-bold text-primary-light">{productLabels[app.product_status]}</span>
-            <span className="text-xs text-gray-500">{app.platforms.join(" · ")}</span>
+            <span className="text-xs text-gray-400">{app.platforms.join(" · ")}</span>
           </div>
           <h2 className="mb-2 text-2xl font-bold text-white">{app.name}</h2>
           <p className="line-clamp-2 leading-relaxed text-gray-400">{app.tagline || app.summary}</p>

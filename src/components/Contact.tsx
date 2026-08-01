@@ -100,19 +100,19 @@ export default function Contact() {
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10" aria-hidden="true">
-                  📍
+                  <svg className="h-5 w-5 text-primary-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-white">Address</h3>
+                  <h3 className="font-bold text-white">주소</h3>
                   <p className="text-sm text-gray-400">공식 사업장 정보 확인 후 공개 예정</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10" aria-hidden="true">
-                  📧
+                  <svg className="h-5 w-5 text-primary-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-white">Email</h3>
+                  <h3 className="font-bold text-white">이메일</h3>
                   <p className="text-sm text-gray-400">contact@honglabai.com</p>
                 </div>
               </div>
@@ -178,7 +178,7 @@ export default function Contact() {
                     type="button"
                     onClick={handleAIAnalysis}
                     disabled={isAnalyzing || projectDesc.length === 0}
-                    className={`flex w-full items-center justify-center gap-2 rounded-lg px-6 py-2 text-sm font-bold transition-all sm:w-auto ${
+                    className={`flex min-h-11 w-full items-center justify-center gap-2 rounded-lg px-6 py-2 text-sm font-bold transition-all sm:w-auto ${
                       isAnalyzing
                         ? "cursor-not-allowed bg-gray-700 text-gray-400"
                         : "bg-gradient-to-r from-secondary to-primary text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
@@ -186,7 +186,7 @@ export default function Contact() {
                   >
                     {isAnalyzing ? "AI 분석 중..." : "✨ AI 초안 분석하기"}
                   </button>
-                  <span className="hidden text-xs text-gray-500 sm:block">서버에서 안전하게 내용을 분석합니다.</span>
+                    <span className="hidden text-xs text-gray-400 sm:block">서버에서 안전하게 내용을 분석합니다.</span>
                 </div>
 
                 {aiResponse ? (
@@ -194,7 +194,7 @@ export default function Contact() {
                     <h3 className="mb-2 font-bold text-primary-light">AI 분석 결과</h3>
                     <p className="mb-4 text-sm leading-relaxed text-gray-300">{aiResponse.analysis}</p>
                     <div>
-                      <span className="text-xs font-bold tracking-wider text-gray-500 uppercase">추천 기술 스택</span>
+                      <span className="text-xs font-bold tracking-wider text-gray-400 uppercase">추천 기술 스택</span>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {aiResponse.techStack.map((tech) => (
                           <span key={tech} className="rounded-full border border-gray-700 bg-dark px-3 py-1 text-xs text-secondary">
@@ -212,8 +212,8 @@ export default function Contact() {
                   </p>
                 ) : null}
 
-                <label className="flex items-start gap-3 text-sm leading-relaxed text-gray-400">
-                  <input type="checkbox" name="privacy_consent" required className="mt-1" />
+                <label className="flex min-h-11 items-start gap-3 text-sm leading-relaxed text-gray-400">
+                  <input type="checkbox" name="privacy_consent" required className="mt-1 h-5 w-5 shrink-0" />
                   <span>문의 처리 목적으로 이름, 이메일, 회사명과 문의 내용을 수집·이용하는 데 동의합니다.</span>
                 </label>
 

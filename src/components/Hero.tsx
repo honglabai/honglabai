@@ -27,7 +27,7 @@ export default function Hero({ featuredApps }: HeroProps) {
             <p className="font-robot mb-4 text-sm tracking-[0.24em] text-slate-400 uppercase">
               HongLabAI
             </p>
-            <h1 className="text-balance text-4xl leading-[1.15] font-black text-white sm:text-5xl lg:max-w-3xl lg:text-6xl 2xl:text-7xl">
+            <h1 className="break-keep text-balance text-4xl leading-[1.15] font-black text-white sm:text-5xl lg:max-w-3xl lg:text-6xl 2xl:text-7xl">
               아이디어를 실제로 사용하는 앱으로 만듭니다.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg lg:mx-0">

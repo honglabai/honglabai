@@ -13,18 +13,30 @@ type HeroAppShowcaseProps = {
 export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isManuallyPaused, setIsManuallyPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [motionOptedIn, setMotionOptedIn] = useState(false);
   const safeIndex = apps.length > 0 ? Math.min(activeIndex, apps.length - 1) : 0;
   const app = apps[safeIndex] ?? null;
 
   useEffect(() => {
-    if (apps.length < 2 || isPaused) return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    updateMotionPreference();
+    mediaQuery.addEventListener("change", updateMotionPreference);
+    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    const motionAllowed = !prefersReducedMotion || motionOptedIn;
+    if (apps.length < 2 || isPaused || isManuallyPaused || !motionAllowed) return;
 
     const timer = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % apps.length);
     }, 5000);
 
     return () => window.clearInterval(timer);
-  }, [apps.length, isPaused]);
+  }, [apps.length, isManuallyPaused, isPaused, motionOptedIn, prefersReducedMotion]);
 
   useEffect(() => {
     if (apps.length < 2) return;
@@ -54,19 +66,18 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
           <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-amber-300/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-          <span className="ml-auto font-mono text-[10px] tracking-widest text-slate-500 uppercase">Featured product</span>
+          <span className="ml-auto font-mono text-[10px] tracking-widest text-slate-400 uppercase">추천 포트폴리오</span>
         </div>
 
-        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 via-slate-900 to-secondary/25" aria-live="polite">
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/25 via-slate-900 to-secondary/25" aria-live={isPaused || isManuallyPaused || prefersReducedMotion ? "polite" : "off"}>
           {app.hero_image_url ? (
             <Image
               src={app.hero_image_url}
               alt={app.image_alt || `${app.name} 앱 화면`}
               fill
               priority
-              unoptimized
               sizes="(min-width: 1024px) 44vw, 92vw"
-              className="object-cover object-top transition duration-500 group-hover:scale-[1.02]"
+              className="object-cover object-top transition duration-300 group-hover:scale-[1.02]"
             />
           ) : (
             <div className="flex h-full items-center justify-center px-8 text-center">
@@ -83,7 +94,7 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
           <div className="min-w-0">
             <div className="mb-2 flex flex-wrap items-center gap-2 text-xs font-bold">
               <span className="rounded-full bg-primary/15 px-2.5 py-1 text-primary-light">{productLabels[app.product_status]}</span>
-              <span className="text-slate-500">{app.platforms.join(" · ")}</span>
+              <span className="text-slate-400">{app.platforms.join(" · ")}</span>
             </div>
             <h2 className="truncate text-2xl font-black text-white sm:text-3xl">{app.name}</h2>
             <p className="mt-1 line-clamp-2 text-sm leading-6 text-slate-400 sm:text-base">{app.tagline}</p>
@@ -92,17 +103,36 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
         </div>
       </Link>
       {apps.length > 1 ? (
-        <div className="mt-4 flex items-center justify-center gap-2" aria-label="히어로 포트폴리오 선택">
-          {apps.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              aria-label={`${item.name} 표시`}
-              aria-current={index === safeIndex ? "true" : undefined}
-              onClick={() => setActiveIndex(index)}
-              className={`h-2 rounded-full transition-all ${index === safeIndex ? "w-8 bg-primary" : "w-2 bg-white/25 hover:bg-white/50"}`}
-            />
-          ))}
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2" aria-label="히어로 포트폴리오 선택">
+          <div className="flex items-center justify-center gap-1">
+            {apps.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                aria-label={`${item.name} 표시`}
+                aria-current={index === safeIndex ? "true" : undefined}
+                onClick={() => setActiveIndex(index)}
+                className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-white/10"
+              >
+                <span aria-hidden="true" className={`block h-2 rounded-full transition-all ${index === safeIndex ? "w-8 bg-primary" : "w-2 bg-white/25 group-hover:bg-white/50"}`} />
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            aria-pressed={isManuallyPaused}
+            aria-label={prefersReducedMotion && !motionOptedIn ? "포트폴리오 자동 전환 사용" : isManuallyPaused ? "포트폴리오 자동 전환 재생" : "포트폴리오 자동 전환 일시정지"}
+            onClick={() => {
+              if (prefersReducedMotion && !motionOptedIn) {
+                setMotionOptedIn(true);
+                return;
+              }
+              setIsManuallyPaused((paused) => !paused);
+            }}
+            className="min-h-11 rounded-full border border-white/10 px-3 text-xs font-medium text-slate-300 transition-colors hover:border-white/25 hover:bg-white/10"
+          >
+            {prefersReducedMotion && !motionOptedIn ? "자동 전환 사용" : isManuallyPaused ? "재생" : "일시정지"}
+          </button>
         </div>
       ) : null}
     </div>

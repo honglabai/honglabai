@@ -14,7 +14,7 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-dark text-white">
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero featuredApps={portfolioApps} />
         <FeaturedApps apps={portfolioApps} />
         <Features />
