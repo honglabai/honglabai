@@ -27,3 +27,6 @@ out
 *.sln
 *.sw?
 coverage
+
+# Supabase CLI local state (project ref, pooler URL, service versions)
+supabase/.temp/
