@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAuthenticatedAdmin } from "@/server/auth";
+import { canEdit, getAuthenticatedAdmin } from "@/server/auth";
 
 export const runtime = "nodejs";
 
@@ -22,6 +22,7 @@ function hasValidSignature(bytes: Uint8Array, mime: string) {
 export async function POST(request: Request) {
   const context = await getAuthenticatedAdmin();
   if (!context) return NextResponse.json({ message: "관리자 인증이 필요합니다." }, { status: 401 });
+  if (!canEdit(context.admin.role)) return NextResponse.json({ message: "업로드 권한이 없습니다." }, { status: 403 });
 
   const formData = await request.formData();
   const file = formData.get("file");

@@ -18,7 +18,11 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export async function POST(request: Request) {
   const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   const clientKey = forwardedFor || request.headers.get("x-real-ip") || "unknown";
-  const rateLimit = checkRateLimit(`inquiry:${clientKey}`, 5, 15 * 60 * 1000);
+
+  const supabase = createPublicSupabaseClient();
+  if (!supabase) return NextResponse.json({ message: "문의 저장소가 아직 연결되지 않았습니다." }, { status: 503 });
+
+  const rateLimit = await checkRateLimit(supabase, `inquiry:${clientKey}`, 5, 15 * 60 * 1000);
 
   if (!rateLimit.allowed) {
     return NextResponse.json(
@@ -51,9 +55,6 @@ export async function POST(request: Request) {
   if (company.length > 120 || message.length < 10 || message.length > 3000 || body.privacyConsent !== true) {
     return NextResponse.json({ message: "문의 내용과 개인정보 수집 동의를 확인해 주세요." }, { status: 400 });
   }
-
-  const supabase = createPublicSupabaseClient();
-  if (!supabase) return NextResponse.json({ message: "문의 저장소가 아직 연결되지 않았습니다." }, { status: 503 });
 
   const { error } = await supabase.from("inquiries").insert({
     inquiry_type: inquiryType,

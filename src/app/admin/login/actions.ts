@@ -1,10 +1,18 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { createPublicSupabaseClient } from "@/lib/supabase/public";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/server/rate-limit";
 
 export type LoginState = { error: string };
 export type MagicLinkState = { error: string; message: string };
+
+async function clientIp() {
+  const store = await headers();
+  return store.get("x-forwarded-for")?.split(",")[0]?.trim() || store.get("x-real-ip") || "unknown";
+}
 
 export async function loginAction(_previousState: LoginState, formData: FormData): Promise<LoginState> {
   const email = formData.get("email");
@@ -12,6 +20,12 @@ export async function loginAction(_previousState: LoginState, formData: FormData
 
   if (typeof email !== "string" || typeof password !== "string" || !email.trim() || password.length < 8) {
     return { error: "이메일과 8자 이상의 비밀번호를 입력해 주세요." };
+  }
+
+  const limiter = createPublicSupabaseClient();
+  if (limiter) {
+    const rl = await checkRateLimit(limiter, `login:${await clientIp()}:${email.trim().toLowerCase()}`, 10, 10 * 60 * 1000);
+    if (!rl.allowed) return { error: "로그인 시도가 너무 많습니다. 잠시 후 다시 시도해 주세요." };
   }
 
   const supabase = await createServerSupabaseClient();
@@ -56,6 +70,12 @@ export async function requestMagicLinkAction(
   const email = formData.get("email");
   if (typeof email !== "string" || !email.trim()) {
     return { error: "관리자 이메일을 입력해 주세요.", message: "" };
+  }
+
+  const limiter = createPublicSupabaseClient();
+  if (limiter) {
+    const rl = await checkRateLimit(limiter, `magiclink:${await clientIp()}:${email.trim().toLowerCase()}`, 3, 15 * 60 * 1000);
+    if (!rl.allowed) return { error: "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.", message: "" };
   }
 
   const supabase = await createServerSupabaseClient();
