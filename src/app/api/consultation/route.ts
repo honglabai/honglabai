@@ -14,7 +14,9 @@ export async function POST(request: Request) {
   const clientKey = forwardedFor || request.headers.get("x-real-ip") || "unknown";
   const limiter = createPublicSupabaseClient();
   if (limiter) {
-    const rateLimit = await checkRateLimit(limiter, `consult:${clientKey}`, 5, 15 * 60 * 1000);
+    // fail-closed: every call here spends Gemini quota, so a broken limiter
+    // must block rather than expose an unmetered paid endpoint.
+    const rateLimit = await checkRateLimit(limiter, `consult:${clientKey}`, 5, 15 * 60 * 1000, "closed");
     if (!rateLimit.allowed) {
       return NextResponse.json(
         { message: "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요." },

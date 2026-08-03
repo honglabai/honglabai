@@ -54,13 +54,11 @@ describe("checkRateLimit — response mapping", () => {
 });
 
 describe("checkRateLimit — failure handling", () => {
-  test("fails open when the RPC errors", async () => {
+  test("defaults to fail-open when the RPC errors", async () => {
     const { client } = clientReturning({ data: null, error: { message: "boom" } });
 
     const result = await checkRateLimit(client, "k", 5, 1000);
 
-    // Deliberate: availability over strictness. If this ever flips to
-    // fail-closed, update the module comment and this test together.
     expect(result).toEqual({ allowed: true, retryAfterSeconds: 0 });
   });
 
@@ -68,6 +66,34 @@ describe("checkRateLimit — failure handling", () => {
     const { client } = clientReturning({ data: [], error: null });
 
     await expect(checkRateLimit(client, "k", 5, 1000)).resolves.toEqual({
+      allowed: true,
+      retryAfterSeconds: 0,
+    });
+  });
+
+  test("fails closed when asked to, on RPC error", async () => {
+    const { client } = clientReturning({ data: null, error: { message: "boom" } });
+
+    const result = await checkRateLimit(client, "k", 5, 1000, "closed");
+
+    // Paid endpoints use this: a broken limiter must not expose an unmetered
+    // route. Blocks with a retry hint instead of letting the call through.
+    expect(result.allowed).toBe(false);
+    expect(result.retryAfterSeconds).toBeGreaterThan(0);
+  });
+
+  test("fails closed when the RPC returns no rows", async () => {
+    const { client } = clientReturning({ data: [], error: null });
+
+    await expect(checkRateLimit(client, "k", 5, 1000, "closed")).resolves.toMatchObject({
+      allowed: false,
+    });
+  });
+
+  test("failure mode does not affect a healthy RPC", async () => {
+    const { client } = clientReturning({ data: [{ allowed: true, retry_after_seconds: 0 }], error: null });
+
+    await expect(checkRateLimit(client, "k", 5, 1000, "closed")).resolves.toEqual({
       allowed: true,
       retryAfterSeconds: 0,
     });

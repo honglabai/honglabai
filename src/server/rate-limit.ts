@@ -1,23 +1,29 @@
 import "server-only";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { logger } from "@/server/logger";
 import type { Database } from "@/types/database";
 
 export type RateLimitResult = { allowed: boolean; retryAfterSeconds: number };
 
+// What to do when the limiter itself is broken (RPC error / no rows):
+//   "open"   — let the request through. Availability first. Use where the only
+//              cost of abuse is noise (contact form) and other guards exist.
+//   "closed" — reject. Use where each request spends money or a scarce quota,
+//              so an outage cannot turn into an unbounded bill.
+export type RateLimitFailureMode = "open" | "closed";
+
+const FAILURE_RETRY_SECONDS = 60;
+
 // Distributed, atomic rate limit backed by the check_rate_limit Postgres RPC.
 // Replaces the previous in-memory Map, which reset on cold start and did not
 // share state across serverless instances (i.e. did not actually limit).
-//
-// ponytail: fails OPEN when the limiter RPC errors — availability over
-// strictness. This is defense-in-depth; auth also relies on Supabase's own
-// throttling and the admin_users gate. Flip the early return to
-// { allowed: false } if you want fail-closed on the paid/LLM routes.
 export async function checkRateLimit(
   client: SupabaseClient<Database>,
   key: string,
   limit: number,
   windowMs: number,
+  onFailure: RateLimitFailureMode = "open",
 ): Promise<RateLimitResult> {
   const { data, error } = await client.rpc("check_rate_limit", {
     p_key: key,
@@ -27,8 +33,12 @@ export async function checkRateLimit(
 
   const row = data?.[0];
   if (error || !row) {
-    console.error("rate limit check failed", error?.message);
-    return { allowed: true, retryAfterSeconds: 0 };
+    // A broken limiter must never be silent — this is the alert signal.
+    logger.error("rate_limit.rpc_failed", { key, limit, onFailure, message: error?.message });
+
+    return onFailure === "closed"
+      ? { allowed: false, retryAfterSeconds: FAILURE_RETRY_SECONDS }
+      : { allowed: true, retryAfterSeconds: 0 };
   }
 
   return { allowed: row.allowed, retryAfterSeconds: row.retry_after_seconds };

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
+import { logger } from "@/server/logger";
 import { checkRateLimit } from "@/server/rate-limit";
 
 type InquiryBody = {
@@ -70,7 +71,7 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    console.error("Inquiry insert failed", error.message);
+    logger.error("inquiry.insert_failed", { message: error.message });
     return NextResponse.json({ message: "문의 저장 중 오류가 발생했습니다." }, { status: 500 });
   }
 

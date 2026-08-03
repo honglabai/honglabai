@@ -1,6 +1,7 @@
 import "server-only";
 
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
+import { logger } from "@/server/logger";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { AppRecord } from "@/domain/apps/types";
 
@@ -56,7 +57,7 @@ export async function getPublishedApps(options: { featured?: boolean; limit?: nu
   const { data, error } = await query;
 
   if (error) {
-    console.error("Published apps query failed", error.message);
+    logger.error("apps.list_failed", { message: error.message });
     return [];
   }
 
@@ -77,7 +78,7 @@ export async function getPublishedAppBySlug(slug: string) {
     .maybeSingle();
 
   if (error) {
-    console.error("Published app query failed", error.message);
+    logger.error("apps.get_failed", { message: error.message });
     return null;
   }
 

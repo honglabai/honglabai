@@ -1,6 +1,7 @@
 import "server-only";
 
 import { GoogleGenAI, Type } from "@google/genai";
+import { logger } from "@/server/logger";
 import type { ConsultationResponse } from "@/types";
 
 let geminiClient: GoogleGenAI | null | undefined;
@@ -65,7 +66,7 @@ export async function analyzeProjectRequest(projectDescription: string): Promise
 
     return JSON.parse(response.text) as ConsultationResponse;
   } catch (error) {
-    console.error("Gemini consultation analysis failed", error);
+    logger.error("gemini.analysis_failed", { error });
     return fallbackResponse;
   }
 }
