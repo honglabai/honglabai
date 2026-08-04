@@ -9,11 +9,11 @@ export default function Footer() {
             <div className="mb-2 text-xl font-bold tracking-tighter text-white">
               HongLab<span className="text-primary-light">AI</span>
             </div>
-            <address className="space-y-1 text-xs leading-relaxed text-gray-500 not-italic">
+            <address className="space-y-1 text-xs leading-relaxed text-gray-400 not-italic">
               <p>홍랩에이아이 (HonglabAI) · 대표 홍은선</p>
               <p>사업자등록번호 571-22-02410</p>
               <p>
-                <a href="mailto:honglabai@gmail.com" className="transition-colors hover:text-gray-300">
+                <a href="mailto:honglabai@gmail.com" className="underline transition-colors hover:text-white">
                   honglabai@gmail.com
                 </a>
               </p>
