@@ -17,10 +17,29 @@ export async function generateMetadata({ params }: AppDetailPageProps): Promise<
 
   if (!app) return { title: "앱을 찾을 수 없습니다", robots: { index: false, follow: false } };
 
+  const title = app.seo_title || app.name;
+  const description = app.seo_description || app.summary || app.tagline;
+  const images = app.hero_image_url ? [{ url: app.hero_image_url, alt: app.image_alt }] : undefined;
+
   return {
-    title: app.seo_title || app.name,
-    description: app.seo_description || app.summary || app.tagline,
-    openGraph: app.hero_image_url ? { images: [{ url: app.hero_image_url, alt: app.image_alt }] } : undefined,
+    title,
+    description,
+    // Absolute canonical prevents duplicate-content splits between the
+    // vercel.app origin and any custom domain added later.
+    alternates: { canonical: `/apps/${app.slug}` },
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url: `/apps/${app.slug}`,
+      images,
+    },
+    twitter: {
+      card: images ? "summary_large_image" : "summary",
+      title,
+      description,
+      images: images?.map((image) => image.url),
+    },
   };
 }
 
@@ -35,8 +54,26 @@ export default async function AppDetailPage({ params }: AppDetailPageProps) {
     ["웹·데모", app.web_url],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
+  // SoftwareApplication markup so each portfolio entry can surface as a rich
+  // result rather than a generic page.
+  const appJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: app.name,
+    description: app.summary || app.tagline,
+    applicationCategory: app.category,
+    operatingSystem: app.platforms.join(", ") || undefined,
+    url: app.web_url ?? undefined,
+    image: app.hero_image_url ?? undefined,
+    author: { "@type": "Organization", name: "HongLabAI" },
+  };
+
   return (
     <div className="min-h-screen bg-dark text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
+      />
       <Navbar />
       <main id="main-content" className="px-6 pt-36 pb-24">
         <article className="container mx-auto max-w-4xl">

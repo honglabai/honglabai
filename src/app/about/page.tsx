@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 export const metadata: Metadata = {
   title: "소개",
   description: "HongLabAI가 제품을 설계하고 개발하는 원칙을 소개합니다.",
+  alternates: { canonical: "/about" },
 };
 
 const principles = [

@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 export const metadata: Metadata = {
   title: "프로젝트 문의",
   description: "AI, 웹, 앱 프로젝트에 대해 HongLabAI와 상담하세요.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

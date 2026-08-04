@@ -7,6 +7,7 @@ import { getPublishedApps } from "@/server/apps";
 export const metadata: Metadata = {
   title: "앱 포트폴리오",
   description: "HongLabAI가 기획하고 개발한 앱과 디지털 제품을 소개합니다.",
+  alternates: { canonical: "/apps" },
 };
 
 export const revalidate = 60;
