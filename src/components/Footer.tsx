@@ -9,10 +9,31 @@ export default function Footer() {
             <div className="mb-2 text-xl font-bold tracking-tighter text-white">
               HongLab<span className="text-primary-light">AI</span>
             </div>
-            <p className="text-sm text-gray-400">© {new Date().getFullYear()} HongLabAI. All rights reserved.</p>
+            <address className="space-y-1 text-xs leading-relaxed text-gray-500 not-italic">
+              <p>홍랩에이아이 (HonglabAI) · 대표 홍은선</p>
+              <p>사업자등록번호 571-22-02410</p>
+              <p>
+                <a href="mailto:honglabai@gmail.com" className="transition-colors hover:text-gray-300">
+                  honglabai@gmail.com
+                </a>
+              </p>
+            </address>
+            <p className="mt-3 text-sm text-gray-400">© {new Date().getFullYear()} HongLabAI. All rights reserved.</p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <Link
+              href="/privacy"
+              className="inline-flex min-h-11 items-center px-3 text-xs text-slate-300 transition-colors hover:text-white"
+            >
+              개인정보 처리방침
+            </Link>
+            <Link
+              href="/terms"
+              className="inline-flex min-h-11 items-center px-3 text-xs text-slate-400 transition-colors hover:text-slate-200"
+            >
+              이용약관
+            </Link>
             <Link
               href="/admin/login"
               aria-label="관리자 로그인"

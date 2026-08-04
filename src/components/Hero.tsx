@@ -39,7 +39,7 @@ export default function Hero({ featuredApps }: HeroProps) {
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
             <Link
               href="/apps"
-              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:bg-primary-dark sm:text-lg"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563eb] px-7 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:bg-primary-dark sm:text-lg"
             >
               만든 앱 둘러보기
               <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>

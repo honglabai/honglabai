@@ -6,6 +6,8 @@
   --color-primary-dark: #1d4ed8;
   --color-primary-light: #60a5fa;
   --color-secondary: #8b5cf6;
+  /* WCAG AA on --color-dark: #8b5cf6 is 4.22, this is 6.56 */
+  --color-secondary-light: #a78bfa;
   --color-dark: #0f172a;
 }
 

@@ -103,8 +103,8 @@ export default function Contact() {
                   <svg className="h-5 w-5 text-primary-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-white">주소</h3>
-                  <p className="text-sm text-gray-400">공식 사업장 정보 확인 후 공개 예정</p>
+                  <h3 className="font-bold text-white">사업자</h3>
+                  <p className="text-sm text-gray-400">홍랩에이아이 · 대표 홍은선</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -113,7 +113,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-white">이메일</h3>
-                  <p className="text-sm text-gray-400">contact@honglabai.com</p>
+                  <p className="text-sm text-gray-400"><a href="mailto:honglabai@gmail.com" className="transition-colors hover:text-white">honglabai@gmail.com</a></p>
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function Contact() {
                     <input id="contact-name" type="text" value={name} onChange={(event) => setName(event.target.value)} maxLength={100} className="w-full rounded-lg border border-gray-700 bg-black/30 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-primary focus:outline-none" required />
                   </div>
                   <div>
-                    <label htmlFor="contact-company" className="mb-2 block text-sm font-medium text-gray-300">회사·팀 <span className="text-gray-600">(선택)</span></label>
+                    <label htmlFor="contact-company" className="mb-2 block text-sm font-medium text-gray-300">회사·팀 <span className="text-gray-400">(선택)</span></label>
                     <input id="contact-company" type="text" value={company} onChange={(event) => setCompany(event.target.value)} maxLength={120} className="w-full rounded-lg border border-gray-700 bg-black/30 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-primary focus:outline-none" />
                   </div>
                 </div>
@@ -214,7 +214,14 @@ export default function Contact() {
 
                 <label className="flex min-h-11 items-start gap-3 text-sm leading-relaxed text-gray-400">
                   <input type="checkbox" name="privacy_consent" required className="mt-1 h-5 w-5 shrink-0" />
-                  <span>문의 처리 목적으로 이름, 이메일, 회사명과 문의 내용을 수집·이용하는 데 동의합니다.</span>
+                  <span>
+                    문의 처리 목적으로 이름, 이메일, 회사명과 문의 내용을 수집·이용하는 데 동의합니다. 보유 기간 등
+                    자세한 내용은{" "}
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-light underline">
+                      개인정보 처리방침
+                    </a>
+                    에서 확인할 수 있습니다.
+                  </span>
                 </label>
 
                 <div className="sr-only" aria-hidden="true">

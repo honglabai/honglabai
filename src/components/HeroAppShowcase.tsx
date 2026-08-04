@@ -55,7 +55,6 @@ export default function HeroAppShowcase({ apps }: HeroAppShowcaseProps) {
       <div className="pointer-events-none absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-primary/25 via-cyan-400/5 to-secondary/20 blur-2xl" aria-hidden="true" />
       <Link
         href={`/apps/${app.slug}`}
-        aria-label={`${app.name} 포트폴리오 자세히 보기`}
         className="group relative block overflow-hidden rounded-[2rem] border border-white/15 bg-slate-950/75 p-3 shadow-2xl shadow-black/35 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-primary/50 sm:p-4"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}

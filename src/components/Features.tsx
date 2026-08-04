@@ -46,7 +46,7 @@ export default function Features() {
     <section id={SectionId.SERVICES} className="relative bg-dark py-24">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
-          <h2 className="mb-3 text-sm font-bold tracking-widest text-secondary uppercase">핵심 역량</h2>
+          <h2 className="mb-3 text-sm font-bold tracking-widest text-secondary-light uppercase">핵심 역량</h2>
           <p className="mb-6 text-3xl font-bold text-white md:text-5xl">혁신을 위한 핵심 역량</p>
           <p className="mx-auto max-w-2xl text-gray-400">
             HongLabAI는 비즈니스 문제를 기술로 해결하고 실제 운영 가능한 제품으로 연결합니다.

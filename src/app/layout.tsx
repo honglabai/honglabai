@@ -36,6 +36,9 @@ const organizationJsonLd = {
   url: siteUrl,
   description:
     "AI 기반 소프트웨어, 앱 포트폴리오 및 기술 컨설팅을 제공하는 HongLabAI의 공식 홈페이지입니다.",
+  legalName: "홍랩에이아이",
+  founder: { "@type": "Person", name: "홍은선" },
+  email: "honglabai@gmail.com",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
