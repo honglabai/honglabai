@@ -41,9 +41,6 @@ function ServiceIcon({ name }: { name: string }) {
   return <svg {...commonProps}><path d="M12 3 10.8 7.8 6 9l4.8 1.2L12 15l1.2-4.8L18 9l-4.8-1.2L12 3Z" /><path d="m19 14-.7 2.3L16 17l2.3.7L19 20l.7-2.3L22 17l-2.3-.7L19 14Z" /><path d="m5 15-.6 1.9-1.9.6 1.9.6L5 20l.6-1.9 1.9-.6-1.9-.6L5 15Z" /></svg>;
 }
 
-// 4개 카드를 6열 위에 3/3/2/4로 흘려 균등 그리드의 전형성을 깬다.
-const bentoSpan = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-4"];
-
 export default function Features() {
   return (
     <section id={SectionId.SERVICES} className="relative bg-dark py-24">
@@ -56,13 +53,13 @@ export default function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
             <article
               key={service.title}
               data-reveal
               style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}
-              className={`group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:border-primary/50 hover:bg-white/10 ${bentoSpan[index % bentoSpan.length]}`}
+              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:border-primary/50 hover:bg-white/10"
             >
               <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-primary/10 blur-[50px] transition-all group-hover:bg-primary/20" />
               <div className="relative z-10 mb-6" aria-hidden="true"><ServiceIcon name={service.icon} /></div>
