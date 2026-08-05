@@ -97,65 +97,64 @@ export default function ScrollVideoHero({
   return (
     <section ref={sectionRef} className="relative h-[280svh] bg-dark">
       <div className="sticky top-0 flex h-svh w-full items-center overflow-hidden">
-        {/* Ambient wash behind the split so the panel does not float on a
-            flat fill. Decorative only — the video itself is a foreground
-            element on the right. */}
+        {/* Full-bleed video. Kept at full opacity — the earlier 45% wash was
+            too dim to read. Legibility comes from a scrim placed only behind
+            the copy instead of dimming the whole frame. */}
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          tabIndex={-1}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
+        {/* Copy-side scrim. Multi-stop and eased: a two-stop gradient reaching
+            transparent early leaves a visible vertical seam down the middle of
+            the frame. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute top-1/2 right-0 h-[720px] w-[720px] -translate-y-1/2 translate-x-1/4 rounded-full bg-primary/12 blur-[140px]"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(100deg, rgb(15 23 42 / 0.94) 0%, rgb(15 23 42 / 0.86) 18%, rgb(15 23 42 / 0.66) 38%, rgb(15 23 42 / 0.34) 58%, rgb(15 23 42 / 0.12) 76%, rgb(15 23 42 / 0) 92%)",
+          }}
         />
+        {/* The horizontal scrim only darkens the left side, which is enough on
+            wide screens but leaves the copy sitting on bright frames once the
+            layout narrows. Add a flat veil below lg. */}
+        <div aria-hidden="true" className="absolute inset-0 bg-dark/45 lg:hidden" />
+
+        {/* Top and bottom falloff so the nav and the next section meet the
+            video without a hard seam. */}
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-dark/85 via-dark/35 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-dark via-dark/45 to-transparent" />
         <div aria-hidden="true" className="grain absolute inset-0" />
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
-          <div className="order-2 max-w-xl lg:order-1">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
+          <div className="max-w-xl">
             <p
-              data-reveal
               className="font-robot mb-5 text-xs tracking-[0.28em] text-primary-light uppercase sm:text-sm"
             >
               {eyebrow}
             </p>
             <h1
-              data-reveal
-              style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
-              className="text-4xl leading-[1.12] font-black tracking-tight text-white sm:text-5xl lg:text-6xl"
+              className="text-4xl leading-[1.12] font-black tracking-tight text-white drop-shadow-[0_2px_12px_rgba(2,6,23,0.75)] sm:text-5xl lg:text-6xl"
             >
               {headline}
             </h1>
             <p
-              data-reveal
-              style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-              className="mt-6 text-base leading-relaxed text-slate-300 sm:text-lg"
+              className="mt-6 text-base leading-relaxed text-slate-200 drop-shadow-[0_1px_8px_rgba(2,6,23,0.7)] sm:text-lg"
             >
               {description}
             </p>
             <div
-              data-reveal
-              style={{ "--reveal-delay": "240ms" } as React.CSSProperties}
               className="mt-9 flex flex-col gap-4 sm:flex-row"
             >
               {children}
-            </div>
-          </div>
-
-          {/* Video panel: a framed foreground object on the right, not a
-              background wash — so it stays fully legible at full opacity. */}
-          <div
-            data-reveal
-            style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
-            className="order-1 lg:order-2"
-          >
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/15 bg-slate-950/60 p-2 shadow-2xl shadow-black/45 backdrop-blur-xl sm:p-3">
-              <video
-                ref={videoRef}
-                src={src}
-                poster={poster}
-                muted
-                playsInline
-                preload="auto"
-                aria-hidden="true"
-                tabIndex={-1}
-                className="aspect-video w-full rounded-[1.25rem] object-cover"
-              />
             </div>
           </div>
         </div>
