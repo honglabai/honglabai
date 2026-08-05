@@ -1,7 +1,3 @@
-/* Pretendard Variable: one variable file replaces the five Noto Sans KR weights
-   we were loading — better Korean typography and fewer font requests. */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -75,7 +71,7 @@ textarea:focus-visible {
 }
 
 .font-robot {
-  font-family: "Orbitron", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-orbitron), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .glass {
