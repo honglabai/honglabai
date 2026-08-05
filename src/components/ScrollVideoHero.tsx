@@ -97,28 +97,17 @@ export default function ScrollVideoHero({
   return (
     <section ref={sectionRef} className="relative h-[280svh] bg-dark">
       <div className="sticky top-0 flex h-svh w-full items-center overflow-hidden">
-        <video
-          ref={videoRef}
-          src={src}
-          poster={poster}
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-          tabIndex={-1}
-          className="absolute inset-0 h-full w-full object-cover opacity-45"
-        />
-
-        {/* Legibility scrim. Darkest where the copy sits. */}
+        {/* Ambient wash behind the split so the panel does not float on a
+            flat fill. Decorative only — the video itself is a foreground
+            element on the right. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-dark via-dark/85 to-dark/40"
+          className="pointer-events-none absolute top-1/2 right-0 h-[720px] w-[720px] -translate-y-1/2 translate-x-1/4 rounded-full bg-primary/12 blur-[140px]"
         />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-dark to-transparent" />
         <div aria-hidden="true" className="grain absolute inset-0" />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
-          <div className="max-w-2xl">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
+          <div className="order-2 max-w-xl lg:order-1">
             <p
               data-reveal
               className="font-robot mb-5 text-xs tracking-[0.28em] text-primary-light uppercase sm:text-sm"
@@ -135,7 +124,7 @@ export default function ScrollVideoHero({
             <p
               data-reveal
               style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-              className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg"
+              className="mt-6 text-base leading-relaxed text-slate-300 sm:text-lg"
             >
               {description}
             </p>
@@ -147,12 +136,35 @@ export default function ScrollVideoHero({
               {children}
             </div>
           </div>
+
+          {/* Video panel: a framed foreground object on the right, not a
+              background wash — so it stays fully legible at full opacity. */}
+          <div
+            data-reveal
+            style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
+            className="order-1 lg:order-2"
+          >
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/15 bg-slate-950/60 p-2 shadow-2xl shadow-black/45 backdrop-blur-xl sm:p-3">
+              <video
+                ref={videoRef}
+                src={src}
+                poster={poster}
+                muted
+                playsInline
+                preload="auto"
+                aria-hidden="true"
+                tabIndex={-1}
+                className="aspect-video w-full rounded-[1.25rem] object-cover"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Scroll affordance — the section only makes sense if you scroll. */}
+        {/* Scroll affordance — the section only makes sense if you scroll.
+            Hidden on short viewports, where it lands on top of the copy. */}
         <div
           aria-hidden="true"
-          className={`absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 transition-opacity duration-700 ${isReady ? "opacity-100" : "opacity-0"}`}
+          className={`pointer-events-none absolute inset-x-0 bottom-8 hidden flex-col items-center gap-2 transition-opacity duration-700 [@media(min-height:760px)]:flex ${isReady ? "opacity-100" : "opacity-0"}`}
         >
           <span className="text-[11px] tracking-[0.3em] text-slate-400 uppercase">Scroll</span>
           <span className="h-10 w-px bg-gradient-to-b from-slate-400 to-transparent" />

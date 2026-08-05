@@ -17,12 +17,13 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
           <div><p className="mb-3 text-sm font-bold tracking-widest text-secondary-light uppercase">추천 포트폴리오</p><h2 className="text-3xl font-black text-white md:text-5xl">운영 중인 앱</h2></div>
           <Link href="/apps" className="inline-flex min-h-11 items-center text-sm font-bold text-primary-light hover:text-white">전체 포트폴리오 보기 →</Link>
         </div>
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {apps.map((app, index) => (
             <div
               key={app.id}
               data-reveal
               style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties}
+              className="h-full"
             >
               <AppCard app={app} />
             </div>
