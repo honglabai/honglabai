@@ -86,10 +86,23 @@ export default function ScrollVideoHero({
     if (video.readyState >= 1) onLoaded();
     sync();
 
+    // Fetch the rest of the clip once the browser is idle. Scrubbing needs the
+    // frames, but not before the page has painted.
+    const warm = () => {
+      video.preload = "auto";
+      video.load();
+    };
+    const canIdle = typeof window.requestIdleCallback === "function";
+    const idle = canIdle
+      ? window.requestIdleCallback(warm, { timeout: 3000 })
+      : window.setTimeout(warm, 1500);
+
     return () => {
       document.removeEventListener("scroll", schedule, { capture: true });
       window.removeEventListener("resize", schedule);
       video.removeEventListener("loadedmetadata", onLoaded);
+      if (canIdle) window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
       if (frame) cancelAnimationFrame(frame);
     };
   }, []);
@@ -99,14 +112,18 @@ export default function ScrollVideoHero({
       <div className="sticky top-0 flex h-svh w-full items-center overflow-hidden">
         {/* Full-bleed video. Kept at full opacity — the earlier 45% wash was
             too dim to read. Legibility comes from a scrim placed only behind
-            the copy instead of dimming the whole frame. */}
+            the copy instead of dimming the whole frame.
+
+            preload is "metadata" so the 1MB clip does not compete with first
+            paint; the effect below upgrades it once the page is idle, which
+            keeps scrubbing smooth without delaying LCP. */}
         <video
           ref={videoRef}
           src={src}
           poster={poster}
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           tabIndex={-1}
           className="absolute inset-0 h-full w-full object-cover"

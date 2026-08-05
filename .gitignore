@@ -30,3 +30,6 @@ coverage
 
 # Supabase CLI local state (project ref, pooler URL, service versions)
 supabase/.temp/
+
+# Database dumps contain personal data (inquiries) — never commit them.
+backups/

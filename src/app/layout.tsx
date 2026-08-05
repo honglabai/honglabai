@@ -44,6 +44,13 @@ const organizationJsonLd = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
+      <head>
+        {/* Fonts come from two third-party origins; connecting early removes
+            the DNS+TLS round trips from the critical path (Lighthouse measured
+            ~357ms on this page). */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+      </head>
       <body className="overflow-x-hidden antialiased">
         <script
           type="application/ld+json"
