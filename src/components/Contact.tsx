@@ -87,14 +87,14 @@ export default function Contact() {
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col gap-16 lg:flex-row">
           <div className="lg:w-1/3">
-            <h2 className="mb-6 text-4xl font-bold text-white">
+            <h2 data-reveal className="mb-6 text-4xl font-bold text-white">
               프로젝트를
               <br />
               시작해볼까요?
             </h2>
             <p className="mb-8 leading-relaxed text-gray-400">
-              아이디어만 있어도 괜찮습니다. HongLabAI의 AI 분석 시스템이 요구사항을 먼저 살펴보고
-              적합한 기술 방향을 제안합니다.
+              아이디어만 있어도 괜찮습니다. 남겨주신 내용을 직접 검토한 뒤,
+              적합한 기술 방향과 예상 일정을 정리해 회신합니다.
             </p>
 
             <div className="space-y-6">
@@ -120,7 +120,7 @@ export default function Contact() {
           </div>
 
           <div className="lg:w-2/3">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+            <div data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties} className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
