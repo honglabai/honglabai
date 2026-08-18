@@ -14,7 +14,7 @@ export default async function HomePage() {
   const portfolioApps = await getPublishedApps({ limit: 6 });
 
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="min-h-screen bg-paper text-zinc-950">
       <Navbar />
       <ScrollReveal />
       <main id="main-content">
@@ -26,14 +26,14 @@ export default async function HomePage() {
             <>
               아이디어를
               <br />
-              작동하는 <span className="text-primary-light">제품</span>으로.
+              작동하는 <span className="text-lime-700">제품</span>으로.
             </>
           }
           description="기획부터 설계, 개발, 배포까지 직접 만듭니다. 지금까지 만든 앱들이 실제로 운영되고 있습니다."
         >
           <Link
             href="/apps"
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563eb] px-8 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary-dark active:scale-[0.98] sm:text-lg"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-bold text-zinc-950 shadow-[0_18px_36px_-14px_rgba(180,212,49,0.7)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-accent-strong active:scale-[0.98] sm:text-lg"
           >
             만든 앱 둘러보기
             <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
@@ -42,7 +42,7 @@ export default async function HomePage() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-base font-bold text-white backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10 active:scale-[0.98] sm:text-lg"
+            className="inline-flex items-center justify-center rounded-full border border-zinc-300 bg-white/70 px-8 py-4 text-base font-bold text-zinc-900 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-zinc-950 active:scale-[0.98] sm:text-lg"
           >
             프로젝트 문의하기
           </Link>

@@ -16,21 +16,21 @@ const principles = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="min-h-screen bg-paper text-zinc-950">
       <Navbar />
       <main id="main-content" className="px-6 pt-36 pb-24">
         <div className="container mx-auto max-w-5xl">
-          <p className="mb-3 text-sm font-bold tracking-[0.24em] text-secondary uppercase">About HongLabAI</p>
+          <p className="mb-3 text-sm font-bold tracking-[0.24em] text-zinc-500 uppercase">About HongLabAI</p>
           <h1 className="mb-8 max-w-3xl text-4xl leading-tight font-black md:text-6xl">아이디어가 실제로 작동하는 제품이 될 때까지</h1>
-          <p className="mb-14 max-w-3xl text-lg leading-relaxed text-gray-400">
+          <p className="mb-14 max-w-3xl text-lg leading-relaxed text-zinc-500">
             HongLabAI는 AI 기술과 소프트웨어 엔지니어링을 결합해 검증 가능한 디지털 제품을 만듭니다.
           </p>
 
           <div className="grid gap-6 md:grid-cols-3">
             {principles.map(([title, description]) => (
-              <article key={title} className="rounded-2xl border border-white/10 bg-white/5 p-7">
+              <article key={title} className="rounded-2xl border border-zinc-200 bg-white p-7">
                 <h2 className="mb-4 text-xl font-bold">{title}</h2>
-                <p className="text-sm leading-relaxed text-gray-400">{description}</p>
+                <p className="text-sm leading-relaxed text-zinc-500">{description}</p>
               </article>
             ))}
           </div>

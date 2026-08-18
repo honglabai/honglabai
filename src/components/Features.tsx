@@ -23,8 +23,8 @@ const services: ServiceItem[] = [
   },
 ];
 
-function ServiceIcon({ name }: { name: string }) {
-  const commonProps = { className: "h-10 w-10 text-primary-light", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+function ServiceIcon({ name, className }: { name: string; className: string }) {
+  const commonProps = { className: `h-10 w-10 ${className}`, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
 
   if (name === "layers") {
     return <svg {...commonProps}><path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5" /><path d="m3 16 9 5 9-5" /></svg>;
@@ -41,36 +41,43 @@ function ServiceIcon({ name }: { name: string }) {
   return <svg {...commonProps}><path d="M12 3 10.8 7.8 6 9l4.8 1.2L12 15l1.2-4.8L18 9l-4.8-1.2L12 3Z" /><path d="m19 14-.7 2.3L16 17l2.3.7L19 20l.7-2.3L22 17l-2.3-.7L19 14Z" /><path d="m5 15-.6 1.9-1.9.6 1.9.6L5 20l.6-1.9 1.9-.6-1.9-.6L5 15Z" /></svg>;
 }
 
+// Same-size cards, mixed materials — the reference's stat row (light, light,
+// lime, near-black) applied to the four capabilities.
+const cardMaterials = [
+  { card: "border border-zinc-200/80 bg-white", icon: "text-zinc-900", title: "text-zinc-950", body: "text-zinc-600" },
+  { card: "border border-zinc-200/80 bg-zinc-100", icon: "text-zinc-900", title: "text-zinc-950", body: "text-zinc-600" },
+  { card: "border border-transparent bg-accent", icon: "text-zinc-950", title: "text-zinc-950", body: "text-zinc-800" },
+  { card: "border border-transparent bg-zinc-950", icon: "text-accent", title: "text-white", body: "text-zinc-400" },
+];
+
 export default function Features() {
   return (
-    <section id={SectionId.SERVICES} className="relative bg-dark py-24">
+    <section id={SectionId.SERVICES} className="relative bg-white py-24 md:py-32">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
-          <h2 data-reveal className="mb-3 text-sm font-bold tracking-widest text-secondary-light uppercase">핵심 역량</h2>
-          <p data-reveal style={{ "--reveal-delay": "60ms" } as React.CSSProperties} className="mb-6 text-3xl font-bold text-white md:text-5xl">기획부터 운영까지, 직접 만듭니다</p>
-          <p className="mx-auto max-w-2xl text-gray-400">
+          <h2 data-reveal className="mb-3 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-zinc-500 uppercase"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />핵심 역량</h2>
+          <p data-reveal style={{ "--reveal-delay": "60ms" } as React.CSSProperties} className="mb-6 text-3xl font-black text-zinc-950 md:text-5xl">기획부터 운영까지, 직접 만듭니다</p>
+          <p className="mx-auto max-w-2xl text-zinc-600">
             HongLabAI는 비즈니스 문제를 기술로 해결하고 실제 운영 가능한 제품으로 연결합니다.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <article
-              key={service.title}
-              data-reveal
-              style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}
-              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:border-primary/50 hover:bg-white/10"
-            >
-              <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-primary/10 blur-[50px] transition-all group-hover:bg-primary/20" />
-              <div className="relative z-10 mb-6" aria-hidden="true"><ServiceIcon name={service.icon} /></div>
-              <h3 className="relative z-10 mb-4 text-xl font-bold text-white transition-colors group-hover:text-primary-light">
-                {service.title}
-              </h3>
-              <p className="relative z-10 text-sm leading-relaxed text-gray-400 group-hover:text-gray-300">
-                {service.description}
-              </p>
-            </article>
-          ))}
+          {services.map((service, index) => {
+            const material = cardMaterials[index % cardMaterials.length];
+            return (
+              <article
+                key={service.title}
+                data-reveal
+                style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-8 shadow-[0_20px_40px_-18px_rgba(24,24,27,0.12)] transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_28px_52px_-20px_rgba(24,24,27,0.2)] ${material.card}`}
+              >
+                <div className="mb-6" aria-hidden="true"><ServiceIcon name={service.icon} className={material.icon} /></div>
+                <h3 className={`mb-4 text-xl font-bold ${material.title}`}>{service.title}</h3>
+                <p className={`text-sm leading-relaxed ${material.body}`}>{service.description}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

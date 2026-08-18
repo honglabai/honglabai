@@ -69,7 +69,7 @@ export default async function AppDetailPage({ params }: AppDetailPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="min-h-screen bg-paper text-zinc-950">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
@@ -77,22 +77,22 @@ export default async function AppDetailPage({ params }: AppDetailPageProps) {
       <Navbar />
       <main id="main-content" className="px-6 pt-36 pb-24">
         <article className="container mx-auto max-w-4xl">
-          <Link href="/apps" className="mb-8 inline-flex text-sm text-primary-light transition-colors hover:text-white">
+          <Link href="/apps" className="mb-8 inline-flex text-sm text-zinc-900 transition-colors hover:text-zinc-950">
             ← 포트폴리오로 돌아가기
           </Link>
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+          <div className="overflow-hidden rounded-3xl border border-zinc-200 bg-white">
             {app.hero_image_url ? <div className="relative aspect-[16/8] w-full"><Image src={app.hero_image_url} alt={app.image_alt} fill priority sizes="(max-width: 1024px) 100vw, 896px" className="object-cover object-top" /></div> : null}
             <div className="p-8 md:p-12">
             <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center">
-              {app.icon_url ? <div className="relative h-24 w-24 overflow-hidden rounded-3xl"><Image src={app.icon_url} alt={`${app.name} 아이콘`} fill sizes="96px" className="object-cover" /></div> : <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-primary to-secondary font-robot text-4xl font-bold">{app.name.slice(0, 1)}</div>}
+              {app.icon_url ? <div className="relative h-24 w-24 overflow-hidden rounded-3xl"><Image src={app.icon_url} alt={`${app.name} 아이콘`} fill sizes="96px" className="object-cover" /></div> : <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-zinc-950 font-robot text-4xl font-bold text-accent">{app.name.slice(0, 1)}</div>}
               <div>
-                <p className="mb-2 text-sm font-bold tracking-widest text-secondary uppercase">{productLabels[app.product_status]} · {app.platforms.join(" · ")}</p>
+                <p className="mb-2 text-sm font-bold tracking-widest text-zinc-500 uppercase">{productLabels[app.product_status]} · {app.platforms.join(" · ")}</p>
                 <h1 className="text-3xl font-black md:text-5xl">{app.name}</h1>
-                <p className="mt-3 text-lg text-gray-400">{app.tagline}</p>
+                <p className="mt-3 text-lg text-zinc-500">{app.tagline}</p>
               </div>
             </div>
-            <p className="mb-8 whitespace-pre-wrap text-lg leading-relaxed text-gray-300">{app.description || app.summary}</p>
-            <div className="flex flex-wrap gap-3">{links.map(([label, url], index) => <a key={label} href={url} target="_blank" rel="noopener noreferrer" className={`rounded-xl px-5 py-3 font-bold transition ${index === 0 ? "bg-primary text-white hover:bg-primary-dark" : "border border-white/10 text-white hover:border-primary/50"}`}>{label} ↗</a>)}</div>
+            <p className="mb-8 whitespace-pre-wrap text-lg leading-relaxed text-zinc-600">{app.description || app.summary}</p>
+            <div className="flex flex-wrap gap-3">{links.map(([label, url], index) => <a key={label} href={url} target="_blank" rel="noopener noreferrer" className={`rounded-xl px-5 py-3 font-bold transition ${index === 0 ? "bg-accent text-zinc-950 hover:bg-accent-strong" : "border border-zinc-200 text-zinc-950 hover:border-zinc-950"}`}>{label} ↗</a>)}</div>
             </div>
           </div>
         </article>

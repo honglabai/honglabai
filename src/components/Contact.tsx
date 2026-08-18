@@ -82,60 +82,60 @@ export default function Contact() {
 
   return (
     <section id={SectionId.CONTACT} className="relative overflow-hidden py-24">
-      <div className="pointer-events-none absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-t from-primary/10 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-t from-lime-100/50 to-transparent" />
 
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col gap-16 lg:flex-row">
           <div className="lg:w-1/3">
-            <h2 data-reveal className="mb-6 text-4xl font-bold text-white">
+            <h2 data-reveal className="mb-6 text-4xl font-black text-zinc-950">
               프로젝트를
               <br />
               시작해볼까요?
             </h2>
-            <p className="mb-8 leading-relaxed text-gray-400">
+            <p className="mb-8 leading-relaxed text-zinc-600">
               아이디어만 있어도 괜찮습니다. 남겨주신 내용을 직접 검토한 뒤,
               적합한 기술 방향과 예상 일정을 정리해 회신합니다.
             </p>
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10" aria-hidden="true">
-                  <svg className="h-5 w-5 text-primary-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-950" aria-hidden="true">
+                  <svg className="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-white">사업자</h3>
-                  <p className="text-sm text-gray-400">홍랩에이아이 · 대표 홍은선</p>
+                  <h3 className="font-bold text-zinc-950">사업자</h3>
+                  <p className="text-sm text-zinc-600">홍랩에이아이 · 대표 홍은선</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10" aria-hidden="true">
-                  <svg className="h-5 w-5 text-primary-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-950" aria-hidden="true">
+                  <svg className="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-white">이메일</h3>
-                  <p className="text-sm text-gray-400"><a href="mailto:honglabai@gmail.com" className="transition-colors hover:text-white">honglabai@gmail.com</a></p>
+                  <h3 className="font-bold text-zinc-950">이메일</h3>
+                  <p className="text-sm text-zinc-600"><a href="mailto:honglabai@gmail.com" className="transition-colors hover:text-white">honglabai@gmail.com</a></p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="lg:w-2/3">
-            <div data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties} className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+            <div data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties} className="rounded-[2rem] border border-zinc-200/80 bg-white p-8 shadow-[0_24px_48px_-20px_rgba(24,24,27,0.14)]">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-gray-300">이름</label>
-                    <input id="contact-name" type="text" value={name} onChange={(event) => setName(event.target.value)} maxLength={100} className="w-full rounded-lg border border-gray-700 bg-black/30 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-primary focus:outline-none" required />
+                    <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-zinc-700">이름</label>
+                    <input id="contact-name" type="text" value={name} onChange={(event) => setName(event.target.value)} maxLength={100} className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-950 placeholder-zinc-400 transition-colors focus:border-zinc-950 focus:outline-none" required />
                   </div>
                   <div>
-                    <label htmlFor="contact-company" className="mb-2 block text-sm font-medium text-gray-300">회사·팀 <span className="text-gray-400">(선택)</span></label>
-                    <input id="contact-company" type="text" value={company} onChange={(event) => setCompany(event.target.value)} maxLength={120} className="w-full rounded-lg border border-gray-700 bg-black/30 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-primary focus:outline-none" />
+                    <label htmlFor="contact-company" className="mb-2 block text-sm font-medium text-zinc-700">회사·팀 <span className="text-zinc-500">(선택)</span></label>
+                    <input id="contact-company" type="text" value={company} onChange={(event) => setCompany(event.target.value)} maxLength={120} className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-950 placeholder-zinc-400 transition-colors focus:border-zinc-950 focus:outline-none" />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="inquiry-type" className="mb-2 block text-sm font-medium text-gray-300">문의 유형</label>
-                  <select id="inquiry-type" value={inquiryType} onChange={(event) => setInquiryType(event.target.value)} className="w-full rounded-lg border border-gray-700 bg-slate-950 px-4 py-3 text-white transition-colors focus:border-primary focus:outline-none">
+                  <label htmlFor="inquiry-type" className="mb-2 block text-sm font-medium text-zinc-700">문의 유형</label>
+                  <select id="inquiry-type" value={inquiryType} onChange={(event) => setInquiryType(event.target.value)} className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-950 transition-colors focus:border-zinc-950 focus:outline-none">
                     <option value="project">앱·웹 프로젝트</option>
                     <option value="partnership">협업·제휴</option>
                     <option value="investment">투자</option>
@@ -144,7 +144,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-gray-300">
+                  <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-zinc-700">
                     이메일
                   </label>
                   <input
@@ -153,13 +153,13 @@ export default function Contact() {
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     placeholder="example@company.com"
-                    className="w-full rounded-lg border border-gray-700 bg-black/30 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-primary focus:outline-none"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-950 placeholder-zinc-400 transition-colors focus:border-zinc-950 focus:outline-none"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="project-description" className="mb-2 block text-sm font-medium text-gray-300">
+                  <label htmlFor="project-description" className="mb-2 block text-sm font-medium text-zinc-700">
                     프로젝트 내용
                   </label>
                   <textarea
@@ -168,7 +168,7 @@ export default function Contact() {
                     onChange={(event) => setProjectDesc(event.target.value)}
                     rows={4}
                     placeholder="만들고 싶은 서비스나 해결하고 싶은 문제를 자유롭게 적어주세요."
-                    className="w-full resize-none rounded-lg border border-gray-700 bg-black/30 px-4 py-3 text-white placeholder-gray-600 transition-colors focus:border-primary focus:outline-none"
+                    className="w-full resize-none rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-950 placeholder-zinc-400 transition-colors focus:border-zinc-950 focus:outline-none"
                     required
                   />
                 </div>
@@ -180,24 +180,24 @@ export default function Contact() {
                     disabled={isAnalyzing || projectDesc.length === 0}
                     className={`flex min-h-11 w-full items-center justify-center gap-2 rounded-lg px-6 py-2 text-sm font-bold transition-all sm:w-auto ${
                       isAnalyzing
-                        ? "cursor-not-allowed bg-gray-700 text-gray-400"
-                        : "bg-gradient-to-r from-secondary to-primary text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                        ? "cursor-not-allowed bg-zinc-200 text-zinc-400"
+                        : "bg-zinc-950 text-white hover:bg-zinc-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                     }`}
                   >
                     {isAnalyzing ? "AI 분석 중..." : "✨ AI 초안 분석하기"}
                   </button>
-                    <span className="hidden text-xs text-gray-400 sm:block">서버에서 안전하게 내용을 분석합니다.</span>
+                    <span className="hidden text-xs text-zinc-500 sm:block">서버에서 안전하게 내용을 분석합니다.</span>
                 </div>
 
                 {aiResponse ? (
-                  <div className="animate-fade-in rounded-xl border border-primary/30 bg-primary/10 p-6">
-                    <h3 className="mb-2 font-bold text-primary-light">AI 분석 결과</h3>
-                    <p className="mb-4 text-sm leading-relaxed text-gray-300">{aiResponse.analysis}</p>
+                  <div className="animate-fade-in rounded-2xl border border-lime-300/70 bg-lime-50 p-6">
+                    <h3 className="mb-2 font-bold text-zinc-950">AI 분석 결과</h3>
+                    <p className="mb-4 text-sm leading-relaxed text-zinc-700">{aiResponse.analysis}</p>
                     <div>
-                      <span className="text-xs font-bold tracking-wider text-gray-400 uppercase">추천 기술 스택</span>
+                      <span className="text-xs font-bold tracking-wider text-zinc-500 uppercase">추천 기술 스택</span>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {aiResponse.techStack.map((tech) => (
-                          <span key={tech} className="rounded-full border border-gray-700 bg-dark px-3 py-1 text-xs text-secondary">
+                          <span key={tech} className="rounded-full bg-zinc-950 px-3 py-1 text-xs font-bold text-accent">
                             {tech}
                           </span>
                         ))}
@@ -207,17 +207,17 @@ export default function Contact() {
                 ) : null}
 
                 {notice ? (
-                  <p className="rounded-lg border border-amber-400/20 bg-amber-400/10 px-4 py-3 text-sm text-amber-100" aria-live="polite">
+                  <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900" aria-live="polite">
                     {notice}
                   </p>
                 ) : null}
 
-                <label className="flex min-h-11 items-start gap-3 text-sm leading-relaxed text-gray-400">
+                <label className="flex min-h-11 items-start gap-3 text-sm leading-relaxed text-zinc-600">
                   <input type="checkbox" name="privacy_consent" required className="mt-1 h-5 w-5 shrink-0" />
                   <span>
                     문의 처리 목적으로 이름, 이메일, 회사명과 문의 내용을 수집·이용하는 데 동의합니다. 보유 기간 등
                     자세한 내용은{" "}
-                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary-light underline">
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="font-medium text-zinc-900 underline decoration-accent-strong decoration-2 underline-offset-2">
                       개인정보 처리방침
                     </a>
                     에서 확인할 수 있습니다.
@@ -229,7 +229,7 @@ export default function Contact() {
                   <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
                 </div>
 
-                <button type="submit" disabled={isSubmitting} className="w-full rounded-lg bg-white py-4 font-bold text-dark shadow-lg transition-colors hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-60">
+                <button type="submit" disabled={isSubmitting} className="w-full rounded-full bg-accent py-4 font-bold text-zinc-950 shadow-[0_18px_36px_-14px_rgba(180,212,49,0.7)] transition-all hover:-translate-y-0.5 hover:bg-accent-strong active:scale-[0.98] disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-60">
                   {isSubmitting ? "문의 저장 중..." : "문의 보내기"}
                 </button>
               </form>

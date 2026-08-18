@@ -108,7 +108,7 @@ export default function ScrollVideoHero({
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[280svh] bg-dark">
+    <section ref={sectionRef} className="relative h-[280svh] bg-paper">
       <div className="sticky top-0 flex h-svh w-full items-center overflow-hidden">
         {/* Full-bleed video. Kept at full opacity — the earlier 45% wash was
             too dim to read. Legibility comes from a scrim placed only behind
@@ -137,34 +137,35 @@ export default function ScrollVideoHero({
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(100deg, rgb(15 23 42 / 0.94) 0%, rgb(15 23 42 / 0.86) 18%, rgb(15 23 42 / 0.66) 38%, rgb(15 23 42 / 0.34) 58%, rgb(15 23 42 / 0.12) 76%, rgb(15 23 42 / 0) 92%)",
+              "linear-gradient(100deg, rgb(247 248 251 / 0.96) 0%, rgb(247 248 251 / 0.88) 18%, rgb(247 248 251 / 0.62) 38%, rgb(247 248 251 / 0.3) 58%, rgb(247 248 251 / 0.1) 76%, rgb(247 248 251 / 0) 92%)",
           }}
         />
         {/* The horizontal scrim only darkens the left side, which is enough on
             wide screens but leaves the copy sitting on bright frames once the
             layout narrows. Add a flat veil below lg. */}
-        <div aria-hidden="true" className="absolute inset-0 bg-dark/45 lg:hidden" />
+        <div aria-hidden="true" className="absolute inset-0 bg-white/55 lg:hidden" />
 
         {/* Top and bottom falloff so the nav and the next section meet the
             video without a hard seam. */}
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-dark/85 via-dark/35 to-transparent" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-dark via-dark/45 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-paper via-paper/40 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-paper via-paper/50 to-transparent" />
         <div aria-hidden="true" className="grain absolute inset-0" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
           <div className="max-w-xl">
             <p
-              className="font-robot mb-5 text-xs tracking-[0.28em] text-primary-light uppercase sm:text-sm"
+              className="font-robot mb-5 inline-flex items-center gap-2 text-xs tracking-[0.28em] text-zinc-500 uppercase sm:text-sm"
             >
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
               {eyebrow}
             </p>
             <h1
-              className="text-4xl leading-[1.12] font-black tracking-tight text-white drop-shadow-[0_2px_12px_rgba(2,6,23,0.75)] sm:text-5xl lg:text-6xl"
+              className="text-4xl leading-[1.12] font-black tracking-tight text-zinc-950 drop-shadow-[0_1px_10px_rgba(255,255,255,0.85)] sm:text-5xl lg:text-6xl"
             >
               {headline}
             </h1>
             <p
-              className="mt-6 text-base leading-relaxed text-slate-200 drop-shadow-[0_1px_8px_rgba(2,6,23,0.7)] sm:text-lg"
+              className="mt-6 text-base leading-relaxed text-zinc-700 drop-shadow-[0_1px_8px_rgba(255,255,255,0.8)] sm:text-lg"
             >
               {description}
             </p>
@@ -182,8 +183,8 @@ export default function ScrollVideoHero({
           aria-hidden="true"
           className={`pointer-events-none absolute inset-x-0 bottom-8 hidden flex-col items-center gap-2 transition-opacity duration-700 [@media(min-height:760px)]:flex ${isReady ? "opacity-100" : "opacity-0"}`}
         >
-          <span className="text-[11px] tracking-[0.3em] text-slate-400 uppercase">Scroll</span>
-          <span className="h-10 w-px bg-gradient-to-b from-slate-400 to-transparent" />
+          <span className="text-[11px] tracking-[0.3em] text-zinc-500 uppercase">Scroll</span>
+          <span className="h-10 w-px bg-gradient-to-b from-zinc-400 to-transparent" />
         </div>
       </div>
     </section>

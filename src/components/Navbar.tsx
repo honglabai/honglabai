@@ -41,10 +41,10 @@ export default function Navbar() {
   return (
     <nav
       aria-label="주요 메뉴"
-      className={`fixed top-0 left-0 z-50 w-full border-b border-white/5 transition-all duration-300 ${
+      className={`fixed top-0 left-0 z-50 w-full border-b transition-all duration-300 ${
         isScrolled
-          ? "glass py-3 shadow-lg shadow-blue-900/20"
-          : "bg-dark/90 py-4 backdrop-blur-md"
+          ? "glass border-zinc-900/10 py-3 shadow-[0_12px_30px_-18px_rgba(24,24,27,0.25)]"
+          : "border-transparent bg-paper/90 py-4 backdrop-blur-md"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
@@ -53,11 +53,11 @@ export default function Navbar() {
           className="flex min-h-11 items-center gap-2 text-2xl font-black tracking-tighter"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-primary to-secondary shadow-lg shadow-primary/30">
-            <span className="font-robot text-lg text-white">H</span>
+          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-950">
+            <span className="font-robot text-lg text-accent">H</span>
           </span>
-          <span className="font-robot tracking-wide text-white">
-            HongLab<span className="text-primary-light">AI</span>
+          <span className="font-robot tracking-wide text-zinc-950">
+            HongLab<span className="text-zinc-400">AI</span>
           </span>
         </Link>
 
@@ -66,14 +66,14 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium tracking-wide text-gray-300 transition-colors hover:text-primary-light"
+              className="text-sm font-medium tracking-wide text-zinc-600 transition-colors hover:text-zinc-950"
             >
               {item.label}
             </Link>
           ))}
           <Link
             href="/contact"
-            className="inline-flex min-h-11 items-center rounded-full bg-gradient-to-r from-primary to-primary-dark px-5 py-2 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+            className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 py-2 text-sm font-bold text-zinc-950 transition-all hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-[0_14px_30px_-12px_rgba(180,212,49,0.8)] active:scale-[0.98]"
           >
             프로젝트 시작
           </Link>
@@ -82,7 +82,7 @@ export default function Navbar() {
         <button
           type="button"
           ref={menuButtonRef}
-          className="flex h-11 w-11 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-lg text-zinc-900 transition-colors hover:bg-zinc-900/5 md:hidden"
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
           aria-label={isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
@@ -101,7 +101,7 @@ export default function Navbar() {
       {isMobileMenuOpen ? (
         <div
           id="mobile-navigation"
-          className="animate-fade-in-down absolute top-full left-0 w-full border-b border-gray-800 bg-dark/95 backdrop-blur-lg md:hidden"
+          className="animate-fade-in-down absolute top-full left-0 w-full border-b border-zinc-200 bg-white/95 backdrop-blur-lg md:hidden"
         >
           <div className="flex flex-col space-y-2 p-6">
             {navigation.map((item, index) => (
@@ -109,7 +109,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 ref={index === 0 ? firstMobileLinkRef : undefined}
-                className="flex min-h-11 items-center rounded-lg px-3 py-2 text-gray-300 transition-colors hover:bg-white/5 hover:text-white"
+                className="flex min-h-11 items-center rounded-lg px-3 py-2 text-zinc-600 transition-colors hover:bg-zinc-900/5 hover:text-zinc-950"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}
