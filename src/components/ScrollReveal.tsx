@@ -30,7 +30,25 @@ export default function ScrollReveal() {
     );
 
     nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
+
+    // Safety net: content hidden by CSS must never depend solely on an
+    // observer callback arriving. If anything already in view is still hidden
+    // shortly after mount, show it.
+    const fallback = window.setTimeout(() => {
+      for (const node of nodes) {
+        if (node.hasAttribute("data-revealed")) continue;
+        const { top, bottom } = node.getBoundingClientRect();
+        if (top < window.innerHeight && bottom > 0) {
+          node.setAttribute("data-revealed", "");
+          observer.unobserve(node);
+        }
+      }
+    }, 1200);
+
+    return () => {
+      window.clearTimeout(fallback);
+      observer.disconnect();
+    };
   }, []);
 
   return null;
