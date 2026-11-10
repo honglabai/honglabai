@@ -4,6 +4,10 @@ export type SupabaseConfig = {
 };
 
 export function getSupabaseConfig(): SupabaseConfig | null {
+  if (process.env.DISABLE_SUPABASE === "true") {
+    return null;
+  }
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
   const publishableKey = (
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
@@ -11,6 +15,10 @@ export function getSupabaseConfig(): SupabaseConfig | null {
   )?.trim();
 
   if (!url || !publishableKey) {
+    return null;
+  }
+
+  if (url.includes("YOUR_PROJECT") || publishableKey.includes("YOUR_KEY")) {
     return null;
   }
 
