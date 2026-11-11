@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | HongLabAI`,
     description: post.summary,
+    keywords: [post.title, ...post.tags, "HongLabAI", "홍랩에이아이", "AI 활용 게시판"],
     alternates: {
       canonical: `${siteUrl}/ai-board/${post.slug}`,
     },
@@ -33,9 +34,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${post.title} | HongLabAI`,
       description: post.summary,
       type: "article",
+      url: `${siteUrl}/ai-board/${post.slug}`,
+      siteName: "HongLabAI (홍랩에이아이)",
+      locale: "ko_KR",
       publishedTime: post.createdAt,
       authors: [post.author],
       tags: post.tags,
+      images: [
+        {
+          url: `${siteUrl}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | HongLabAI`,
+      description: post.summary,
+      images: [`${siteUrl}/opengraph-image`],
     },
   };
 }

@@ -5,13 +5,28 @@ export default function robots(): MetadataRoute.Robots {
   const siteUrl = getSiteUrl();
 
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      // Admin and auth are session-gated anyway; keeping them out of the index
-      // avoids leaking the surface and wasting crawl budget on redirects.
-      disallow: ["/admin", "/admin/", "/auth/", "/api/"],
-    },
+    rules: [
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/admin", "/admin/", "/auth/", "/api/"],
+      },
+      {
+        userAgent: "Yeti", // Naver Search Engine Bot
+        allow: "/",
+        disallow: ["/admin", "/admin/", "/auth/", "/api/"],
+      },
+      {
+        userAgent: "Daumoa", // Daum/Kakao Search Engine Bot
+        allow: "/",
+        disallow: ["/admin", "/admin/", "/auth/", "/api/"],
+      },
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin", "/admin/", "/auth/", "/api/"],
+      },
+    ],
     sitemap: `${siteUrl}/sitemap.xml`,
     host: siteUrl,
   };

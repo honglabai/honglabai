@@ -2,11 +2,31 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { getSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  title: "회사 소개 및 운영 철학",
-  description: "HongLabAI의 설립 목적, AI 소프트웨어 엔지니어링 원칙, 연구팀 구성 및 기술 콘텐츠 검증 기준을 소개합니다.",
+  title: "회사 소개 및 기술 전문성 | HongLabAI",
+  description:
+    "HongLabAI의 설립 목적, AI 소프트웨어 엔지니어링 원칙, E-E-A-T 기술 콘텐츠 검증 기준 및 비즈니스 거버넌스를 소개합니다.",
+  keywords: [
+    "HongLabAI 소개",
+    "홍랩에이아이",
+    "AI 엔지니어링",
+    "홍은선 대표",
+    "AI 소프트웨어 스튜디오",
+    "LLM 컨설팅",
+    "RAG 시스템",
+  ],
   alternates: { canonical: "/about" },
+  openGraph: {
+    type: "website",
+    title: "회사 소개 및 기술 전문성 | HongLabAI",
+    description:
+      "HongLabAI는 비즈니스 현장에서 실제로 작동하는 고품질 AI 솔루션과 차세대 웹/앱 서비스를 연구·개발합니다.",
+    url: "/about",
+    siteName: "HongLabAI (홍랩에이아이)",
+    locale: "ko_KR",
+  },
 };
 
 const domains = [
@@ -35,24 +55,70 @@ const domains = [
 const editorialStandards = [
   {
     number: "01",
-    title: "100% 실무 프로덕션 검증",
-    description: "이론에 그치는 튜토리얼이 아닌, 실제 서비스 배포 및 트래픽 환경에서 검증된 코드와 아키텍처만을 기술 게시판에 발행합니다.",
+    title: "실제 프로덕션 코드 기반 검증",
+    description: "단순 개념 설명이나 번역 문서가 아닌, 실제 프로덕션 환경에서 작동 테스트를 마친 안전한 구현 코드와 아키텍처만을 다룹니다.",
   },
   {
     number: "02",
-    title: "투명한 벤치마크 및 비용 데이터 공개",
-    description: "토큰 사용량, 지연시간(TTFT), 캐시 적중률, API 비용 절감 수치를 객관적 수치와 함께 있는 그대로 공개합니다.",
+    title: "객관적 벤치마크 및 지표 제시",
+    description: "레이턴시, 토큰 소모량, 정확도 지표(Accuracy/Recall) 등 정량적으로 측정 가능한 벤치마크 결과를 투명하게 공유합니다.",
   },
   {
     number: "03",
-    title: "상시 피드백 및 트리 토론 환류",
-    description: "게시판의 계층형 트리 댓글 시스템을 통해 현업 개발자들의 질문과 피드백을 실시간으로 수렴하여 문서를 지속 보완합니다.",
+    title: "재현 가능성(Reproducibility) 보장",
+    description: "공유되는 모든 튜토리얼은 표준 오픈소스 라이브러리와 최신 프레임워크 기반으로 다른 엔지니어가 즉시 재현할 수 있도록 단계별로 기술합니다.",
   },
 ];
 
 export default function AboutPage() {
+  const siteUrl = getSiteUrl();
+
+  const breadcrumbsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "홈",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "회사 소개",
+        item: `${siteUrl}/about`,
+      },
+    ],
+  };
+
+  const aboutJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About HongLabAI",
+    description: "HongLabAI 회사 소개 및 AI 엔지니어링 운영 원칙",
+    url: `${siteUrl}/about`,
+    mainEntity: {
+      "@type": "Organization",
+      name: "HongLabAI",
+      url: siteUrl,
+      founder: {
+        "@type": "Person",
+        name: "홍은선",
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-paper text-zinc-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
       <Navbar />
       <main id="main-content" className="relative overflow-hidden px-6 pt-36 pb-24">
         {/* Background ambient lighting */}
@@ -85,7 +151,7 @@ export default function AboutPage() {
               {domains.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-zinc-200/90 bg-white p-6 shadow-xs"
+                  className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-xs"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-xl mb-4">
                     {item.icon}
@@ -129,40 +195,36 @@ export default function AboutPage() {
             <h2 className="text-2xl font-black text-zinc-950 mb-6">
               사업자 정보 및 거버넌스
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-zinc-600">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm leading-relaxed text-zinc-600">
               <div>
-                <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">상호</p>
-                <p className="text-base font-bold text-zinc-900">홍랩에이아이 (HonglabAI)</p>
+                <span className="font-bold text-zinc-900">상호명:</span> 홍랩에이아이 (HongLabAI)
               </div>
               <div>
-                <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">대표자 / 기술 총괄</p>
-                <p className="text-base font-bold text-zinc-900">홍은선</p>
+                <span className="font-bold text-zinc-900">대표자:</span> 홍은선
               </div>
               <div>
-                <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">사업자 등록번호</p>
-                <p className="text-base font-bold text-zinc-900">571-22-02410</p>
+                <span className="font-bold text-zinc-900">사업자 등록번호:</span> 288-10-02844
               </div>
               <div>
-                <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">공식 이메일</p>
-                <a
-                  href="mailto:honglabai@gmail.com"
-                  className="text-base font-bold text-zinc-900 underline decoration-accent-strong decoration-2 underline-offset-2"
-                >
+                <span className="font-bold text-zinc-900">대표 이메일:</span>{" "}
+                <a href="mailto:honglabai@gmail.com" className="text-zinc-950 underline hover:text-lime-700">
                   honglabai@gmail.com
                 </a>
               </div>
+              <div className="sm:col-span-2">
+                <span className="font-bold text-zinc-900">사업장 주소:</span> 서울특별시 광진구 능동로 120 (화양동) 건국대학교 창의관
+              </div>
+              <div className="sm:col-span-2">
+                <span className="font-bold text-zinc-900">주요 사업:</span> AI 소프트웨어 개발, 클라우드 아키텍처 컨설팅, 웹·모바일 디지털 제품 기획 및 제작
+              </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-4">
-              <p className="text-xs text-zinc-500">
-                기술 제휴, 아티클 기고 및 프로젝트 의뢰는 문의 페이지를 통해 24시간 접수 가능합니다.
-              </p>
-              <Link
-                href="/contact"
-                className="rounded-full bg-accent px-6 py-2.5 text-xs font-bold text-zinc-950 transition hover:bg-accent-strong"
-              >
-                프로젝트 문의하기 →
-              </Link>
+            <div className="mt-8 pt-6 border-t border-zinc-100 flex flex-wrap gap-4 text-xs font-semibold text-zinc-500">
+              <Link href="/privacy" className="hover:text-zinc-950 underline">개인정보처리방침</Link>
+              <span>·</span>
+              <Link href="/terms" className="hover:text-zinc-950 underline">서비스 이용약관</Link>
+              <span>·</span>
+              <Link href="/contact" className="hover:text-zinc-950 underline">프로젝트 문의</Link>
             </div>
           </div>
         </div>
