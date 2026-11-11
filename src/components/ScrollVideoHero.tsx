@@ -183,7 +183,7 @@ export default function ScrollVideoHero({
 
             {/* Right section: 3D Horizontal Rotating App Deck (User specified area) */}
             {apps && apps.length > 0 && (
-              <div className="hidden lg:flex flex-col items-center justify-center w-[280px] xl:w-[320px] shrink-0 pt-2">
+              <div className="hidden lg:flex flex-col items-center justify-center w-[290px] xl:w-[330px] shrink-0 pt-2">
                 <HeroAppRevolver apps={apps} />
               </div>
             )}

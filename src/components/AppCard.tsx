@@ -12,8 +12,10 @@ export default function AppCard({ app }: { app: AppRecord }) {
               src={app.hero_image_url}
               alt={app.image_alt}
               fill
+              unoptimized={true}
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
               className="object-cover object-top transition duration-300 group-hover:scale-105"
+              style={{ imageRendering: "-webkit-optimize-contrast" }}
             />
           ) : (
             <div className="flex h-full items-center justify-center font-robot text-5xl font-bold text-zinc-300">{app.name.slice(0, 1)}</div>
