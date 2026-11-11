@@ -50,7 +50,7 @@ const homeFaqJsonLd = {
 };
 
 export default async function HomePage() {
-  const portfolioApps = await getPublishedApps({ limit: 6 });
+  const portfolioApps = await getPublishedApps();
 
   return (
     <div className="min-h-screen bg-paper text-zinc-950">
