@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site-url";
 import { getPublishedApps } from "@/server/apps";
+import { INITIAL_POSTS } from "@/domain/board/data";
 
 // Regenerate hourly so a newly published app appears without a redeploy.
 export const revalidate = 3600;
@@ -32,6 +33,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(app.updated_at ?? app.published_at ?? now),
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...INITIAL_POSTS.map((post) => ({
+      url: `${siteUrl}/ai-board/${post.slug}`,
+      lastModified: new Date(post.createdAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
     })),
   ];
 }

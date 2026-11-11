@@ -35,6 +35,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  other: {
+    ...(process.env.NEXT_PUBLIC_ADSENSE_ACCOUNT_ID
+      ? { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_ACCOUNT_ID }
+      : {}),
+  },
 };
 
 // Organization markup helps search engines link the site to the brand entity.

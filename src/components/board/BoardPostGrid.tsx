@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { BoardPost } from "@/domain/board/types";
 
 type BoardPostGridProps = {
@@ -39,10 +40,15 @@ export default function BoardPostGrid({ posts, onSelectPost }: BoardPostGridProp
             key={post.id}
             className="group relative flex flex-col justify-between rounded-2xl border border-zinc-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
           >
-            {/* Accessible Full-Card Clickable Button */}
-            <button
-              type="button"
-              onClick={() => onSelectPost(post)}
+            {/* Accessible Full-Card Crawlable Link */}
+            <Link
+              href={`/ai-board/${post.slug}`}
+              onClick={(e) => {
+                if (!e.metaKey && !e.ctrlKey && !e.shiftKey) {
+                  e.preventDefault();
+                  onSelectPost(post);
+                }
+              }}
               aria-label={`${post.title} 상세 보기`}
               className="absolute inset-0 z-0 h-full w-full rounded-2xl cursor-pointer"
             />

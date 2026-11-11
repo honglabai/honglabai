@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { BoardPost, TreeRoot } from "@/domain/board/types";
 
 type VisualTreeMapProps = {
@@ -109,10 +110,15 @@ export default function VisualTreeMap({
                         {/* Leaf Posts (Nested Children) */}
                         <div className="pl-3.5 space-y-1.5 border-l-2 border-zinc-200/80 ml-1">
                           {nodePosts.map((post) => (
-                            <button
+                            <Link
                               key={post.id}
-                              type="button"
-                              onClick={() => onSelectPost(post)}
+                              href={`/ai-board/${post.slug}`}
+                              onClick={(e) => {
+                                if (!e.metaKey && !e.ctrlKey && !e.shiftKey) {
+                                  e.preventDefault();
+                                  onSelectPost(post);
+                                }
+                              }}
                               className="group flex w-full items-start gap-2 rounded-lg p-1.5 text-left transition hover:bg-zinc-100/80"
                             >
                               <span className="text-zinc-300 group-hover:text-lime-600 transition-colors text-xs font-mono">
@@ -132,7 +138,7 @@ export default function VisualTreeMap({
                                   <span>댓글 {post.comments.length}</span>
                                 </div>
                               </div>
-                            </button>
+                            </Link>
                           ))}
                         </div>
                       </div>
