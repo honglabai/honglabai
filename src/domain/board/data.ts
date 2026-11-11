@@ -131,6 +131,46 @@ export const INITIAL_TREES: TreeRoot[] = [
       },
     ],
   },
+  {
+    id: "root-motion",
+    name: "AI 모션그래픽 & 비디오 크리에이티브",
+    englishName: "AI Motion Graphics & Video Creative",
+    icon: "🎬",
+    badge: "Motion & Video",
+    description: "최신 Fable 5.2, GPT Astra 6.0, Gemini 4 Carbon 모델과 프롬프트·스크립트 엔지니어링을 결합한 프로덕션급 모션그래픽 제작 워크플로우",
+    themeColor: {
+      accent: "from-rose-400 to-pink-500",
+      border: "border-rose-400/40",
+      bg: "bg-rose-500/10",
+      text: "text-rose-700",
+    },
+    nodes: [
+      {
+        id: "node-fable",
+        label: "패이블 5.2(Fable 5.2) 벡터 키프레임 & 캐릭터 모션",
+        description: "Fable 5.2 물리 엔진 제어, 일러스트 벡터 레이어 분할, 본(Bone) 리깅 및 가속도 보간 실전",
+        postIds: ["post-501", "post-504"],
+      },
+      {
+        id: "node-astra",
+        label: "GPT Astra 6.0 시네마틱 카메라 & 모션 스크립팅",
+        description: "Astra 6.0 다이나믹 씬 연출, After Effects JSX / Remotion TSX 코드 자동 생성 및 공간 카메라 무빙",
+        postIds: ["post-502", "post-504"],
+      },
+      {
+        id: "node-carbon",
+        label: "Gemini 4 Carbon 실시간 렌더링 & V2V 파이프라인",
+        description: "Gemini 4 Carbon 초고속 뉴럴 렌더링, 물리 조명/텍스처 매칭 및 60fps 비디오 컴포지팅",
+        postIds: ["post-503"],
+      },
+      {
+        id: "node-interactive",
+        label: "인터랙티브 웹 모션 & Lottie/Rive 연동",
+        description: "AI 생성 모션을 100KB 이하 경량 Lottie / Rive 벡터 인터랙션으로 최적화 및 웹 런타임 탑재",
+        postIds: ["post-505"],
+      },
+    ],
+  },
 ];
 
 export const INITIAL_POSTS: BoardPost[] = [
@@ -629,6 +669,371 @@ HongLabAI에서는 GitHub Actions PR 단계에서 50개의 골든 테스트셋(G
     createdAt: "2026-11-02",
     views: 1540,
     likes: 104,
+    comments: [],
+  },
+  {
+    id: "post-501",
+    slug: "fable-5-2-character-rigging-vector-motion",
+    rootTreeId: "root-motion",
+    rootTreeName: "AI 모션그래픽 & 비디오 크리에이티브",
+    treeId: "node-fable",
+    treeName: "패이블 5.2(Fable 5.2) 벡터 키프레임 & 캐릭터 모션",
+    title: "패이블 5.2(Fable 5.2)로 완성하는 AI 캐릭터 리깅과 벡터 키프레임 제어 실무",
+    summary: "Fable 5.2의 신규 물리 기반 벡터 엔진을 활용해 정지 일러스트에서 레이어를 분할하고, 자연스러운 관절 리깅과 가속도 키프레임 보간을 자동화하는 엔드투엔드 파이프라인입니다.",
+    content: `기존 2D 캐릭터 모션그래픽 작업은 일러스트레이터에서 신체 부위별 레이어를 일일이 분리하고, 애프터이펙트 듀익(Duik)이나 림버(Limber)로 본(Bone)을 심는 데에만 수 시간 이상 소요되었습니다.
+    
+최신 Fable 5.2는 'Auto-Vector Layering' 뉴럴 모델을 탑재하여, 단 한 장의 정지 비트맵 이미지에서도 머리, 몸통, 팔, 다리, 옷자락 등 최대 128개의 서브 벡터 패스(Bezier Path)를 오차 없이 자동 분해합니다.
+
+더 나아가 내장된 역운동학(IK, Inverse Kinematics) 솔버와 탄성 물리 엔진을 통해 발의 접지면(Grounding Plane)을 계산하고, 걷기나 점프 동작 시 머리카락과 의복의 2차 탄성 진동(Secondary Motion)을 자동으로 생성합니다.
+
+HongLabAI에서는 Fable 5.2 REST API와 Python 파이프라인을 연동하여, 캐릭터 콘셉트 아트 한 장으로 10가지 기본 동작(Walk, Run, Wave, Idle, Jump 등)의 무손실 SVG/WebM 에셋을 5분 만에 일괄 렌더링하고 있습니다.`,
+    keyTakeaways: [
+      "Fable 5.2의 Auto-Vector Layering으로 정지 이미지에서 128개 독립 벡터 레이어 자동 분리",
+      "Inverse Kinematics(IK)와 물리 엔진 결합으로 사람 손으로 수일 걸리던 캐릭터 모션을 5분 만에 완성",
+      "REST API 및 Fable CLI를 통해 수백 개의 배너 모션 에셋을 파라메트릭하게 대량 자동 렌더링",
+    ],
+    codeSnippet: {
+      language: "python",
+      code: `import requests
+import json
+
+# Fable 5.2 Motion Rigging API 파이프라인
+FABLE_API_ENDPOINT = "https://api.fable.app/v5.2/motion/rig-and-animate"
+HEADERS = {"Authorization": "Bearer YOUR_FABLE_API_KEY", "Content-Type": "application/json"}
+
+payload = {
+    "source_image_url": "https://honglabai.vercel.app/uploads/character-hero.png",
+    "layer_segmentation": {
+        "precision": "ultra_fine",
+        "separate_secondary_elements": True,  # 머리카락, 옷자락, 액세서리 분리
+        "vector_tolerance": 0.08              # Bezier 곡선 오차 허용치
+    },
+    "skeleton_rig": {
+        "ik_solver": "two_bone_soft_ik",
+        "spring_physics": {
+            "stiffness": 140,
+            "damping": 12,
+            "mass": 1.2
+        }
+    },
+    "motion_presets": ["walk_cycle_happy", "idle_breathing"],
+    "export_format": "lottie_json"
+}
+
+response = requests.post(FABLE_API_ENDPOINT, headers=HEADERS, json=payload)
+result = response.json()
+print("Generated Lottie URL:", result["download_url"])
+print("Total Keyframes Generated:", len(result["timeline"]["keyframes"]))`,
+    },
+    architectureFlow: [
+      "2D 일러스트 에셋 입력",
+      "Fable 5.2 시맨틱 레이어 분해 (Head, Torso, Limbs)",
+      "IK 본 리깅 & 스프링 물리 제약조건 주입",
+      "가속도(Easing Curve) 키프레임 자동 보간",
+      "60fps SVG / WebM / Lottie 무손실 렌더링",
+    ],
+    tags: ["Fable5.2", "MotionGraphics", "CharacterRigging", "Keyframing", "VectorAnimation"],
+    difficulty: "실무 아키텍처",
+    author: "홍은선 연구원",
+    authorRole: "HongLabAI AI 엔지니어링 리드",
+    createdAt: "2026-11-11",
+    views: 1280,
+    likes: 94,
+    comments: [
+      {
+        id: "c-fable-1",
+        author: "모션디자이너 박수진",
+        authorRole: "크리에이티브 디렉터",
+        content: "Fable 5.2에서 머리카락이나 스카프 흔들릴 때 부자연스러운 왜곡이 생기던 문제가 스프링 댐핑 튜닝으로 완전히 해결되는군요! 현업 프로젝트에 바로 적용해보겠습니다.",
+        createdAt: "2026-11-11 16:30",
+        likes: 14,
+        replies: [
+          {
+            id: "c-fable-1-1",
+            author: "홍은선 연구원",
+            authorRole: "작성자",
+            content: "감사합니다! 특히 stiffness 120~150에 damping 10~15 구간을 두시면 젤리 같은 과도한 탄성 없이 디즈니 스타일의 세련된 2차 모션을 얻으실 수 있습니다.",
+            createdAt: "2026-11-11 17:10",
+            likes: 8,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "post-502",
+    slug: "gpt-astra-6-0-cinematic-camera-remotion-scripting",
+    rootTreeId: "root-motion",
+    rootTreeName: "AI 모션그래픽 & 비디오 크리에이티브",
+    treeId: "node-astra",
+    treeName: "GPT Astra 6.0 시네마틱 카메라 & 모션 스크립팅",
+    title: "GPT Astra 6.0과 Remotion TSX로 구축하는 코드 기반 시네마틱 3D 모션그래픽 파이프라인",
+    summary: "GPT Astra 6.0의 시각적 공간 추론 능력을 이용해 3D 카메라 패닝, 뎁스 오브 필드(DoF), 타이포그래피 키네틱 모션을 React Remotion 코드로 100% 자동 생성하는 실전 가이드입니다.",
+    content: `기존의 텍스트-투-비디오(Text-to-Video) 모델은 카메라 앵글을 세밀하게 제어하기 어렵고, 자막이나 UI 요소가 배경과 뭉개지는 문제가 있었습니다.
+    
+GPT Astra 6.0은 진보된 3차원 공간 추론 엔진(Spatial Reasoning Engine)을 갖추어 가상 카메라의 초점거리(Focal Length), 셔터 스피드, 카메라 리그 이동 궤적(X, Y, Z, Pitch, Yaw, Roll)을 정확한 수학적 좌표로 산출합니다.
+
+이를 웹 표준 기반 비디오 제작 프레임워크인 Remotion(React)과 결합하면, GUI 프로그램을 켜지 않고도 100% 코드로 시네마틱 카메라 워킹과 비트 싱크 키네틱 타이포그래피를 렌더링할 수 있습니다.
+
+데이터베이스의 텍스트와 상품 이미지를 주입하기만 하면, Astra 6.0이 카메라 궤적과 타이밍 곡선을 계산하여 완전히 렌더링된 고화질 홍보 영상을 서버리스 인프라에서 초당 수십 편씩 자동 생성합니다.`,
+    keyTakeaways: [
+      "GPT Astra 6.0은 3차원 좌표계와 시네마틱 카메라 궤적을 완벽히 이해하여 충돌 없는 샷 산출",
+      "React Remotion 코드로 비디오를 생성하므로 Git 형상 관리, A/B 테스트, 실시간 데이터 치환 가능",
+      "서버리스 AWS Lambda / Vercel Functions 상에서 분당 100개 이상의 개인화 마케팅 모션 비디오 렌더링",
+    ],
+    codeSnippet: {
+      language: "typescript",
+      code: `import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import React from "react";
+
+// GPT Astra 6.0이 자동 생성한 시네마틱 카메라 리그 및 키네틱 타이포 컴포넌트
+export const AstraCinematicScene = ({ headline, subtitle }: { headline: string; subtitle: string }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // 1. Astra 6.0이 계산한 부드러운 카메라 패닝 & 줌 궤적
+  const cameraZ = interpolate(frame, [0, 90], [1200, 450], { extrapolateRight: "clamp" });
+  const cameraRotateY = interpolate(frame, [0, 90], [-18, 4], { extrapolateRight: "clamp" });
+  
+  // 2. 물리 스프링 기반 텍스트 진입 타이밍
+  const textEntrance = spring({ frame: frame - 15, fps, config: { damping: 14, stiffness: 120 } });
+  const blurAmount = interpolate(frame, [0, 25], [16, 0], { extrapolateRight: "clamp" });
+
+  return (
+    <div
+      style={{
+        perspective: 1000,
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "radial-gradient(circle at 60% 40%, #1e1b4b 0%, #030712 100%)",
+      }}
+    >
+      <div
+        style={{
+          transform: \`translateZ(\${cameraZ}px) rotateY(\${cameraRotateY}deg)\`,
+          filter: \`blur(\${blurAmount}px)\`,
+          opacity: textEntrance,
+          textAlign: "center",
+        }}
+      >
+        <h1 style={{ fontSize: 84, fontWeight: 900, color: "#facc15", letterSpacing: "-0.04em" }}>
+          {headline}
+        </h1>
+        <p style={{ fontSize: 36, color: "#cbd5e1", marginTop: 24 }}>{subtitle}</p>
+      </div>
+    </div>
+  );
+};`,
+    },
+    architectureFlow: [
+      "스토리보드 및 오디오 BPM 입력",
+      "GPT Astra 6.0 공간 카메라 궤적 & 키네틱 타임라인 추론",
+      "Remotion TSX 컴포넌트 실시간 생성",
+      "React 스프링 물리 기반 이징(Easing) 계산",
+      "헤드리스 브라우저 클러스터 병렬 렌더링",
+    ],
+    tags: ["GPTAstra6.0", "Remotion", "CinematicCamera", "KineticTypography", "CodeMotion"],
+    difficulty: "고급",
+    author: "홍은선 연구원",
+    authorRole: "HongLabAI AI 엔지니어링 리드",
+    createdAt: "2026-11-11",
+    views: 1490,
+    likes: 112,
+    comments: [
+      {
+        id: "c-astra-1",
+        author: "윤태호",
+        authorRole: "비디오 엔지니어링 팀장",
+        content: "Astra 6.0 프롬프트로 Remotion 코드를 뽑아내는 파이프라인은 영상 제작 업계의 게임체인저입니다. 애프터이펙트 렌더팜 구축 비용을 1/10로 줄였습니다.",
+        createdAt: "2026-11-11 18:20",
+        likes: 21,
+      },
+    ],
+  },
+  {
+    id: "post-503",
+    slug: "gemini-4-carbon-realtime-v2v-lighting-compositing",
+    rootTreeId: "root-motion",
+    rootTreeName: "AI 모션그래픽 & 비디오 크리에이티브",
+    treeId: "node-carbon",
+    treeName: "Gemini 4 Carbon 실시간 렌더링 & V2V 파이프라인",
+    title: "Gemini 4 Carbon의 Video-to-Video 엔진과 물리 조명 매칭을 활용한 60fps 모션 컴포지팅",
+    summary: "Gemini 4 Carbon의 초고속 뉴럴 렌더링 코어를 활용하여 단순 2D 모션 시안을 포토리얼리스틱 3D 질감과 광학 조명이 적용된 고해상도 60fps 비디오로 변환하는 실전 컴포지팅 기법입니다.",
+    content: `많은 생성형 비디오 모델의 고질적인 약점은 프레임과 프레임 사이가 물결치듯 흔들리는 '시간적 불일치(Temporal Inconsistency)'와 플리커 현상이었습니다.
+    
+Gemini 4 Carbon은 옵티컬 플로우 텐서 가이드와 글로벌 조명(Global Illumination) 캐시를 통합한 신규 신경망 아키텍처를 도입하여, 60fps 고주사율에서도 흔들림 없는 완벽한 프레임 연속성을 보장합니다.
+
+특히 Video-to-Video(V2V) 모드에서는 단순한 2D 흑백 와이어프레임이나 모션 경로만 입력해도, PBR(물리 기반 렌더링) 크롬 질감, 반투명 프로스트 글래스, 굴절 네온 광선 효과를 사실적으로 합성해 냅니다.
+
+프레임당 렌더링 속도가 12ms에 불과하여, 실시간 웹캠 필터링, 대화형 전시 미디어아트, 라이브 방송 그래픽 등 지연시간이 극도로 중요한 프로덕션 환경에 최적화되어 있습니다.`,
+    keyTakeaways: [
+      "복잡한 3D C4D/블렌더 렌더링 작업 없이 단순 2D 모션으로 하이엔드 3D 룩앤필 구현",
+      "Gemini 4 Carbon의 독점 Temporal Anchor 기술로 AI 비디오 특유의 떨림/와블링 현상 완벽 차단",
+      "프레임당 렌더링 속도 12ms 달성으로 실시간 인터랙티브 광고 및 방송 그래픽 제작 가능",
+    ],
+    codeSnippet: {
+      language: "typescript",
+      code: `import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+// Gemini 4 Carbon V2V 시네마틱 컴포지팅 파이프라인
+export async function compositeMotionWithCarbon(sourceVideoBuffer: Buffer) {
+  const response = await ai.models.generateVideo({
+    model: "gemini-4-carbon",
+    prompt: {
+      text: "Transform the 2D minimalist motion guide into a hyper-realistic futuristic glassmorphism composition. " +
+            "Refractive frosted acrylic glass layers, caustics light refraction, metallic titanium edges, " +
+            "subtle volumetric dust particles, anamorphic lens flare with 4500k warm ambient lighting.",
+      videoInput: sourceVideoBuffer,
+    },
+    config: {
+      fps: 60,
+      resolution: "4K_UHD",
+      temporalStability: 0.98, // 플리커 방지 시간축 앵커 계수
+      specularMetalness: 0.85,
+    },
+  });
+
+  return response.videoUrl;
+}`,
+    },
+    architectureFlow: [
+      "2D 모션 레이아웃 프리비즈(Pre-vis) 생성",
+      "Gemini 4 Carbon 비디오 스트림 주입",
+      "PBR 머티리얼 & 글로벌 일루미네이션(GI) 뉴럴 합성",
+      "시간축(Temporal) 일관성 필터링 & 60fps 보간",
+      "프로덕션 마스터 비디오 출력",
+    ],
+    tags: ["Gemini4Carbon", "VideoToVideo", "NeuralRendering", "Compositing", "TemporalConsistency"],
+    difficulty: "실무 아키텍처",
+    author: "최재훈",
+    authorRole: "데이터 & 검색 엔진 스페셜리스트",
+    createdAt: "2026-11-11",
+    views: 1620,
+    likes: 125,
+    comments: [],
+  },
+  {
+    id: "post-504",
+    slug: "ai-motion-production-prompt-bible-2026",
+    rootTreeId: "root-motion",
+    rootTreeName: "AI 모션그래픽 & 비디오 크리에이티브",
+    treeId: "node-astra",
+    treeName: "GPT Astra 6.0 시네마틱 카메라 & 모션 스크립팅",
+    title: "[프롬프트 바이블] Fable 5.2 · Astra 6.0 · Gemini 4 Carbon 핵심 모션 제어 프롬프트 15선",
+    summary: "네온 사이버펑크 HUD, 3D 글래스모피즘 아이소메트릭, 키네틱 타이포, 액체 모핑, 시네마틱 돌리 줌 등 현업에서 가장 많이 쓰이는 고품질 모션그래픽 프롬프트와 네거티브 가드레일 모음집입니다.",
+    content: `AI 모션그래픽에서 가장 흔히 겪는 실패 원인은 '이미지에 대한 묘사'만 길게 적고, '움직임의 궤적과 타이밍(Timing & Spacing)'을 기술하지 않는 것입니다.
+    
+전문 모션그래픽 감독 수준의 결과물을 얻기 위해서는 이징 곡선(Easing Curve), 카메라 셔터 앵글, 가속도, 조명 온도(Kelvin) 및 렌즈 특성을 명시해야 합니다.
+
+HongLabAI 크리에이티브 랩에서 Fable 5.2, GPT Astra 6.0, Gemini 4 Carbon에 공통 적용하여 최고의 결과를 검증한 15가지 핵심 모션 템플릿과 네거티브 프롬프트 가이드를 공개합니다.
+
+[대표 카테고리 5선 요약]
+1. 볼드 스태카토 키네틱 타이포그래피 (Staccato Kinetic Typography)
+2. 사이버펑크 홀로그래픽 FUI 데이터 디스플레이 (Holographic Tech HUD)
+3. 3D 프로스트 글래스모피즘 제품 쇼케이스 (Frosted Glass UI Showcase)
+4. 유체 크롬 엠블럼 액체 모핑 (Viscous Liquid Chrome Morph)
+5. 히치콕 버티고 돌리 줌 & 궤도 회전 샷 (Vertigo Dolly Zoom & Orbital Orbit)`,
+    keyTakeaways: [
+      "모션 프롬프트는 '무엇이 있는가'보다 '어떻게 움직이고 어떤 속도로 감속하는가'를 명시해야 결과가 정확함",
+      "이징 곡선(Easing), 카메라 각도, 조명 온도(Kelvin), 셔터 앵글(180deg) 등의 전문 용어가 모션 품질을 결정",
+      "네거티브 프롬프트에 'jitter, flickering, abrupt cuts, morphing deformation' 필수 추가",
+    ],
+    codeSnippet: {
+      language: "json",
+      code: `{
+  "preset_name": "glassmorphism_isometric_product_hero",
+  "target_engine": "Gemini 4 Carbon & Astra 6.0",
+  "positive_prompt": "Isometric 3D mobile app floating card showcase, ultra-clean frosted glassmorphism layers with soft neon bevel reflections. Smooth 60fps ease-in-out floating hover motion, 45-degree angle slow orbital camera drift. Volumetric studio softbox lighting, refractive dispersion caustics, crisp typography, clean background with subtle gradient #0a0f1d to #1e1b4b, 8k resolution, octane render style --motion-smoothness 0.95 --shutter-angle 180",
+  "negative_prompt": "jitter, flickering, stuttering, abrupt camera jump, frame blending blur, distorted text, muddy shadows, low-poly artifacts, watermark, low frame rate",
+  "recommended_params": {
+    "fps": 60,
+    "aspect_ratio": "16:9",
+    "seed_lock": true,
+    "motion_magnitude": 0.45
+  }
+}`,
+    },
+    architectureFlow: [
+      "기획 의도 분석 (무드, 타깃, 템포)",
+      "카테고리별 검증된 베이스 프롬프트 선택",
+      "모델별 고유 파라미터 및 물리 수치 오버라이드",
+      "네거티브 가드레일 결합 후 모션 엔진 구동",
+    ],
+    tags: ["PromptEngineering", "MotionPrompts", "Fable5.2", "Astra6.0", "Gemini4Carbon"],
+    difficulty: "입문",
+    author: "홍은선 연구원",
+    authorRole: "HongLabAI AI 엔지니어링 리드",
+    createdAt: "2026-11-11",
+    views: 2150,
+    likes: 184,
+    comments: [],
+  },
+  {
+    id: "post-505",
+    slug: "interactive-web-motion-rive-lottie-optimization",
+    rootTreeId: "root-motion",
+    rootTreeName: "AI 모션그래픽 & 비디오 크리에이티브",
+    treeId: "node-interactive",
+    treeName: "인터랙티브 웹 모션 & Lottie/Rive 연동",
+    title: "AI 생성 모션 에셋을 100KB 이하 초경량 Lottie & Rive 웹 인터랙션으로 최적화하기",
+    summary: "AI가 생성한 무거운 비디오를 브라우저에서 60fps로 실시간 상호작용 가능한 벡터 Lottie/Rive 런타임으로 변환하고 번들 크기를 90% 압축하는 웹 성능 최적화 노하우입니다.",
+    content: `AI 비디오 도구로 만든 고화질 MP4 파일은 화려하지만, 웹사이트에 그대로 탑재할 경우 치명적인 성능 저하를 초래합니다. 15MB가 넘는 비디오는 모바일 데이터 소모가 심하고, Largest Contentful Paint(LCP) 지표를 파괴하며, 사용자의 마우스 움직임에 반응할 수 없습니다.
+
+해결책은 AI 생성 비디오에서 핵심 모션 궤적만을 추출하여 브라우저에서 실시간 벡터로 연산하는 Rive 및 Lottie 바이너리로 컴파일하는 것입니다.
+
+HongLabAI에서는 AI 생성 키프레임을 벡터화한 뒤, 베지에 곡선 감축(Bezier Decimation) 알고리즘으로 불필요한 제어점을 제거하여 파일 크기를 평균 80KB 미만으로 경량화합니다.
+
+더 나아가 Rive 상태 머신(State Machine)에 연결하여, 마우스 호버 시 재생 속도가 가속되거나 클릭 시 폭죽이 터지는 반응형 인터랙션을 코딩 없이 구현할 수 있습니다.`,
+    keyTakeaways: [
+      "비디오는 단순 시청용이지만, Lottie/Rive로 전환하면 마우스와 스크롤에 반응하는 살아있는 인터랙션이 됨",
+      "베지에 곡선 오차 허용치(Tolerance: 0.15) 최적화로 시각적 차이 없이 용량 90% 절감",
+      "웹사이트 코어 웹 바이탈(Core Web Vitals) 점수를 유지하면서도 애플 수준의 유려한 인터랙션 제공",
+    ],
+    codeSnippet: {
+      language: "typescript",
+      code: `import React from "react";
+import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
+
+// AI 생성 모션을 80KB 초경량 Rive 인터랙티브 컴포넌트로 렌더링
+export default function InteractiveAiGraphic() {
+  const { rive, RiveComponent } = useRive({
+    src: "/media/ai-optimized-motion.riv", // 78KB 초경량 바이너리
+    stateMachines: "State Machine 1",
+    autoplay: true,
+  });
+
+  // 마우스 진입 시 AI 모션의 가속도를 트리거
+  const hoverTrigger = useStateMachineInput(rive, "State Machine 1", "isHovered");
+
+  return (
+    <div
+      className="relative h-96 w-full cursor-pointer"
+      onMouseEnter={() => hoverTrigger && (hoverTrigger.value = true)}
+      onMouseLeave={() => hoverTrigger && (hoverTrigger.value = false)}
+    >
+      <RiveComponent className="h-full w-full object-contain" />
+    </div>
+  );
+}`,
+    },
+    architectureFlow: [
+      "AI 비디오 키프레임 추출",
+      "SVG 벡터 트레이싱 & 베지에 커브 디시메이션",
+      "Rive 상태 머신(State Machine) 인터랙션 바인딩",
+      "Next.js 동적 임포트 & WebGL 가속 렌더링",
+    ],
+    tags: ["Rive", "Lottie", "WebMotion", "PerformanceOptimization", "InteractiveUI"],
+    difficulty: "중급",
+    author: "홍은선 연구원",
+    authorRole: "HongLabAI AI 엔지니어링 리드",
+    createdAt: "2026-11-11",
+    views: 1390,
+    likes: 98,
     comments: [],
   },
 ];

@@ -21,12 +21,18 @@ export default function TreeSidebar({
   totalPostsCount,
 }: TreeSidebarProps) {
   // Track open/closed state of tree roots
-  const [openTrees, setOpenTrees] = useState<Record<string, boolean>>({
-    "root-genai": true,
-    "root-dx": true,
-    "root-dev": true,
-    "root-mlops": true,
-  });
+  const [openTrees, setOpenTrees] = useState<Record<string, boolean>>(() =>
+    trees.reduce<Record<string, boolean>>((acc, t) => {
+      acc[t.id] = true;
+      return acc;
+    }, {
+      "root-genai": true,
+      "root-dx": true,
+      "root-dev": true,
+      "root-mlops": true,
+      "root-motion": true,
+    })
+  );
 
   const toggleTree = (treeId: string) => {
     setOpenTrees((prev) => ({
