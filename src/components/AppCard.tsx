@@ -21,13 +21,13 @@ export default function AppCard({ app }: { app: AppRecord }) {
             <div className="flex h-full items-center justify-center font-robot text-5xl font-bold text-zinc-300">{app.name.slice(0, 1)}</div>
           )}
         </div>
-        <div className="p-6">
-          <div className="mb-4 flex items-center justify-between gap-4">
-            <span className="rounded-full bg-lime-200 px-3 py-1 text-xs font-bold text-zinc-900">{productLabels[app.product_status]}</span>
+        <div className="p-5 xl:p-6">
+          <div className="mb-3 flex items-center justify-between gap-3 xl:mb-4">
+            <span className="rounded-full bg-lime-200 px-2.5 py-0.5 text-xs font-bold text-zinc-900">{productLabels[app.product_status]}</span>
             <span className="text-xs text-zinc-500">{app.platforms.join(" · ")}</span>
           </div>
-          <h2 className="mb-2 text-2xl font-bold text-zinc-950">{app.name}</h2>
-          <p className="line-clamp-2 leading-relaxed text-zinc-600">{app.tagline || app.summary}</p>
+          <h2 className="mb-2 text-xl font-bold text-zinc-950 xl:text-2xl">{app.name}</h2>
+          <p className="line-clamp-2 text-sm leading-relaxed text-zinc-600 xl:text-base">{app.tagline || app.summary}</p>
         </div>
       </Link>
     </article>
