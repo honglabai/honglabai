@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 const navigation = [
   { href: "/apps", label: "앱 포트폴리오" },
   { href: "/#services", label: "서비스" },
+  { href: "/ai-board", label: "AI 활용", badge: "게시판" },
   { href: "/about", label: "소개" },
   { href: "/contact", label: "문의하기" },
 ];
@@ -61,14 +62,19 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center space-x-8 md:flex">
+        <div className="hidden items-center space-x-7 md:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium tracking-wide text-zinc-600 transition-colors hover:text-zinc-950"
+              className="inline-flex items-center gap-1.5 text-sm font-medium tracking-wide text-zinc-600 transition-colors hover:text-zinc-950"
             >
-              {item.label}
+              <span>{item.label}</span>
+              {"badge" in item && item.badge ? (
+                <span className="rounded-full bg-accent/40 px-1.5 py-0.2 text-[10px] font-bold text-zinc-950 border border-lime-300">
+                  {item.badge}
+                </span>
+              ) : null}
             </Link>
           ))}
           <Link
@@ -109,10 +115,15 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 ref={index === 0 ? firstMobileLinkRef : undefined}
-                className="flex min-h-11 items-center rounded-lg px-3 py-2 text-zinc-600 transition-colors hover:bg-zinc-900/5 hover:text-zinc-950"
+                className="flex min-h-11 items-center justify-between rounded-lg px-3 py-2 text-zinc-600 transition-colors hover:bg-zinc-900/5 hover:text-zinc-950"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {item.label}
+                <span>{item.label}</span>
+                {"badge" in item && item.badge ? (
+                  <span className="rounded-full bg-accent/40 px-2 py-0.5 text-[11px] font-bold text-zinc-950">
+                    {item.badge}
+                  </span>
+                ) : null}
               </Link>
             ))}
           </div>
