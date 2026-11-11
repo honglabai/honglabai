@@ -30,6 +30,7 @@ export default async function HomePage() {
             </>
           }
           description="기획부터 설계, 개발, 배포까지 직접 만듭니다. 지금까지 만든 앱들이 실제로 운영되고 있습니다."
+          apps={portfolioApps}
         >
           <Link
             href="/apps"

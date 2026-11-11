@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import HeroAppRevolver from "@/components/HeroAppRevolver";
+import type { AppRecord } from "@/domain/apps/types";
 
 type ScrollVideoHeroProps = {
   src: string;
@@ -9,6 +11,7 @@ type ScrollVideoHeroProps = {
   headline: React.ReactNode;
   description: string;
   children?: React.ReactNode;
+  apps?: AppRecord[];
 };
 
 // Scroll-driven video: the section is taller than the viewport, the video is
@@ -25,6 +28,7 @@ export default function ScrollVideoHero({
   headline,
   description,
   children,
+  apps,
 }: ScrollVideoHeroProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -152,28 +156,37 @@ export default function ScrollVideoHero({
         <div aria-hidden="true" className="grain absolute inset-0" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
-          <div className="max-w-xl">
-            <p
-              className="font-robot mb-5 inline-flex items-center gap-2 text-xs tracking-[0.28em] text-zinc-500 uppercase sm:text-sm"
-            >
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
-              {eyebrow}
-            </p>
-            <h1
-              className="text-4xl leading-[1.12] font-black tracking-tight text-zinc-950 drop-shadow-[0_1px_10px_rgba(255,255,255,0.85)] sm:text-5xl lg:text-6xl"
-            >
-              {headline}
-            </h1>
-            <p
-              className="mt-6 text-base leading-relaxed text-zinc-700 drop-shadow-[0_1px_8px_rgba(255,255,255,0.8)] sm:text-lg"
-            >
-              {description}
-            </p>
-            <div
-              className="mt-9 flex flex-col gap-4 sm:flex-row"
-            >
-              {children}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 xl:gap-12">
+            <div className="max-w-xl">
+              <p
+                className="font-robot mb-5 inline-flex items-center gap-2 text-xs tracking-[0.28em] text-zinc-500 uppercase sm:text-sm"
+              >
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
+                {eyebrow}
+              </p>
+              <h1
+                className="text-4xl leading-[1.12] font-black tracking-tight text-zinc-950 drop-shadow-[0_1px_10px_rgba(255,255,255,0.85)] sm:text-5xl lg:text-6xl"
+              >
+                {headline}
+              </h1>
+              <p
+                className="mt-6 text-base leading-relaxed text-zinc-700 drop-shadow-[0_1px_8px_rgba(255,255,255,0.8)] sm:text-lg"
+              >
+                {description}
+              </p>
+              <div
+                className="mt-9 flex flex-col gap-4 sm:flex-row"
+              >
+                {children}
+              </div>
             </div>
+
+            {/* Right section: 3D Horizontal Rotating App Deck (User specified area) */}
+            {apps && apps.length > 0 && (
+              <div className="hidden lg:flex flex-col items-center justify-center w-[280px] xl:w-[320px] shrink-0 pt-2">
+                <HeroAppRevolver apps={apps} />
+              </div>
+            )}
           </div>
         </div>
 
