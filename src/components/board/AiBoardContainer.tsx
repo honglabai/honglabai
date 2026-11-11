@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { BoardPost, DifficultyLevel, TreeRoot } from "@/domain/board/types";
+import type { BoardPost, TreeRoot } from "@/domain/board/types";
 import { INITIAL_POSTS, INITIAL_TREES } from "@/domain/board/data";
 import TreeSidebar from "./TreeSidebar";
 import VisualTreeMap from "./VisualTreeMap";

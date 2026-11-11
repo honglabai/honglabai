@@ -3,6 +3,13 @@
 import { useEffect, useState } from "react";
 import type { BoardPost, TreeComment } from "@/domain/board/types";
 
+function createCommentId(prefix: "c" | "r") {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return `${prefix}-${crypto.randomUUID()}`;
+  }
+  return `${prefix}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 type PostDetailModalProps = {
   post: BoardPost | null;
   onClose: () => void;
@@ -54,7 +61,7 @@ export default function PostDetailModal({
     if (!commentText.trim()) return;
 
     const newComment: TreeComment = {
-      id: `c-${Date.now()}`,
+      id: createCommentId("c"),
       author: commentAuthor.trim() || "익명 개발자",
       authorRole: "게스트",
       content: commentText.trim(),
@@ -77,7 +84,7 @@ export default function PostDetailModal({
     if (!replyText.trim()) return;
 
     const newReply: TreeComment = {
-      id: `r-${Date.now()}`,
+      id: createCommentId("r"),
       author: replyAuthor.trim() || "익명 개발자",
       authorRole: "답글 작성자",
       content: replyText.trim(),
@@ -106,16 +113,20 @@ export default function PostDetailModal({
   };
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-post-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/60 backdrop-blur-sm animate-fade-in"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
+      {/* Accessible Backdrop Button */}
+      <button
+        type="button"
+        aria-label="모달 닫기"
+        onClick={onClose}
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm cursor-default"
+      />
+
       <div
-        className="relative flex flex-col max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl border border-zinc-200"
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-post-title"
+        className="relative z-10 flex flex-col max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl border border-zinc-200"
       >
         {/* Sticky Modal Header */}
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-100 bg-white/95 px-6 py-4 backdrop-blur-md">
@@ -214,7 +225,7 @@ export default function PostDetailModal({
               </h3>
               <div className="flex flex-col sm:flex-row items-center gap-2 overflow-x-auto py-2">
                 {post.architectureFlow.map((step, idx) => (
-                  <div key={idx} className="flex items-center gap-2 w-full sm:w-auto">
+                  <div key={step} className="flex items-center gap-2 w-full sm:w-auto">
                     <div className="flex-1 sm:flex-initial rounded-xl bg-zinc-800 border border-zinc-700 px-3.5 py-2.5 text-center text-xs font-semibold text-zinc-200 shadow-sm whitespace-nowrap">
                       {step}
                     </div>

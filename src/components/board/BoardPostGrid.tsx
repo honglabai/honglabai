@@ -37,10 +37,17 @@ export default function BoardPostGrid({ posts, onSelectPost }: BoardPostGridProp
         return (
           <article
             key={post.id}
-            onClick={() => onSelectPost(post)}
-            className="group relative flex flex-col justify-between rounded-2xl border border-zinc-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md cursor-pointer"
+            className="group relative flex flex-col justify-between rounded-2xl border border-zinc-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-md"
           >
-            <div>
+            {/* Accessible Full-Card Clickable Button */}
+            <button
+              type="button"
+              onClick={() => onSelectPost(post)}
+              aria-label={`${post.title} 상세 보기`}
+              className="absolute inset-0 z-0 h-full w-full rounded-2xl cursor-pointer"
+            />
+
+            <div className="relative z-10 pointer-events-none">
               {/* Header: Tree Breadcrumb & Difficulty */}
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-bold text-zinc-600">
@@ -89,7 +96,7 @@ export default function BoardPostGrid({ posts, onSelectPost }: BoardPostGridProp
             </div>
 
             {/* Footer Metadata */}
-            <div className="mt-5 flex items-center justify-between border-t border-zinc-100 pt-3 text-xs text-zinc-500">
+            <div className="relative z-10 pointer-events-none mt-5 flex items-center justify-between border-t border-zinc-100 pt-3 text-xs text-zinc-500">
               <div className="flex items-center gap-2">
                 <span className="font-semibold text-zinc-800">{post.author}</span>
                 <span className="text-[10px] text-zinc-400">{post.createdAt}</span>
