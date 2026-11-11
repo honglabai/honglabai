@@ -93,9 +93,7 @@ export const metadata: Metadata = {
       ...(process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION
         ? { "naver-site-verification": process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION }
         : {}),
-      ...(process.env.NEXT_PUBLIC_ADSENSE_ACCOUNT_ID
-        ? { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_ACCOUNT_ID }
-        : {}),
+      "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_ACCOUNT_ID || "ca-pub-8675047967209162",
     },
   },
 };
@@ -172,6 +170,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             that cost ~357ms on the critical path. */}
         <link rel="stylesheet" href="/fonts/pretendard.css" />
         <link rel="alternate" type="application/rss+xml" title="HongLabAI RSS Feed" href="/rss.xml" />
+        {/* Google AdSense official script tag for custom domain ownership verification */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8675047967209162"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="overflow-x-hidden antialiased">
         <script

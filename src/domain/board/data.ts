@@ -702,7 +702,7 @@ FABLE_API_ENDPOINT = "https://api.fable.app/v5.2/motion/rig-and-animate"
 HEADERS = {"Authorization": "Bearer YOUR_FABLE_API_KEY", "Content-Type": "application/json"}
 
 payload = {
-    "source_image_url": "https://honglabai.vercel.app/uploads/character-hero.png",
+    "source_image_url": "https://honglabai.com/uploads/character-hero.png",
     "layer_segmentation": {
         "precision": "ultra_fine",
         "separate_secondary_elements": True,  # 머리카락, 옷자락, 액세서리 분리
