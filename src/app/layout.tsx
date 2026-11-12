@@ -79,10 +79,15 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || process.env.GOOGLE_SITE_VERIFICATION,
     other: {
-      ...(process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION
-        ? { "naver-site-verification": process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION }
+      ...(process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || process.env.NAVER_SITE_VERIFICATION
+        ? {
+            "naver-site-verification": (
+              process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION ||
+              process.env.NAVER_SITE_VERIFICATION
+            )?.trim(),
+          }
         : {}),
       "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_ACCOUNT_ID || "ca-pub-8675047967209162",
     },
@@ -97,6 +102,10 @@ const organizationJsonLd = {
   name: "HongLabAI",
   alternateName: ["홍랩에이아이", "HongLab AI"],
   url: siteUrl,
+  sameAs: [
+    "https://honglabai.com",
+    "https://www.honglabai.com",
+  ],
   logo: {
     "@type": "ImageObject",
     url: `${siteUrl}/icon.svg`,
@@ -134,7 +143,7 @@ const websiteJsonLd = {
   "@id": `${siteUrl}/#website`,
   url: siteUrl,
   name: "HongLabAI (홍랩에이아이)",
-  alternateName: "HongLabAI",
+  alternateName: ["HongLabAI", "honglabai.com", "www.honglabai.com"],
   description: "AI 소프트웨어 개발 & LLM 기술 컨설팅",
   inLanguage: "ko-KR",
   publisher: {
