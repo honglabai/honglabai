@@ -8,7 +8,6 @@ import VisualTreeMap from "./VisualTreeMap";
 import BoardPostGrid from "./BoardPostGrid";
 import PostDetailModal from "./PostDetailModal";
 import CreatePostModal from "./CreatePostModal";
-import { IconClose, IconGrid, IconNetwork, IconPlus, IconSearch, TreeIcon } from "./Icons";
 
 export default function AiBoardContainer() {
   const [trees, setTrees] = useState<TreeRoot[]>(INITIAL_TREES);
@@ -76,6 +75,7 @@ export default function AiBoardContainer() {
   const handleCreatePost = (newPost: BoardPost) => {
     setPosts((prev) => [newPost, ...prev]);
 
+    // Update tree nodes so post is indexed in tree
     setTrees((prevTrees) =>
       prevTrees.map((tree) => {
         if (tree.id === newPost.rootTreeId) {
@@ -96,28 +96,30 @@ export default function AiBoardContainer() {
       })
     );
 
+    // Switch active view to new post's category
     setActiveRootId(newPost.rootTreeId);
     setActiveNodeId(newPost.treeId);
   };
 
+  // Find active titles for breadcrumb
   const currentRoot = trees.find((t) => t.id === activeRootId);
   const currentNode = currentRoot?.nodes.find((n) => n.id === activeNodeId);
 
   return (
     <div className="space-y-6">
       {/* Top Banner & Quick Root Tree Tabs */}
-      <div className="rounded-2xl border border-zinc-200/90 bg-white p-6 sm:p-7">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+      <div className="rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 shadow-xs">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div>
-            <div className="mb-2.5 inline-flex items-center gap-2 rounded-md border border-zinc-200/80 bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-zinc-950" />
+            <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-accent/30 px-3 py-1 text-xs font-bold text-zinc-950">
+              <span className="h-2 w-2 rounded-full bg-lime-600 animate-pulse" />
               HongLabAI 기술 지식 베이스
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950">
-              AI 활용 기술 아키텍처 보드
+            <h1 className="text-3xl sm:text-4xl font-black text-zinc-950 tracking-tight">
+              AI 활용 트리 구조 게시판
             </h1>
-            <p className="mt-2 text-xs sm:text-sm text-zinc-600 max-w-2xl leading-relaxed">
-              프롬프트 제어, 하이브리드 RAG, 자율 에이전트, 비즈니스 DX 자동화, MLOps 실무 파이프라인을 계층형 트리 구조로 탐색하고 검증된 코드를 열람할 수 있습니다.
+            <p className="mt-2 text-sm text-zinc-600 max-w-2xl leading-relaxed">
+              프롬프트 제어, 하이브리드 RAG, 자율 에이전트, 비즈니스 DX 자동화, MLOps까지 여러 갈래의 AI 활용 체계를 계층형 트리 보드로 탐색하고 질문을 나눌 수 있습니다.
             </p>
           </div>
 
@@ -126,22 +128,22 @@ export default function AiBoardContainer() {
             <button
               type="button"
               onClick={() => setIsCreateOpen(true)}
-              className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-zinc-950 px-3.5 text-xs font-semibold text-white transition-colors duration-150 hover:bg-zinc-800"
+              className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-5 py-3 text-sm font-bold text-accent shadow-md transition hover:bg-zinc-800 hover:-translate-y-0.5 active:scale-95"
             >
-              <IconPlus className="h-3.5 w-3.5" />
-              <span>사례 작성</span>
+              <span className="text-base font-black">+</span>
+              <span>사례 / 질문 작성하기</span>
             </button>
           </div>
         </div>
 
         {/* Root Tree Quick Filter Tabs */}
-        <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-zinc-100 pt-5">
+        <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-zinc-100 pt-6">
           <button
             type="button"
             onClick={() => handleSelectRoot("all")}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors duration-150 ${
+            className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
               activeRootId === "all"
-                ? "bg-zinc-950 text-white"
+                ? "bg-zinc-950 text-white shadow-xs"
                 : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200/70 hover:text-zinc-950"
             }`}
           >
@@ -157,16 +159,16 @@ export default function AiBoardContainer() {
                 key={tree.id}
                 type="button"
                 onClick={() => handleSelectRoot(tree.id)}
-                className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors duration-150 ${
+                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold transition-all ${
                   isActive
-                    ? "bg-zinc-950 text-white"
+                    ? "bg-zinc-950 text-accent shadow-xs"
                     : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200/70 hover:text-zinc-950"
                 }`}
               >
-                <TreeIcon id={tree.id} className="h-3.5 w-3.5" />
+                <span>{tree.icon}</span>
                 <span>{tree.name}</span>
                 <span
-                  className={`ml-0.5 rounded px-1.5 py-0.2 text-[10px] font-mono tabular-nums ${
+                  className={`ml-1 rounded-full px-1.5 py-0.2 text-[10px] ${
                     isActive ? "bg-zinc-800 text-zinc-200" : "bg-zinc-200 text-zinc-600"
                   }`}
                 >
@@ -179,42 +181,42 @@ export default function AiBoardContainer() {
       </div>
 
       {/* Control Bar: View Mode, Difficulty, Search */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-zinc-200/90 bg-white p-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl border border-zinc-200 bg-white p-4 shadow-xs">
         {/* Left: View Mode Toggle */}
-        <div className="inline-flex rounded-lg bg-zinc-100 p-0.5">
+        <div className="inline-flex rounded-xl bg-zinc-100 p-1">
           <button
             type="button"
             onClick={() => setViewMode("board")}
-            className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-xs font-medium transition-colors duration-150 ${
+            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-bold transition-all ${
               viewMode === "board"
-                ? "bg-white text-zinc-950 shadow-2xs font-semibold"
+                ? "bg-white text-zinc-950 shadow-xs"
                 : "text-zinc-500 hover:text-zinc-900"
             }`}
           >
-            <IconGrid className="h-3.5 w-3.5" />
-            <span>게시판 보드</span>
+            <span>📋</span>
+            <span>게시판 보드 뷰</span>
           </button>
           <button
             type="button"
             onClick={() => setViewMode("treeMap")}
-            className={`flex items-center gap-1.5 rounded-md px-3 py-1 text-xs font-medium transition-colors duration-150 ${
+            className={`flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-bold transition-all ${
               viewMode === "treeMap"
-                ? "bg-white text-zinc-950 shadow-2xs font-semibold"
+                ? "bg-white text-zinc-950 shadow-xs"
                 : "text-zinc-500 hover:text-zinc-900"
             }`}
           >
-            <IconNetwork className="h-3.5 w-3.5" />
-            <span>트리 맵</span>
+            <span>🌳</span>
+            <span>인터랙티브 트리 맵</span>
           </button>
         </div>
 
         {/* Right: Filters & Search */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Difficulty Filter */}
           <select
             value={selectedDifficulty}
             onChange={(e) => setSelectedDifficulty(e.target.value)}
-            className="h-8 rounded-lg border border-zinc-200 bg-white px-2.5 text-xs font-medium text-zinc-700 focus:outline-none focus:border-zinc-950"
+            className="rounded-xl border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 focus:outline-none focus:border-zinc-950"
           >
             <option value="all">전체 난이도</option>
             <option value="입문">입문</option>
@@ -224,25 +226,22 @@ export default function AiBoardContainer() {
           </select>
 
           {/* Search Box */}
-          <div className="relative w-full sm:w-56">
+          <div className="relative w-full sm:w-60">
             <input
               type="text"
-              placeholder="기술명, 태그 검색"
+              placeholder="제목, 내용, 태그 검색..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-8 w-full rounded-lg border border-zinc-200 bg-white pl-7 pr-7 text-xs text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-950"
+              className="w-full rounded-xl border border-zinc-200 bg-white pl-8 pr-3 py-1.5 text-xs text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-950"
             />
-            <span className="absolute left-2.5 top-2 text-zinc-400">
-              <IconSearch className="h-3.5 w-3.5" />
-            </span>
+            <span className="absolute left-2.5 top-2 text-xs text-zinc-400">🔍</span>
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-2 text-zinc-400 hover:text-zinc-700"
-                aria-label="검색어 지우기"
+                className="absolute right-2.5 top-1.5 text-xs text-zinc-400 hover:text-zinc-700"
               >
-                <IconClose className="h-3.5 w-3.5" />
+                ✕
               </button>
             )}
           </div>
@@ -279,22 +278,22 @@ export default function AiBoardContainer() {
           {/* Right Column: Board Posts Grid */}
           <div className="lg:col-span-3 space-y-4">
             {/* Active Breadcrumb indicator */}
-            <div className="flex items-center justify-between rounded-xl bg-white px-4 py-2 border border-zinc-200/80 text-xs text-zinc-500">
+            <div className="flex items-center justify-between rounded-xl bg-white px-4 py-2.5 border border-zinc-200/80 text-xs text-zinc-500 shadow-2xs">
               <div className="flex items-center gap-1.5">
-                <span className="font-semibold text-zinc-900">
+                <span className="font-bold text-zinc-900">
                   {currentRoot ? currentRoot.name : "전체 트리"}
                 </span>
                 {currentNode && (
                   <>
                     <span className="text-zinc-300">›</span>
-                    <span className="font-medium text-zinc-800 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-200/70">
+                    <span className="font-semibold text-lime-700 bg-lime-50 px-2 py-0.5 rounded-md border border-lime-200">
                       {currentNode.label}
                     </span>
                   </>
                 )}
               </div>
-              <span className="text-[11px] font-mono tabular-nums text-zinc-400">
-                {filteredPosts.length} posts
+              <span className="text-[11px] font-semibold text-zinc-400">
+                게시글 {filteredPosts.length}건
               </span>
             </div>
 

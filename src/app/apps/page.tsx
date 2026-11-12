@@ -70,13 +70,14 @@ export default async function AppsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
       <Navbar />
-      <main id="main-content" className="relative px-6 pt-32 pb-24">
+      <main id="main-content" className="relative overflow-hidden px-6 pt-36 pb-24">
+        <div className="pointer-events-none absolute top-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/15 blur-[120px]" />
         <div className="container relative mx-auto">
           <div className="mx-auto mb-14 max-w-3xl text-center">
-            <p className="mb-2 text-xs font-semibold text-zinc-500">프로덕션 제품 라인업</p>
-            <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-5xl">자체 개발 및 운영 앱 포트폴리오</h1>
-            <p className="text-sm leading-relaxed text-zinc-600 sm:text-base">
-              HongLabAI가 기획하고 엔지니어링하여 실제로 운영 중인 디지털 제품군입니다.
+            <p className="mb-3 text-sm font-bold tracking-[0.24em] text-zinc-500 uppercase">App Portfolio</p>
+            <h1 className="mb-6 text-4xl font-black md:text-6xl">만들고 운영하는 앱을 한곳에서</h1>
+            <p className="text-lg leading-relaxed text-zinc-500">
+              HongLabAI가 기획하고 개발해 실제 공개 및 운영 중인 앱과 디지털 제품을 소개합니다.
             </p>
           </div>
 
@@ -87,15 +88,15 @@ export default async function AppsPage() {
               ))}
             </section>
           ) : (
-            <section className="mx-auto max-w-4xl rounded-2xl border border-dashed border-zinc-200 bg-white p-10 text-center md:p-14">
+            <section className="mx-auto max-w-4xl rounded-3xl border border-dashed border-zinc-200 bg-white p-10 text-center md:p-16">
               <div
-                className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-100 text-2xl text-zinc-400 font-mono"
+                className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-100 text-3xl text-zinc-400"
                 aria-hidden="true"
               >
-                0
+                ◫
               </div>
-              <h2 className="mb-2 text-xl font-bold text-zinc-900">게시된 앱이 아직 없습니다</h2>
-              <p className="mx-auto max-w-xl text-xs sm:text-sm leading-relaxed text-zinc-500">
+              <h2 className="mb-3 text-2xl font-bold">게시된 앱이 아직 없습니다</h2>
+              <p className="mx-auto max-w-xl leading-relaxed text-zinc-500">
                 관리자에서 앱을 작성하고 게시하면 이곳에 자동으로 표시됩니다.
               </p>
             </section>

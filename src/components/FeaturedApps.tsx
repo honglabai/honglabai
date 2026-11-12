@@ -101,18 +101,19 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
     <section className="relative overflow-hidden bg-paper py-24 md:py-32">
       <div aria-hidden="true" className="grain absolute inset-0" />
       <div className="relative z-10 container mx-auto px-6">
-        <div data-reveal className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div data-reveal className="mb-14 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-2 text-xs font-semibold text-zinc-500">
-              실무 운영 제품군
+            <p className="mb-3 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-zinc-500 uppercase">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
+              추천 포트폴리오
             </p>
-            <h2 className="text-2xl font-bold tracking-tight text-zinc-950 sm:text-4xl">운영 중인 앱 포트폴리오</h2>
+            <h2 className="text-3xl font-black text-zinc-950 md:text-5xl">운영 중인 앱</h2>
           </div>
           <Link
             href="/apps"
-            className="inline-flex items-center text-xs font-semibold text-zinc-700 transition-colors hover:text-zinc-950"
+            className="inline-flex min-h-11 items-center text-sm font-bold text-zinc-900 underline decoration-accent-strong decoration-2 underline-offset-4 hover:decoration-zinc-950"
           >
-            전체 포트폴리오 확인하기 →
+            전체 포트폴리오 보기 →
           </Link>
         </div>
 
@@ -126,10 +127,10 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
                 onClick={() => handleScroll("prev")}
                 aria-label="이전 앱 보기"
                 title={canScrollPrev ? "이전 앱 보기" : "마지막 앱으로 이동"}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-white text-zinc-700 transition-colors duration-150 hover:border-zinc-400 hover:bg-zinc-50 hover:text-zinc-950 sm:h-11 sm:w-11"
+                className="group/btn flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-zinc-200/90 bg-white/95 text-zinc-900 shadow-[0_10px_25px_-8px_rgba(24,24,27,0.14)] backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-zinc-950 hover:bg-zinc-950 hover:text-white active:scale-95 sm:h-12 sm:w-12 md:h-14 md:w-14"
               >
                 <svg
-                  className="h-5 w-5 stroke-[2]"
+                  className="h-5 w-5 stroke-[2.5] transition-transform duration-200 group-hover/btn:-translate-x-0.5 sm:h-6 sm:w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -162,10 +163,10 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
                 onClick={() => handleScroll("next")}
                 aria-label="다음 앱 보기"
                 title={canScrollNext ? "다음 앱 보기" : "첫 번째 앱으로 이동"}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-white text-zinc-700 transition-colors duration-150 hover:border-zinc-400 hover:bg-zinc-50 hover:text-zinc-950 sm:h-11 sm:w-11"
+                className="group/btn flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-zinc-200/90 bg-white/95 text-zinc-900 shadow-[0_10px_25px_-8px_rgba(24,24,27,0.14)] backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-zinc-950 hover:bg-zinc-950 hover:text-white active:scale-95 sm:h-12 sm:w-12 md:h-14 md:w-14"
               >
                 <svg
-                  className="h-5 w-5 stroke-[2]"
+                  className="h-5 w-5 stroke-[2.5] transition-transform duration-200 group-hover/btn:translate-x-0.5 sm:h-6 sm:w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -176,7 +177,7 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
             </div>
 
             {/* Pagination Dots Indicator */}
-            <div className="flex items-center justify-center gap-1.5 pt-2">
+            <div className="flex items-center justify-center gap-2 pt-2">
               {apps.map((app, index) => {
                 const isActive = index === currentIndex;
                 return (
@@ -185,8 +186,8 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
                     type="button"
                     onClick={() => scrollToCard(index)}
                     aria-label={`${index + 1}번째 앱: ${app.name} 보기`}
-                    className={`h-1.5 rounded-full transition-all duration-200 ${
-                      isActive ? "w-5 bg-zinc-900" : "w-1.5 bg-zinc-200 hover:bg-zinc-300"
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      isActive ? "w-7 bg-zinc-950" : "w-2 bg-zinc-300 hover:bg-zinc-400"
                     }`}
                   />
                 );

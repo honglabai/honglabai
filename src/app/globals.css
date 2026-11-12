@@ -77,7 +77,7 @@ textarea:focus-visible {
 }
 
 .font-robot {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-orbitron), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .glass {

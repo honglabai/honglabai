@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
+import { Orbitron } from "next/font/google";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const siteUrl = getSiteUrl();
+
+// Self-hosted by next/font: no gstatic connection, and the CSS is inlined.
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: "700",
+  variable: "--font-orbitron",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -161,7 +170,7 @@ const websiteJsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={orbitron.variable}>
       <head>
         {/* Pretendard, self-hosted from /public. Loaded as a plain stylesheet
             link rather than a CSS @import so the bundler leaves the /fonts
