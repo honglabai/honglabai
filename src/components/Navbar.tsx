@@ -67,11 +67,11 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex items-center gap-1.5 text-sm font-medium tracking-wide text-zinc-600 transition-colors hover:text-zinc-950"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-600 transition-colors hover:text-zinc-950"
             >
               <span>{item.label}</span>
               {"badge" in item && item.badge ? (
-                <span className="rounded-full bg-accent/40 px-1.5 py-0.2 text-[10px] font-bold text-zinc-950 border border-lime-300">
+                <span className="rounded bg-zinc-100 border border-zinc-200/80 px-1.5 py-0.5 text-[10px] font-medium text-zinc-600">
                   {item.badge}
                 </span>
               ) : null}
@@ -79,9 +79,9 @@ export default function Navbar() {
           ))}
           <Link
             href="/contact"
-            className="inline-flex min-h-11 items-center rounded-full bg-accent px-5 py-2 text-sm font-bold text-zinc-950 transition-all hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-[0_14px_30px_-12px_rgba(180,212,49,0.8)] active:scale-[0.98]"
+            className="inline-flex h-9 items-center rounded-lg bg-zinc-950 px-4 text-xs font-semibold text-white transition-colors duration-150 hover:bg-zinc-800"
           >
-            프로젝트 시작
+            프로젝트 문의
           </Link>
         </div>
 
@@ -120,7 +120,7 @@ export default function Navbar() {
               >
                 <span>{item.label}</span>
                 {"badge" in item && item.badge ? (
-                  <span className="rounded-full bg-accent/40 px-2 py-0.5 text-[11px] font-bold text-zinc-950">
+                  <span className="rounded bg-zinc-100 border border-zinc-200/80 px-1.5 py-0.5 text-[10px] font-medium text-zinc-600">
                     {item.badge}
                   </span>
                 ) : null}

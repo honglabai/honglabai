@@ -5,6 +5,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { INITIAL_POSTS } from "@/domain/board/data";
 import { getSiteUrl } from "@/lib/site-url";
+import {
+  IconActivity,
+  IconArrowRight,
+  IconCheck,
+  IconEye,
+  IconHeart,
+  IconMessage,
+} from "@/components/board/Icons";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -68,12 +76,10 @@ export default async function BoardPostPage({ params }: Props) {
 
   const siteUrl = getSiteUrl();
 
-  // Related posts from same tree
   const relatedPosts = INITIAL_POSTS.filter(
     (p) => p.rootTreeId === post.rootTreeId && p.id !== post.id
   ).slice(0, 3);
 
-  // Schema.org TechArticle Structured Data for Google Rich Results & E-E-A-T
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "TechArticle",
@@ -137,7 +143,6 @@ export default async function BoardPostPage({ params }: Props) {
     <div className="min-h-screen bg-paper text-zinc-950">
       <Navbar />
 
-      {/* Structured Data injection */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -147,90 +152,96 @@ export default async function BoardPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd) }}
       />
 
-      <main id="main-content" className="relative overflow-hidden px-4 sm:px-6 pt-32 pb-24">
-        {/* Ambient background light */}
-        <div className="pointer-events-none absolute top-0 left-1/2 h-[350px] w-[500px] -translate-x-1/2 rounded-full bg-accent/15 blur-[140px]" />
-
-        <article className="container relative mx-auto max-w-4xl space-y-10">
+      <main id="main-content" className="relative px-4 sm:px-6 pt-28 pb-24">
+        <article className="container mx-auto max-w-4xl space-y-8">
           {/* Breadcrumb Navigation */}
-          <nav aria-label="브레드크럼" className="flex items-center gap-2 text-xs font-semibold text-zinc-500">
+          <nav aria-label="브레드크럼" className="flex items-center gap-1.5 text-xs text-zinc-500 font-medium">
             <Link href="/" className="hover:text-zinc-900 transition-colors">
               홈
             </Link>
-            <span>›</span>
+            <span className="text-zinc-300">/</span>
             <Link href="/ai-board" className="hover:text-zinc-900 transition-colors">
-              AI 활용 게시판
+              AI 활용 기술 보드
             </Link>
-            <span>›</span>
-            <span className="text-lime-700 font-bold">{post.rootTreeName}</span>
-            <span>›</span>
-            <span className="text-zinc-700">{post.treeName}</span>
+            <span className="text-zinc-300">/</span>
+            <span className="text-zinc-800 font-semibold">{post.rootTreeName}</span>
+            <span className="text-zinc-300">/</span>
+            <span className="text-zinc-600">{post.treeName}</span>
           </nav>
 
           {/* Article Header */}
-          <header className="rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-10 shadow-xs">
-            <div className="mb-4 flex flex-wrap items-center gap-2.5">
-              <span className="rounded-full bg-zinc-950 px-3.5 py-1 text-xs font-bold text-accent">
+          <header className="rounded-2xl border border-zinc-200/90 bg-white p-6 sm:p-8">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <span className="rounded border border-zinc-200/90 bg-zinc-50 px-2 py-0.5 text-[10px] font-mono text-zinc-700">
                 {post.difficulty}
               </span>
-              <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-600">
-                트리 브랜치: {post.treeName}
+              <span className="rounded bg-zinc-100 px-2 py-0.5 text-[11px] font-medium text-zinc-600">
+                {post.treeName}
               </span>
-              <span className="text-xs text-zinc-400 font-medium">
-                게시일 {post.createdAt} · 조회 {post.views}회
+              <span className="text-xs font-mono tabular-nums text-zinc-400">
+                {post.createdAt} · 조회 {post.views}
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-950 tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-zinc-950 tracking-tight leading-snug">
               {post.title}
             </h1>
 
-            <p className="mt-5 text-base sm:text-lg leading-relaxed text-zinc-600 border-l-4 border-lime-400 pl-4 py-1">
+            <p className="mt-4 text-sm sm:text-base leading-relaxed text-zinc-600 border-l-2 border-zinc-300 pl-3">
               {post.summary}
             </p>
 
             {/* Author Byline */}
-            <div className="mt-8 flex items-center justify-between border-t border-zinc-100 pt-6">
-              <div className="flex items-center gap-3.5">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-950 text-base font-black text-accent shadow-xs">
+            <div className="mt-6 flex items-center justify-between border-t border-zinc-100 pt-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-950 text-xs font-bold text-white">
                   {post.author.slice(0, 1)}
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-zinc-950">{post.author}</p>
-                  <p className="text-xs text-zinc-400 font-medium">{post.authorRole}</p>
+                  <p className="text-xs font-semibold text-zinc-950">{post.author}</p>
+                  <p className="text-[11px] text-zinc-400">{post.authorRole}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 text-xs font-medium text-zinc-500">
-                <span className="flex items-center gap-1">👁️ 조회 {post.views}</span>
-                <span className="flex items-center gap-1">❤️ 추천 {post.likes}</span>
-                <span className="flex items-center gap-1 font-bold text-zinc-800">💬 댓글 {post.comments.length}</span>
+              <div className="flex items-center gap-3 text-xs text-zinc-500">
+                <span className="flex items-center gap-1">
+                  <IconEye className="h-3.5 w-3.5 text-zinc-400" />
+                  <span className="font-mono tabular-nums">{post.views}</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <IconHeart className="h-3.5 w-3.5 text-zinc-400" />
+                  <span className="font-mono tabular-nums">{post.likes}</span>
+                </span>
+                <span className="flex items-center gap-1 font-medium text-zinc-700">
+                  <IconMessage className="h-3.5 w-3.5 text-zinc-500" />
+                  <span className="font-mono tabular-nums">{post.comments.length}</span>
+                </span>
               </div>
             </div>
           </header>
 
           {/* AdSense In-Content Responsive Slot Placeholder */}
           <div
-            className="my-6 rounded-2xl border border-dashed border-zinc-200 bg-zinc-50/50 p-4 text-center text-xs text-zinc-400"
+            className="my-4 rounded-xl border border-dashed border-zinc-200 bg-zinc-50/50 p-3.5 text-center text-xs text-zinc-400 font-mono"
             data-ad-slot="content-top"
           >
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+            <span className="text-[10px] text-zinc-400">
               스폰서 광고 영역 (Google AdSense)
             </span>
           </div>
 
           {/* Key Takeaways */}
           {post.keyTakeaways && post.keyTakeaways.length > 0 && (
-            <section className="rounded-2xl border border-lime-200 bg-lime-50/50 p-6 sm:p-8">
-              <h2 className="text-sm font-bold tracking-wider text-lime-900 uppercase flex items-center gap-2 mb-3">
-                <span>📌</span>
+            <section className="rounded-xl border border-zinc-200/80 bg-zinc-50/70 p-5 sm:p-6">
+              <h2 className="text-xs font-semibold text-zinc-800 flex items-center gap-1.5 mb-2.5">
+                <IconCheck className="h-4 w-4 text-zinc-700" />
                 <span>실무 핵심 요약 (Key Engineering Takeaways)</span>
               </h2>
-              <ul className="space-y-2 text-sm text-zinc-700">
+              <ul className="space-y-1.5 text-xs text-zinc-600">
                 {post.keyTakeaways.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5">
-                    <span className="text-lime-600 font-bold shrink-0">✔</span>
-                    <span>{point}</span>
+                  <li key={point} className="flex items-start gap-2">
+                    <span className="mt-1 h-1 w-1 rounded-full bg-zinc-400 shrink-0" />
+                    <span className="leading-relaxed">{point}</span>
                   </li>
                 ))}
               </ul>
@@ -238,10 +249,10 @@ export default async function BoardPostPage({ params }: Props) {
           )}
 
           {/* Main Content Body */}
-          <div className="rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-10 shadow-xs space-y-8">
-            <div className="prose prose-base sm:prose-lg max-w-none text-zinc-800 leading-relaxed space-y-5">
+          <div className="rounded-2xl border border-zinc-200/90 bg-white p-6 sm:p-8 space-y-6">
+            <div className="prose prose-sm sm:prose-base max-w-none text-zinc-700 leading-relaxed space-y-4">
               {post.content.split("\n\n").map((paragraph, idx) => (
-                <p key={idx} className="whitespace-pre-line leading-relaxed text-zinc-700">
+                <p key={idx} className="whitespace-pre-line leading-relaxed text-zinc-700 text-xs sm:text-sm">
                   {paragraph}
                 </p>
               ))}
@@ -249,20 +260,20 @@ export default async function BoardPostPage({ params }: Props) {
 
             {/* Architecture Flow */}
             {post.architectureFlow && post.architectureFlow.length > 0 && (
-              <section className="rounded-2xl border border-zinc-200 bg-zinc-900 p-6 text-white space-y-4">
-                <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
-                  <span>🔄</span>
+              <section className="rounded-xl border border-zinc-800 bg-zinc-950 p-5 text-zinc-200 space-y-3">
+                <h3 className="text-xs font-semibold text-zinc-400 flex items-center gap-1.5">
+                  <IconActivity className="h-3.5 w-3.5 text-zinc-400" />
                   <span>엔지니어링 아키텍처 흐름도 (Architecture Workflow)</span>
                 </h3>
-                <div className="flex flex-col sm:flex-row items-center gap-2.5 overflow-x-auto py-2">
+                <div className="flex flex-col sm:flex-row items-center gap-2 overflow-x-auto py-1">
                   {post.architectureFlow.map((step, idx) => (
-                    <div key={step} className="flex items-center gap-2.5 w-full sm:w-auto">
-                      <div className="flex-1 sm:flex-initial rounded-xl bg-zinc-800 border border-zinc-700 px-4 py-3 text-center text-xs sm:text-sm font-semibold text-zinc-200 shadow-sm whitespace-nowrap">
+                    <div key={step} className="flex items-center gap-2 w-full sm:w-auto">
+                      <div className="flex-1 sm:flex-initial rounded-lg bg-zinc-900 border border-zinc-800 px-3.5 py-2 text-center text-xs font-mono text-zinc-300 shadow-2xs whitespace-nowrap">
                         {step}
                       </div>
                       {idx < post.architectureFlow!.length - 1 && (
-                        <span className="text-accent text-base font-bold rotate-90 sm:rotate-0">
-                          ➔
+                        <span className="text-zinc-600 text-xs shrink-0 rotate-90 sm:rotate-0">
+                          <IconArrowRight className="h-3 w-3" />
                         </span>
                       )}
                     </div>
@@ -273,25 +284,25 @@ export default async function BoardPostPage({ params }: Props) {
 
             {/* Code Snippet */}
             {post.codeSnippet && (
-              <section className="rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 text-zinc-200">
-                <div className="mb-3 flex items-center justify-between border-b border-zinc-800 pb-3">
-                  <span className="text-xs font-mono font-bold uppercase text-accent">
+              <section className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 sm:p-5 text-zinc-200">
+                <div className="mb-2.5 flex items-center justify-between border-b border-zinc-800 pb-2">
+                  <span className="text-xs font-mono font-medium text-zinc-400">
                     {post.codeSnippet.language} 예제 코드
                   </span>
                   <span className="text-[11px] text-zinc-500 font-mono">HongLabAI Verified</span>
                 </div>
-                <pre className="overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed text-lime-300">
+                <pre className="overflow-x-auto text-xs font-mono leading-relaxed text-zinc-200">
                   <code>{post.codeSnippet.code}</code>
                 </pre>
               </section>
             )}
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-100">
+            <div className="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-100">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-lg bg-zinc-100 px-3 py-1.5 text-xs font-semibold text-zinc-600"
+                  className="rounded bg-zinc-100 px-2 py-0.5 text-[10px] font-mono text-zinc-500"
                 >
                   #{tag}
                 </span>
@@ -301,72 +312,74 @@ export default async function BoardPostPage({ params }: Props) {
 
           {/* AdSense In-Content Bottom Slot Placeholder */}
           <div
-            className="my-6 rounded-2xl border border-dashed border-zinc-200 bg-zinc-50/50 p-4 text-center text-xs text-zinc-400"
+            className="my-4 rounded-xl border border-dashed border-zinc-200 bg-zinc-50/50 p-3.5 text-center text-xs text-zinc-400 font-mono"
             data-ad-slot="content-bottom"
           >
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+            <span className="text-[10px] text-zinc-400">
               스폰서 광고 영역 (Google AdSense)
             </span>
           </div>
 
           {/* Hierarchical Tree Comments & Discussion */}
-          <section className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-10 shadow-xs">
-            <h2 className="text-xl font-black text-zinc-950 mb-2 flex items-center gap-2">
-              <span>💬</span>
-              <span>트리 구조 기술 토론 ({post.comments.length})</span>
+          <section className="rounded-2xl border border-zinc-200/90 bg-white p-6 sm:p-8">
+            <h2 className="text-base font-bold text-zinc-950 mb-1 flex items-center gap-1.5">
+              <IconMessage className="h-4 w-4 text-zinc-700" />
+              <span>기술 토론 및 피드백</span>
+              <span className="font-mono tabular-nums text-xs text-zinc-400 font-normal">
+                ({post.comments.length})
+              </span>
             </h2>
-            <p className="text-xs text-zinc-500 mb-6">
-              해당 주제에 관한 질의응답 및 피드백은 계층형 트리 댓글로 정리됩니다.
+            <p className="text-xs text-zinc-500 mb-5">
+              해당 아키텍처에 관한 기술 질의와 피드백입니다.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {post.comments.length === 0 ? (
-                <p className="py-8 text-center text-xs text-zinc-400">
-                  작성된 기술 토론이 아직 없습니다. 메인 보드에서 첫 번째 질문을 남겨보세요!
+                <p className="py-6 text-center text-xs text-zinc-400 font-mono">
+                  작성된 기술 토론이 아직 없습니다.
                 </p>
               ) : (
                 post.comments.map((comment) => (
-                  <div key={comment.id} className="space-y-3">
-                    <div className="rounded-2xl border border-zinc-100 bg-zinc-50/60 p-4">
-                      <div className="flex items-center justify-between mb-2">
+                  <div key={comment.id} className="space-y-2">
+                    <div className="rounded-xl border border-zinc-100 bg-zinc-50/60 p-3.5">
+                      <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center gap-2">
-                          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-200 text-xs font-bold text-zinc-700">
+                          <span className="flex h-5 w-5 items-center justify-center rounded bg-zinc-200 text-[10px] font-bold text-zinc-700">
                             {comment.author.slice(0, 1)}
                           </span>
-                          <span className="text-xs font-bold text-zinc-900">{comment.author}</span>
+                          <span className="text-xs font-semibold text-zinc-900">{comment.author}</span>
                           {comment.authorRole && (
-                            <span className="rounded bg-zinc-200/80 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-600">
+                            <span className="rounded bg-zinc-200/80 px-1.5 py-0.2 text-[10px] text-zinc-600">
                               {comment.authorRole}
                             </span>
                           )}
                         </div>
-                        <span className="text-[11px] text-zinc-400">{comment.createdAt}</span>
+                        <span className="text-[11px] font-mono text-zinc-400">{comment.createdAt}</span>
                       </div>
-                      <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed whitespace-pre-line">
+                      <p className="text-xs text-zinc-600 leading-relaxed whitespace-pre-line">
                         {comment.content}
                       </p>
                     </div>
 
                     {comment.replies && comment.replies.length > 0 && (
-                      <div className="ml-6 sm:ml-10 space-y-2.5 border-l-2 border-zinc-200 pl-4">
+                      <div className="ml-5 sm:ml-8 space-y-2 border-l border-zinc-200 pl-3">
                         {comment.replies.map((reply) => (
                           <div
                             key={reply.id}
-                            className="rounded-xl border border-zinc-100 bg-white p-3.5 shadow-2xs"
+                            className="rounded-lg border border-zinc-100 bg-white p-3"
                           >
                             <div className="flex items-center justify-between mb-1">
-                              <div className="flex items-center gap-2">
-                                <span className="text-zinc-400 font-mono text-xs">↳</span>
-                                <span className="text-xs font-bold text-zinc-900">{reply.author}</span>
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-xs font-semibold text-zinc-900">{reply.author}</span>
                                 {reply.authorRole && (
-                                  <span className="rounded bg-accent/30 px-1.5 py-0.2 text-[10px] font-bold text-zinc-800">
+                                  <span className="rounded bg-zinc-100 px-1.5 py-0.2 text-[10px] text-zinc-600">
                                     {reply.authorRole}
                                   </span>
                                 )}
                               </div>
-                              <span className="text-[10px] text-zinc-400">{reply.createdAt}</span>
+                              <span className="text-[10px] font-mono text-zinc-400">{reply.createdAt}</span>
                             </div>
-                            <p className="text-xs text-zinc-600 leading-relaxed whitespace-pre-line pl-4">
+                            <p className="text-xs text-zinc-600 leading-relaxed whitespace-pre-line">
                               {reply.content}
                             </p>
                           </div>
@@ -378,42 +391,42 @@ export default async function BoardPostPage({ params }: Props) {
               )}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-zinc-100 text-center">
+            <div className="mt-6 pt-5 border-t border-zinc-100 text-center">
               <Link
                 href="/ai-board"
-                className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-6 py-3 text-xs font-bold text-accent transition hover:bg-zinc-800"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-950 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800"
               >
-                <span>← 전체 AI 활용 트리 게시판으로 돌아가기</span>
+                <span>← 전체 AI 활용 기술 보드로 이동</span>
               </Link>
             </div>
           </section>
 
           {/* Related Articles in Same Tree */}
           {relatedPosts.length > 0 && (
-            <section className="space-y-4">
-              <h2 className="text-xl font-black text-zinc-950">
-                같은 트리 브랜치의 추천 아티클
+            <section className="space-y-3">
+              <h2 className="text-sm font-bold text-zinc-900">
+                동일 분류 트리의 다른 아티클
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {relatedPosts.map((rel) => (
                   <Link
                     key={rel.id}
                     href={`/ai-board/${rel.slug}`}
-                    className="group flex flex-col justify-between rounded-2xl border border-zinc-200/90 bg-white p-5 shadow-xs transition hover:-translate-y-1 hover:border-zinc-300"
+                    className="group flex flex-col justify-between rounded-xl border border-zinc-200/90 bg-white p-4 transition-colors hover:border-zinc-400"
                   >
                     <div>
-                      <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-bold text-zinc-600">
+                      <span className="rounded border border-zinc-200/80 bg-zinc-50 px-1.5 py-0.5 text-[10px] font-mono text-zinc-600">
                         {rel.difficulty}
                       </span>
-                      <h3 className="mt-2 text-sm font-bold text-zinc-950 group-hover:text-lime-700 transition-colors line-clamp-2">
+                      <h3 className="mt-2 text-xs font-bold text-zinc-950 group-hover:text-zinc-700 transition-colors line-clamp-2">
                         {rel.title}
                       </h3>
                       <p className="mt-1 text-xs text-zinc-500 line-clamp-2">
                         {rel.summary}
                       </p>
                     </div>
-                    <span className="mt-4 text-xs font-bold text-lime-700">
-                      읽어보기 →
+                    <span className="mt-3 text-xs font-medium text-zinc-700 group-hover:text-zinc-950">
+                      자세히 보기 →
                     </span>
                   </Link>
                 ))}

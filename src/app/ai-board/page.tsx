@@ -76,9 +76,7 @@ export default function AiBoardPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
       <Navbar />
-      <main id="main-content" className="relative overflow-hidden px-4 sm:px-6 pt-32 pb-24">
-        {/* Background ambient lighting */}
-        <div className="pointer-events-none absolute top-0 left-1/2 h-[420px] w-[500px] -translate-x-1/2 rounded-full bg-accent/15 blur-[140px]" />
+      <main id="main-content" className="relative px-4 sm:px-6 pt-28 pb-24">
         <div className="container relative mx-auto max-w-7xl">
           <AiBoardContainer />
         </div>
