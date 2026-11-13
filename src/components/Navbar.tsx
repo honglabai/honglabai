@@ -7,6 +7,7 @@ const navigation = [
   { href: "/apps", label: "앱 포트폴리오" },
   { href: "/#services", label: "서비스" },
   { href: "/ai-board", label: "AI 활용", badge: "게시판" },
+  { href: "/brand-story", label: "브랜드 스토리" },
   { href: "/about", label: "소개" },
   { href: "/contact", label: "문의하기" },
 ];
@@ -62,7 +63,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center space-x-7 md:flex">
+        <div className="hidden items-center space-x-4 lg:space-x-6 xl:space-x-7 md:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}

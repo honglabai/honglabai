@@ -67,9 +67,9 @@ export default async function HomePage() {
           eyebrow="AI Software & Consulting"
           headline={
             <>
-              아이디어를
+              AI로 인간을 널리
               <br />
-              작동하는 <span className="text-lime-700">제품</span>으로.
+              이롭게! <span className="text-lime-700">홍랩 AI</span>
             </>
           }
           description="기획부터 설계, 개발, 배포까지 직접 만듭니다. 지금까지 만든 앱들이 실제로 운영되고 있습니다."

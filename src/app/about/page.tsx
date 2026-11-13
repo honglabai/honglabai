@@ -203,7 +203,7 @@ export default function AboutPage() {
                 <span className="font-bold text-zinc-900">대표자:</span> 홍은선
               </div>
               <div>
-                <span className="font-bold text-zinc-900">사업자 등록번호:</span> 288-10-02844
+                <span className="font-bold text-zinc-900">사업자 등록번호:</span> 571-22-02410
               </div>
               <div>
                 <span className="font-bold text-zinc-900">대표 이메일:</span>{" "}

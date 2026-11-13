@@ -59,8 +59,13 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-xs text-zinc-500">
               <li>
+                <Link href="/brand-story" className="hover:text-zinc-950 transition-colors font-medium text-zinc-700">
+                  브랜드 스토리
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-zinc-950 transition-colors">
-                  회사 소개 &amp; E-E-A-T 철학
+                  회사 소개 &amp; 거버넌스
                 </Link>
               </li>
               <li>
