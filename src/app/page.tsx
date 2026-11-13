@@ -1,5 +1,4 @@
 import Link from "next/link";
-import BrandStory from "@/components/BrandStory";
 import Contact from "@/components/Contact";
 import Features from "@/components/Features";
 import FeaturedApps from "@/components/FeaturedApps";
@@ -65,18 +64,15 @@ export default async function HomePage() {
         <ScrollVideoHero
           src="/media/hero-scroll.mp4"
           poster="/media/hero-poster.jpg"
-          eyebrow="HONGLAB AI · OUR PURPOSE"
+          eyebrow="AI Software & Consulting"
           headline={
             <>
-              <span className="block text-2xl sm:text-3xl lg:text-4xl font-extrabold text-lime-700 mb-2">
-                AI로, 사람을 널리 이롭게.
-              </span>
               아이디어를
               <br />
-              작동하는 <span className="text-zinc-950">제품</span>으로.
+              작동하는 <span className="text-lime-700">제품</span>으로.
             </>
           }
-          description="기술의 중심에는 언제나 사람이 있습니다. 당신의 아이디어를 사람의 일상에 도움이 되는 제품으로 만듭니다. 기획부터 설계, 개발, 배포까지 직접 운영합니다."
+          description="기획부터 설계, 개발, 배포까지 직접 만듭니다. 지금까지 만든 앱들이 실제로 운영되고 있습니다."
           apps={portfolioApps}
         >
           <Link
@@ -97,7 +93,6 @@ export default async function HomePage() {
         </ScrollVideoHero>
 
         <FeaturedApps apps={portfolioApps} />
-        <BrandStory />
         <Features />
         <Contact />
       </main>

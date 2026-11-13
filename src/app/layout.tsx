@@ -123,8 +123,7 @@ const organizationJsonLd = {
     url: `${siteUrl}/icon.svg`,
   },
   description:
-    "AI 기반 소프트웨어, 앱 포트폴리오 및 기술 컨설팅을 제공하는 HongLabAI의 공식 홈페이지입니다. 홍익인간(弘益人間)의 철학으로 일상의 불편을 해결하는 실제 작동하는 제품을 만듭니다.",
-  slogan: "AI로, 사람을 널리 이롭게. (Technology for People. AI for Everyone.)",
+    "AI 기반 소프트웨어, 앱 포트폴리오 및 기술 컨설팅을 제공하는 HongLabAI의 공식 홈페이지입니다.",
   legalName: "홍랩에이아이",
   founder: {
     "@type": "Person",
