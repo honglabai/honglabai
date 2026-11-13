@@ -5,13 +5,14 @@ import Navbar from "@/components/Navbar";
 import { getSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  title: "브랜드 스토리 | AI로 인간을 널리 이롭게! 홍랩 AI",
+  title: "브랜드 스토리 | 인간을 널리 이롭게! Honglab AI",
   description:
-    "AI로 인간을 널리 이롭게! 홍익인간(弘益人間)의 철학을 기술로 실현하는 홍랩 AI의 브랜드 스토리. 사람의 작은 불편을 발견하고 실제 작동하는 제품으로 해결합니다.",
+    "인간을 널리 이롭게! 홍익인간(弘益人間)의 철학을 기술로 실현하는 Honglab AI의 브랜드 스토리. 사람의 작은 불편을 발견하고 실제 작동하는 제품으로 해결합니다.",
   keywords: [
-    "홍랩AI 브랜드 스토리",
-    "홍랩 AI",
-    "AI로 인간을 널리 이롭게",
+    "Honglab AI 브랜드 스토리",
+    "Honglab AI",
+    "홍랩AI",
+    "인간을 널리 이롭게",
     "홍익인간 AI",
     "Technology for People",
     "AI for Everyone",
@@ -21,9 +22,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/brand-story" },
   openGraph: {
     type: "website",
-    title: "브랜드 스토리 | AI로 인간을 널리 이롭게! 홍랩 AI",
+    title: "브랜드 스토리 | 인간을 널리 이롭게! Honglab AI",
     description:
-      "기술의 발전이 곧 인간의 발전은 아닙니다. 기술이 사람의 삶을 이롭게 할 때 비로소 진정한 발전이 됩니다. 홍랩 AI의 철학과 비전을 만나보세요.",
+      "기술의 발전이 곧 인간의 발전은 아닙니다. 기술이 사람의 삶을 이롭게 할 때 비로소 진정한 발전이 됩니다. Honglab AI의 철학과 비전을 만나보세요.",
     url: "/brand-story",
     siteName: "HongLabAI (홍랩에이아이)",
     locale: "ko_KR",
@@ -105,7 +106,7 @@ const brandIdentity = [
   { label: "브랜드 미션", value: "AI를 통해 사람의 일상을 더 편리하고 이롭게 만든다." },
   { label: "브랜드 비전", value: "누구나 AI의 혜택을 누릴 수 있는 세상 (Technology for People. AI for Everyone.)" },
   { label: "핵심 철학", value: "홍익인간(弘益人間) — 인간의 가치를 우선하고 일상과 공동체를 널리 이롭게 함" },
-  { label: "브랜드 슬로건", value: "AI로 인간을 널리 이롭게! 홍랩 AI" },
+  { label: "브랜드 슬로건", value: "인간을 널리 이롭게! Honglab AI" },
   { label: "브랜드 약속", value: "사람의 작은 불편을 발견하고, 실제 작동하는 기술로 해결한다." },
   { label: "핵심 차별점", value: "철학을 구호에 그치지 않고 실제 운영되는 제품 포트폴리오로 증명한다." },
 ];
@@ -135,13 +136,13 @@ export default function BrandStoryPage() {
   const storyJsonLd = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "HongLab AI 브랜드 스토리",
-    description: "AI로 인간을 널리 이롭게! 홍익인간의 철학을 기술로 실현하는 홍랩 AI",
+    name: "Honglab AI 브랜드 스토리",
+    description: "인간을 널리 이롭게! 홍익인간의 철학을 기술로 실현하는 Honglab AI",
     url: `${siteUrl}/brand-story`,
     mainEntity: {
       "@type": "Organization",
       name: "HongLabAI",
-      slogan: "AI로 인간을 널리 이롭게! 홍랩 AI",
+      slogan: "인간을 널리 이롭게! Honglab AI",
       url: siteUrl,
     },
   };
@@ -173,9 +174,9 @@ export default function BrandStoryPage() {
               HONGLAB AI · BRAND STORY &amp; PHILOSOPHY
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-950 leading-[1.12] tracking-tight">
-              AI로 인간을 널리 이롭게!
+              인간을 널리 이롭게!
               <br />
-              <span className="text-lime-700">홍랩 AI</span>
+              <span className="text-lime-700">Honglab AI</span>
             </h1>
             <p className="mt-3 font-robot text-sm sm:text-base font-semibold text-zinc-500 italic">
               Technology for People. AI for Everyone.
