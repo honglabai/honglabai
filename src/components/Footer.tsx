@@ -10,8 +10,11 @@ export default function Footer() {
             <div className="text-2xl font-black tracking-tighter text-zinc-950">
               HongLab<span className="text-zinc-400">AI</span>
             </div>
+            <p className="text-xs font-bold text-lime-800">
+              AI로, 사람을 널리 이롭게.
+            </p>
             <p className="text-xs text-zinc-600 leading-relaxed">
-              AI 소프트웨어 엔지니어링, 실무 자동화 파이프라인 및 디지털 제품 스튜디오
+              홍익인간(弘益人間)의 철학으로 일상의 작은 불편을 발견하고, 실제 작동하는 AI 소프트웨어로 해결합니다.
             </p>
             <address className="space-y-1 text-xs text-zinc-500 not-italic pt-1">
               <p>상호: 홍랩에이아이 (HonglabAI)</p>
@@ -60,7 +63,7 @@ export default function Footer() {
             <ul className="space-y-2 text-xs text-zinc-500">
               <li>
                 <Link href="/about" className="hover:text-zinc-950 transition-colors">
-                  회사 소개 &amp; E-E-A-T 철학
+                  브랜드 스토리 &amp; 회사 소개
                 </Link>
               </li>
               <li>
