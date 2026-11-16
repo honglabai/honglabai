@@ -27,7 +27,7 @@ const homeFaqJsonLd = {
       name: "AI 도입 및 외주 개발 프로젝트의 일반적인 소요 기간은 어떻게 되나요?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "MVP(최소 기능 제품) 기준 2~4주 이내에 핵심 기능 프로토타입 제작 및 배포가 완료되며, 엔터프라이즈 시스템 연동이나 고도화 프로젝트는 요구사항에 맞춰 1~3개월 단위로 애자일하게 진행됩니다.",
+        text: "프로젝트의 범위, 데이터 준비 상태, 외부 시스템 연동과 검증 요구사항에 따라 달라집니다. 문의 시 목표와 필요한 기능을 알려주시면 기술 타당성을 검토해 일정과 범위를 협의합니다.",
       },
     },
     {
@@ -43,7 +43,7 @@ const homeFaqJsonLd = {
       name: "개발 의뢰 및 견적 상담은 어떻게 신청하나요?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "웹사이트 상단의 '프로젝트 문의하기' 메뉴 또는 공식 이메일(honglabai@gmail.com)을 통해 프로젝트 개요를 남겨주시면 24시간 이내에 전담 엔지니어가 기술 타당성 검토와 함께 상세한 안내를 회신해 드립니다.",
+        text: "웹사이트 상단의 '프로젝트 문의하기' 메뉴 또는 공식 이메일(honglabai@gmail.com)을 통해 프로젝트 개요를 남겨주시면 기술 타당성과 필요한 개발 범위를 검토해 안내해 드립니다.",
       },
     },
   ],
@@ -94,6 +94,18 @@ export default async function HomePage() {
 
         <FeaturedApps apps={portfolioApps} />
         <Features />
+        <section aria-labelledby="home-faq-title" className="mx-auto max-w-4xl px-6 py-16">
+          <h2 id="home-faq-title" className="text-2xl font-bold tracking-tight">AI 개발 및 기술 컨설팅 자주 묻는 질문</h2>
+          <div className="mt-8 space-y-6">
+            {homeFaqJsonLd.mainEntity.map((faq) => (
+              <div key={faq.name}>
+                <h3 className="text-lg font-semibold">{faq.name}</h3>
+                <p className="mt-2 leading-7 text-zinc-600">{faq.acceptedAnswer.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8"><Link href="/contact" className="font-semibold text-lime-800 underline underline-offset-4">프로젝트 문의하기</Link></p>
+        </section>
         <Contact />
       </main>
       <Footer />
