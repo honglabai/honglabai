@@ -114,10 +114,6 @@ const organizationJsonLd = {
   name: "HongLabAI",
   alternateName: ["홍랩에이아이", "HongLab AI"],
   url: siteUrl,
-  sameAs: [
-    "https://honglabai.com",
-    "https://www.honglabai.com",
-  ],
   logo: {
     "@type": "ImageObject",
     url: `${siteUrl}/icon.svg`,
@@ -160,14 +156,6 @@ const websiteJsonLd = {
   inLanguage: "ko-KR",
   publisher: {
     "@id": `${siteUrl}/#organization`,
-  },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${siteUrl}/ai-board?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
   },
 };
 
