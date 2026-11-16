@@ -20,18 +20,18 @@ const staticRoutes = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
   const apps = await getPublishedApps();
-  const now = new Date();
 
   return [
     ...staticRoutes.map((route) => ({
       url: `${siteUrl}${route.path}`,
-      lastModified: now,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     })),
     ...apps.map((app) => ({
       url: `${siteUrl}/apps/${app.slug}`,
-      lastModified: new Date(app.updated_at ?? app.published_at ?? now),
+      ...(app.updated_at || app.published_at
+        ? { lastModified: new Date(app.updated_at ?? app.published_at!) }
+        : {}),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
