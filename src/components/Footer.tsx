@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-zinc-100">
           {/* Brand & Business Identity */}
           <div className="md:col-span-1 space-y-3">
-            <div className="text-2xl font-black tracking-tighter text-zinc-950">
+            <div className="font-robot text-2xl font-black tracking-wide text-zinc-950">
               HongLab<span className="text-zinc-400">AI</span>
             </div>
             <p className="text-xs text-zinc-600 leading-relaxed">

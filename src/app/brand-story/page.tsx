@@ -176,7 +176,9 @@ export default function BrandStoryPage() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-950 leading-[1.12] tracking-tight">
               인간을 널리 이롭게!
               <br />
-              <span className="text-lime-700">Honglab AI</span>
+              <span className="font-robot tracking-wide text-zinc-950">
+                HongLab<span className="text-zinc-400">AI</span>
+              </span>
             </h1>
             <p className="mt-3 font-robot text-sm sm:text-base font-semibold text-zinc-500 italic">
               Technology for People. AI for Everyone.

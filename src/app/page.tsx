@@ -69,7 +69,9 @@ export default async function HomePage() {
             <>
               인간을 널리 이롭게!
               <br />
-              <span className="text-lime-700">Honglab AI</span>
+              <span className="font-robot tracking-wide text-zinc-950">
+                HongLab<span className="text-zinc-400">AI</span>
+              </span>
             </>
           }
           description="기획부터 설계, 개발, 배포까지 직접 만듭니다. 지금까지 만든 앱들이 실제로 운영되고 있습니다."
