@@ -59,7 +59,7 @@ export default function Navbar() {
             <span className="font-robot text-lg text-accent">H</span>
           </span>
           <span className="font-robot tracking-wide text-zinc-950">
-            HongLab<span className="text-zinc-400">AI</span>
+            HongLab<span className="text-zinc-500">AI</span>
           </span>
         </Link>
 
@@ -68,7 +68,7 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex items-center gap-1.5 text-sm font-medium tracking-wide text-zinc-600 transition-colors hover:text-zinc-950"
+              className="inline-flex items-center gap-1.5 text-sm font-medium tracking-wide text-zinc-700 transition-colors hover:text-zinc-950"
             >
               <span>{item.label}</span>
               {"badge" in item && item.badge ? (

@@ -12,10 +12,8 @@ export default function AppCard({ app }: { app: AppRecord }) {
               src={app.hero_image_url}
               alt={app.image_alt}
               fill
-              unoptimized={true}
-              sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
+              sizes="(max-width: 639px) 380px, (max-width: 1023px) 380px, 280px"
               className="object-cover object-top transition duration-300 group-hover:scale-105"
-              style={{ imageRendering: "-webkit-optimize-contrast" }}
             />
           ) : (
             <div className="flex h-full items-center justify-center font-robot text-5xl font-bold text-zinc-300">{app.name.slice(0, 1)}</div>
@@ -24,9 +22,9 @@ export default function AppCard({ app }: { app: AppRecord }) {
         <div className="p-5 xl:p-6">
           <div className="mb-3 flex items-center justify-between gap-3 xl:mb-4">
             <span className="rounded-full bg-lime-200 px-2.5 py-0.5 text-xs font-bold text-zinc-900">{productLabels[app.product_status]}</span>
-            <span className="text-xs text-zinc-500">{app.platforms.join(" · ")}</span>
+            <span className="text-xs font-medium text-zinc-600">{app.platforms.join(" · ")}</span>
           </div>
-          <h2 className="mb-2 text-xl font-bold text-zinc-950 xl:text-2xl">{app.name}</h2>
+          <h3 className="mb-2 text-xl font-bold text-zinc-950 xl:text-2xl">{app.name}</h3>
           <p className="line-clamp-2 text-sm leading-relaxed text-zinc-600 xl:text-base">{app.tagline || app.summary}</p>
         </div>
       </Link>

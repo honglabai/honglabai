@@ -128,7 +128,7 @@ export default function Contact() {
                     <input id="contact-name" type="text" value={name} onChange={(event) => setName(event.target.value)} maxLength={100} className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-950 placeholder-zinc-400 transition-colors focus:border-zinc-950 focus:outline-none" required />
                   </div>
                   <div>
-                    <label htmlFor="contact-company" className="mb-2 block text-sm font-medium text-zinc-700">회사·팀 <span className="text-zinc-500">(선택)</span></label>
+                    <label htmlFor="contact-company" className="mb-2 block text-sm font-medium text-zinc-700">회사·팀 <span className="text-zinc-600 font-medium">(선택)</span></label>
                     <input id="contact-company" type="text" value={company} onChange={(event) => setCompany(event.target.value)} maxLength={120} className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-950 placeholder-zinc-400 transition-colors focus:border-zinc-950 focus:outline-none" />
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function Contact() {
                   >
                     {isAnalyzing ? "AI 분석 중..." : "✨ AI 초안 분석하기"}
                   </button>
-                    <span className="hidden text-xs text-zinc-500 sm:block">서버에서 안전하게 내용을 분석합니다.</span>
+                    <span className="hidden text-xs text-zinc-600 sm:block">서버에서 안전하게 내용을 분석합니다.</span>
                 </div>
 
                 {aiResponse ? (
@@ -194,7 +194,7 @@ export default function Contact() {
                     <h3 className="mb-2 font-bold text-zinc-950">AI 분석 결과</h3>
                     <p className="mb-4 text-sm leading-relaxed text-zinc-700">{aiResponse.analysis}</p>
                     <div>
-                      <span className="text-xs font-bold tracking-wider text-zinc-500 uppercase">추천 기술 스택</span>
+                      <span className="text-xs font-bold tracking-wider text-zinc-700 uppercase">추천 기술 스택</span>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {aiResponse.techStack.map((tech) => (
                           <span key={tech} className="rounded-full bg-zinc-950 px-3 py-1 text-xs font-bold text-accent">

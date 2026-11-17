@@ -8,12 +8,12 @@ export default function Footer() {
           {/* Brand & Business Identity */}
           <div className="md:col-span-1 space-y-3">
             <div className="font-robot text-2xl font-black tracking-wide text-zinc-950">
-              HongLab<span className="text-zinc-400">AI</span>
+              HongLab<span className="text-zinc-500">AI</span>
             </div>
             <p className="text-xs text-zinc-600 leading-relaxed">
               AI 소프트웨어 엔지니어링, 실무 자동화 파이프라인 및 디지털 제품 스튜디오
             </p>
-            <address className="space-y-1 text-xs text-zinc-500 not-italic pt-1">
+            <address className="space-y-1 text-xs text-zinc-600 not-italic pt-1">
               <p>상호: 홍랩에이아이 (HonglabAI)</p>
               <p>대표자: 홍은선 · 사업자등록번호: 571-22-02410</p>
               <p>
@@ -30,10 +30,10 @@ export default function Footer() {
 
           {/* Nav Column 1: 주요 서비스 */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
+            <h3 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
               주요 서비스
-            </h4>
-            <ul className="space-y-2 text-xs text-zinc-500">
+            </h3>
+            <ul className="space-y-2 text-xs text-zinc-600">
               <li>
                 <Link href="/apps" className="hover:text-zinc-950 transition-colors">
                   앱 포트폴리오
@@ -54,12 +54,12 @@ export default function Footer() {
 
           {/* Nav Column 2: 회사 및 지원 */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
+            <h3 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
               회사 및 지원
-            </h4>
-            <ul className="space-y-2 text-xs text-zinc-500">
+            </h3>
+            <ul className="space-y-2 text-xs text-zinc-600">
               <li>
-                <Link href="/brand-story" className="hover:text-zinc-950 transition-colors font-medium text-zinc-700">
+                <Link href="/brand-story" className="hover:text-zinc-950 transition-colors font-medium text-zinc-800">
                   브랜드 스토리
                 </Link>
               </li>
@@ -74,24 +74,24 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <span className="text-zinc-400">문의 회신: 영업일 기준 24시간 내</span>
+                <span className="text-zinc-600">문의 회신: 영업일 기준 24시간 내</span>
               </li>
             </ul>
           </div>
 
           {/* Nav Column 3: 정책 및 광고 고지 */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
+            <h3 className="text-xs font-bold text-zinc-950 uppercase tracking-wider">
               정책 및 광고 고지
-            </h4>
-            <ul className="space-y-2 text-xs text-zinc-500">
+            </h3>
+            <ul className="space-y-2 text-xs text-zinc-600">
               <li>
-                <Link href="/privacy" className="font-semibold text-zinc-700 hover:text-zinc-950 transition-colors">
+                <Link href="/privacy" className="font-semibold text-zinc-800 hover:text-zinc-950 transition-colors">
                   개인정보 처리방침
                 </Link>
               </li>
               <li>
-                <Link href="/privacy#cookies" className="text-lime-700 font-semibold hover:underline transition-colors">
+                <Link href="/privacy#cookies" className="text-lime-800 font-semibold hover:underline transition-colors">
                   광고 및 쿠키 정책 (구글 애드센스 고지)
                 </Link>
               </li>
@@ -110,14 +110,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright & Admin link */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 gap-3">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-3">
           <p>© {new Date().getFullYear()} HongLabAI. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <span className="text-[11px] text-zinc-400">Google AdSense Partner Compliant</span>
+            <span className="text-[11px] text-zinc-600">Google AdSense Partner Compliant</span>
             <Link
               href="/admin/login"
               aria-label="관리자 로그인"
-              className="text-zinc-400 hover:text-zinc-700 transition-colors"
+              className="text-zinc-600 hover:text-zinc-950 transition-colors"
             >
               관리자
             </Link>

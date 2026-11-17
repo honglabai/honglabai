@@ -63,14 +63,14 @@ export default async function HomePage() {
       <main id="main-content">
         <ScrollVideoHero
           src="/media/hero-scroll.mp4"
-          poster="/media/hero-poster.jpg"
+          poster="/media/hero-poster.webp"
           eyebrow="AI Software & Consulting"
           headline={
             <>
               인간을 널리 이롭게!
               <br />
               <span className="font-robot tracking-wide text-zinc-950">
-                HongLab<span className="text-zinc-400">AI</span>
+                HongLab<span className="text-zinc-500">AI</span>
               </span>
             </>
           }

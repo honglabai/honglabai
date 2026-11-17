@@ -46,7 +46,6 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
     const el = scrollRef.current;
     if (!el) return;
 
-    updateScrollState();
     el.addEventListener("scroll", updateScrollState, { passive: true });
     window.addEventListener("resize", updateScrollState);
 
@@ -103,7 +102,7 @@ export default function FeaturedApps({ apps }: FeaturedAppsProps) {
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         <div data-reveal className="mb-14 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-3 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-zinc-500 uppercase">
+            <p className="mb-3 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-zinc-700 uppercase">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
               추천 포트폴리오
             </p>

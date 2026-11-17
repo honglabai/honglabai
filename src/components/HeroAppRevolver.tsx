@@ -49,7 +49,7 @@ export default function HeroAppRevolver({ apps }: HeroAppRevolverProps) {
           <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-500" />
         </span>
         <span className="text-xs font-bold text-zinc-900">실시간 서비스 중</span>
-        <span className="text-[10px] font-medium text-zinc-400">· 클릭 시 새 창 열림</span>
+        <span className="text-[10px] font-semibold text-zinc-600">· 클릭 시 새 창 열림</span>
       </div>
 
       {/* 3D Rotating Cards Stage (Actual Portfolio Cards) */}
@@ -139,11 +139,8 @@ export default function HeroAppRevolver({ apps }: HeroAppRevolverProps) {
                         src={app.hero_image_url}
                         alt={app.image_alt || app.name}
                         fill
-                        unoptimized={true}
-                        priority={isFront || isRight || isLeft}
-                        sizes="(max-width: 1200px) 100vw, 640px"
+                        sizes="(max-width: 1280px) 280px, 310px"
                         className="object-cover object-top transition duration-500 group-hover:scale-105"
-                        style={{ imageRendering: "-webkit-optimize-contrast" }}
                       />
                     ) : (
                       <div className="flex h-full items-center justify-center font-robot text-4xl font-bold text-zinc-300">
@@ -172,11 +169,11 @@ export default function HeroAppRevolver({ apps }: HeroAppRevolverProps) {
                         <span className="rounded-full bg-lime-200 px-2.5 py-0.5 text-xs font-bold text-zinc-900">
                           {productLabels[app.product_status] || "운영 중"}
                         </span>
-                        <span className="text-xs text-zinc-500">{app.platforms.join(" · ")}</span>
+                        <span className="text-xs font-medium text-zinc-600">{app.platforms.join(" · ")}</span>
                       </div>
-                      <h3 className="line-clamp-1 text-lg xl:text-xl font-bold text-zinc-950 transition-colors group-hover:text-lime-700">
+                      <p className="line-clamp-1 text-lg xl:text-xl font-bold text-zinc-950 transition-colors group-hover:text-lime-700">
                         {app.name}
-                      </h3>
+                      </p>
                       <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-zinc-600">
                         {app.tagline || app.summary}
                       </p>
@@ -184,7 +181,7 @@ export default function HeroAppRevolver({ apps }: HeroAppRevolverProps) {
 
                     {/* Bottom CTA */}
                     <div className="mt-3 flex items-center justify-between border-t border-zinc-100 pt-2.5">
-                      <span className="text-[11px] font-medium text-zinc-400">새 창에서 실행</span>
+                      <span className="text-[11px] font-medium text-zinc-600">새 창에서 실행</span>
                       <span className="inline-flex items-center gap-1 rounded-full bg-accent/30 px-3 py-1 text-xs font-bold text-zinc-950 transition group-hover:bg-accent group-hover:shadow-sm">
                         접속하기 →
                       </span>

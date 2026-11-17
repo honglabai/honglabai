@@ -159,7 +159,7 @@ export default function ScrollVideoHero({
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 xl:gap-12">
             <div className="max-w-xl">
               <p
-                className="font-robot mb-5 inline-flex items-center gap-2 text-xs tracking-[0.28em] text-zinc-500 uppercase sm:text-sm"
+                className="font-robot mb-5 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.28em] text-zinc-700 uppercase sm:text-sm"
               >
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
                 {eyebrow}
@@ -196,8 +196,8 @@ export default function ScrollVideoHero({
           aria-hidden="true"
           className={`pointer-events-none absolute inset-x-0 bottom-8 hidden flex-col items-center gap-2 transition-opacity duration-700 [@media(min-height:760px)]:flex ${isReady ? "opacity-100" : "opacity-0"}`}
         >
-          <span className="text-[11px] tracking-[0.3em] text-zinc-500 uppercase">Scroll</span>
-          <span className="h-10 w-px bg-gradient-to-b from-zinc-400 to-transparent" />
+          <span className="text-[11px] font-semibold tracking-[0.3em] text-zinc-700 uppercase">Scroll</span>
+          <span className="h-10 w-px bg-gradient-to-b from-zinc-500 to-transparent" />
         </div>
       </div>
     </section>

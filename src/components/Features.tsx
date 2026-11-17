@@ -55,8 +55,8 @@ export default function Features() {
     <section id={SectionId.SERVICES} className="relative bg-white py-24 md:py-32">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
-          <h2 data-reveal className="mb-3 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-zinc-500 uppercase"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />핵심 역량</h2>
-          <p data-reveal style={{ "--reveal-delay": "60ms" } as React.CSSProperties} className="mb-6 text-3xl font-black text-zinc-950 md:text-5xl">기획부터 운영까지, 직접 만듭니다</p>
+          <p data-reveal className="mb-3 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-zinc-700 uppercase"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-strong" />핵심 역량</p>
+          <h2 data-reveal style={{ "--reveal-delay": "60ms" } as React.CSSProperties} className="mb-6 text-3xl font-black text-zinc-950 md:text-5xl">기획부터 운영까지, 직접 만듭니다</h2>
           <p className="mx-auto max-w-2xl text-zinc-600">
             HongLabAI는 비즈니스 문제를 기술로 해결하고 실제 운영 가능한 제품으로 연결합니다.
           </p>

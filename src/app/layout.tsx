@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Orbitron } from "next/font/google";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -11,6 +12,7 @@ const orbitron = Orbitron({
   weight: "700",
   variable: "--font-orbitron",
   display: "swap",
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -163,21 +165,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ko" className={orbitron.variable}>
       <head>
-        {/* Pretendard, self-hosted from /public. Loaded as a plain stylesheet
-            link rather than a CSS @import so the bundler leaves the /fonts
-            paths alone. The dynamic subset fetches only the ranges the page
-            uses, and same-origin delivery drops the third-party connection
-            that cost ~357ms on the critical path. */}
-        <link rel="stylesheet" href="/fonts/pretendard.css" />
+        <link rel="preload" as="image" href="/media/hero-poster.webp" fetchPriority="high" />
         <link rel="alternate" type="application/rss+xml" title="HongLabAI RSS Feed" href="/rss.xml" />
-        {/* Google AdSense official script tag for custom domain ownership verification */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8675047967209162"
-          crossOrigin="anonymous"
-        />
       </head>
       <body className="overflow-x-hidden antialiased">
+        {/* Google AdSense loaded with lazyOnload strategy so it doesn't compete with critical paint / main thread */}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8675047967209162"
+          strategy="lazyOnload"
+          crossOrigin="anonymous"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
