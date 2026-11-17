@@ -212,9 +212,6 @@ export default function AboutPage() {
                 </a>
               </div>
               <div className="sm:col-span-2">
-                <span className="font-bold text-zinc-900">사업장 주소:</span> 서울특별시 광진구 능동로 120 (화양동) 건국대학교 창의관
-              </div>
-              <div className="sm:col-span-2">
                 <span className="font-bold text-zinc-900">주요 사업:</span> AI 소프트웨어 개발, 클라우드 아키텍처 컨설팅, 웹·모바일 디지털 제품 기획 및 제작
               </div>
             </div>
