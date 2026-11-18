@@ -181,7 +181,7 @@ export const STATIC_PORTFOLIO_APPS: AppRecord[] = [
     seo_description: "PX 인기 화장품·식품 큐레이션, 이달의 할인 행사, 최저가 가격비교 및 영외 PX 위치 찾기 스마트 가이드",
     published_at: "2026-08-07T00:00:00.000Z",
     created_at: "2026-08-07T00:00:00.000Z",
-    updated_at: "2026-08-07T00:00:00.000Z",
+    updated_at: "2026-11-18T10:35:00.000Z",
   },
   {
     id: "app-pagol",
@@ -231,7 +231,7 @@ export const STATIC_PORTFOLIO_APPS: AppRecord[] = [
     seo_description: "발표와 영상 촬영을 위한 자동 스크롤 프롬프터. 속도 조절, 글자 크기, 하프미러 반전 모드 지원",
     published_at: "2026-08-09T00:00:00.000Z",
     created_at: "2026-08-09T00:00:00.000Z",
-    updated_at: "2026-08-09T00:00:00.000Z",
+    updated_at: "2026-11-18T10:35:00.000Z",
   },
 ];
 
