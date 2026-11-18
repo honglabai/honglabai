@@ -139,8 +139,10 @@ export default function HeroAppRevolver({ apps }: HeroAppRevolverProps) {
                         src={app.hero_image_url}
                         alt={app.image_alt || app.name}
                         fill
-                        sizes="(max-width: 1280px) 280px, 310px"
+                        unoptimized={true}
+                        sizes="(max-width: 1280px) 600px, 900px"
                         className="object-cover object-top transition duration-500 group-hover:scale-105"
+                        style={{ imageRendering: "-webkit-optimize-contrast" }}
                       />
                     ) : (
                       <div className="flex h-full items-center justify-center font-robot text-4xl font-bold text-zinc-300">
